@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,8 @@ public class CameraManager : MonoBehaviour
 {
     [SerializeField] private Camera camera;
     [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
+    [SerializeField] private CinemachineConfiner confiner;
+    [SerializeField] private Collider2D boundingBox;
 
     private float orthographicSize;
     private float targetOrthographicSize;
@@ -32,28 +35,21 @@ public class CameraManager : MonoBehaviour
 
     private void HandleMovement()
     {
-        if (CheckCameraOutOfBounds())
-        {
-            return;
-        }
+        
         float x = inputs.x;
         float y = inputs.y;
         Vector2 moveDir = new Vector2(x, y).normalized;
-        
-        cinemachineVirtualCamera.transform.position += (Vector3)moveDir * moveSpeed * Time.deltaTime;
-    }
-
-    private bool CheckCameraOutOfBounds()
-    {
-        // TopLeft
-        Vector3 viewportPos = new Vector3(0f, 1f, camera.nearClipPlane);
-        Debug.Log("Viewport" + viewportPos);
-        Vector3 topLeft = camera.ViewportToWorldPoint(viewportPos);
-        if (cinemachineVirtualCamera.transform.position.x < -16)
+        Vector3 targetPosition = (Vector3)moveDir * moveSpeed * Time.deltaTime + cinemachineVirtualCamera.transform.position;
+        targetPosition.x = Mathf.Clamp(targetPosition.x, boundingBox.bounds.min.x, boundingBox.bounds.max.x);
+        targetPosition.y = Mathf.Clamp(targetPosition.y, boundingBox.bounds.min.y, boundingBox.bounds.max.y);
+        Debug.Log("BoudningBox Bounds: " + boundingBox.bounds);
+        Debug.Log("Target Position: " + targetPosition);
+        float distance = Vector2.Distance(targetPosition, camera.transform.position);
+        if (distance > 1)
         {
-            return true;
+            return;
         }
-        return false;
+        cinemachineVirtualCamera.transform.position = targetPosition;
     }
 
     private void HandleZoom()
@@ -65,6 +61,12 @@ public class CameraManager : MonoBehaviour
         orthographicSize = Mathf.Lerp(orthographicSize, targetOrthographicSize, Time.deltaTime * zoomSpeed);
 
         cinemachineVirtualCamera.m_Lens.OrthographicSize = orthographicSize;
+
+        float distance = Vector2.Distance(cinemachineVirtualCamera.transform.position, camera.transform.position);
+        if (distance > 1)
+        {
+            cinemachineVirtualCamera.transform.position = camera.transform.position;
+        }
     }
 
     public void PlayerInput(InputAction.CallbackContext context)
