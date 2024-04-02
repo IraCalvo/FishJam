@@ -285,7 +285,7 @@ Transform:
   m_GameObject: {fileID: 1318273513822450231}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: -0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 1661836317321004000}
   - component: {fileID: 4975817358667602905}
   m_Layer: 2
-  m_Name: Square
+  m_Name: Tank Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -366,7 +366,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.1721698, g: 0.37853792, b: 0.6886792, a: 1}
   m_FlipX: 0
@@ -389,7 +389,7 @@ GameObject:
   - component: {fileID: 6605693732855921419}
   - component: {fileID: 2517789447479325435}
   m_Layer: 2
-  m_Name: Square (1)
+  m_Name: Sand Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -450,7 +450,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -99
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.6380757, g: 0.6415094, b: 0.52954787, a: 1}
   m_FlipX: 0

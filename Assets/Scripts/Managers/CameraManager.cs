@@ -42,8 +42,6 @@ public class CameraManager : MonoBehaviour
         Vector3 targetPosition = (Vector3)moveDir * moveSpeed * Time.deltaTime + cinemachineVirtualCamera.transform.position;
         targetPosition.x = Mathf.Clamp(targetPosition.x, boundingBox.bounds.min.x, boundingBox.bounds.max.x);
         targetPosition.y = Mathf.Clamp(targetPosition.y, boundingBox.bounds.min.y, boundingBox.bounds.max.y);
-        Debug.Log("BoudningBox Bounds: " + boundingBox.bounds);
-        Debug.Log("Target Position: " + targetPosition);
         float distance = Vector2.Distance(targetPosition, camera.transform.position);
         if (distance > 1)
         {
