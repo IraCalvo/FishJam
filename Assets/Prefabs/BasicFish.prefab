@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8128727022327921946}
   - component: {fileID: 5510317409862591210}
+  - component: {fileID: 5600057492648021476}
   m_Layer: 0
   m_Name: BasicFish
   m_TagString: Untagged
@@ -84,3 +85,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5600057492648021476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5415256789493638983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 805fefec805aa0d459ddd411a34cb73b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minMoneyTimer: 5
+  maxMoneyTimer: 10
+  moneyToDrop: {fileID: 4335957793588255294, guid: e85e4f10c91db9a42a0b650b7b7df7b2, type: 3}

@@ -25,7 +25,7 @@ public class BankManager : MonoBehaviour
         currentMoneyAmount = initialMoneyAmount;
     }
 
-    public void AddMoney()
+    public void AddMoney(int moneyToAdd)
     { 
         
     }
