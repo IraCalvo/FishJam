@@ -27,7 +27,7 @@ public class BankManager : MonoBehaviour
 
     public void AddMoney(int moneyToAdd)
     { 
-        
+        currentMoneyAmount += moneyToAdd;
     }
 
     public void RemoveMoney(int moneyToSubtract) 
