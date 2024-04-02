@@ -32,24 +32,38 @@ public class CameraManager : MonoBehaviour
 
     private void HandleMovement()
     {
-        if (CheckCameraOutOfBounds())
-        {
-            return;
-        }
+        
         float x = inputs.x;
         float y = inputs.y;
         Vector2 moveDir = new Vector2(x, y).normalized;
-        
+        if (CheckCameraOutOfBounds(moveDir))
+        {
+            return;
+        }
+
         cinemachineVirtualCamera.transform.position += (Vector3)moveDir * moveSpeed * Time.deltaTime;
     }
 
-    private bool CheckCameraOutOfBounds()
+    private bool CheckCameraOutOfBounds(Vector2 moveDir)
     {
+        Debug.Log("MoveDirection: " + moveDir);
         // TopLeft
         Vector3 viewportPos = new Vector3(0f, 1f, camera.nearClipPlane);
         Debug.Log("Viewport" + viewportPos);
         Vector3 topLeft = camera.ViewportToWorldPoint(viewportPos);
-        if (cinemachineVirtualCamera.transform.position.x < -16)
+        if (moveDir.x < 0 && cinemachineVirtualCamera.transform.position.x < -16)
+        {
+            return true;
+        }
+        if (moveDir.x > 0 && cinemachineVirtualCamera.transform.position.x > 16)
+        {
+            return true;
+        }
+        if (moveDir.y < 0 && cinemachineVirtualCamera.transform.position.y < -16)
+        {
+            return true;
+        }
+        if (moveDir.y > 0 && cinemachineVirtualCamera.transform.position.y > 16)
         {
             return true;
         }
