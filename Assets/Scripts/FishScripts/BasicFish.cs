@@ -10,7 +10,7 @@ public class BasicFish : MonoBehaviour
     [SerializeField] float minLocationPickTimer;
     [SerializeField] float maxLocationPickTimer;
     float nextLocationTimer;
-    Vector2 randomTargetPosition;
+    Vector2 targetPosition;
     bool isMoving;
     bool canMove;
 
@@ -21,12 +21,14 @@ public class BasicFish : MonoBehaviour
     [SerializeField] GameObject moneyToDrop;
 
     [Header("Misc")]
+    SpriteRenderer sr;
     Rigidbody2D rb;
     GameObject tank;
     Bounds tankBounds;
 
     private void Awake()
     {
+        sr = GetComponent<SpriteRenderer>();   
         rb = GetComponent<Rigidbody2D>();
         tank = GameObject.Find("Tank");
         tankBounds= tank.GetComponent<PolygonCollider2D>().bounds;
@@ -64,9 +66,9 @@ public class BasicFish : MonoBehaviour
     {
         if (nextLocationTimer <= 0)
         {
-            if (Vector2.Distance(transform.position, randomTargetPosition) > 0.1f)
+            if (Vector2.Distance(transform.position, targetPosition) > 0.1f)
             {
-                transform.position = Vector2.MoveTowards(transform.position, randomTargetPosition, fishMoveSpeed * Time.fixedDeltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, targetPosition, fishMoveSpeed * Time.fixedDeltaTime);
             }
             else
             {
@@ -82,13 +84,13 @@ public class BasicFish : MonoBehaviour
 
     void PickRandomLocation()
     {
-        float randomX = Random.Range(tankBounds.min.x - 1f, tankBounds.max.x - 1f);
+        float randomX = Random.Range(tankBounds.min.x - 3f, tankBounds.max.x - 3f);
         float randomY = Random.Range(tankBounds.min.y - 1f, tankBounds.max.y - 1f);
         
-        randomTargetPosition = new Vector2(randomX, randomY);
-        Debug.Log(randomTargetPosition);
+        targetPosition = new Vector2(randomX, randomY);
+        SpriteDirection(targetPosition);
     }
-
+    
     void PickWaitTimer()
     {
         nextLocationTimer = Random.Range(minLocationPickTimer, maxLocationPickTimer);
@@ -97,5 +99,17 @@ public class BasicFish : MonoBehaviour
     void ChooseMoneyTimer()
     {
         moneyTimer = Random.Range(minMoneyTimer, maxMoneyTimer);
+    }
+
+    void SpriteDirection(Vector2 targetPosition)
+    {
+        if (targetPosition.x < transform.position.x)
+        {
+            sr.flipX = true;
+        }
+        else
+        {  
+            sr.flipX = false;
+        }
     }
 }
