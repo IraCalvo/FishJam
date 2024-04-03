@@ -35,18 +35,36 @@ public class CameraManager : MonoBehaviour
 
     private void HandleMovement()
     {
-        
+
         float x = inputs.x;
         float y = inputs.y;
         Vector2 moveDir = new Vector2(x, y).normalized;
         Vector3 targetPosition = (Vector3)moveDir * moveSpeed * Time.deltaTime + cinemachineVirtualCamera.transform.position;
-        targetPosition.x = Mathf.Clamp(targetPosition.x, boundingBox.bounds.min.x, boundingBox.bounds.max.x);
-        targetPosition.y = Mathf.Clamp(targetPosition.y, boundingBox.bounds.min.y, boundingBox.bounds.max.y);
-        float distance = Vector2.Distance(targetPosition, camera.transform.position);
-        if (distance > 1)
+
+        // If movement to the left is maxed out, cancel left movement but allow downward movement
+        if (targetPosition.x < boundingBox.bounds.min.x)
         {
-            return;
+            targetPosition.x = boundingBox.bounds.min.x;
         }
+
+        // If movement to the right is maxed out, cancel right movement but allow upward movement
+        if (targetPosition.x > boundingBox.bounds.max.x)
+        {
+            targetPosition.x = boundingBox.bounds.max.x;
+        }
+
+        // If movement downwards is maxed out, cancel downward movement but allow left/right movement
+        if (targetPosition.y < boundingBox.bounds.min.y)
+        {
+            targetPosition.y = boundingBox.bounds.min.y;
+        }
+
+        // If movement upwards is maxed out, cancel upward movement but allow left/right movement
+        if (targetPosition.y > boundingBox.bounds.max.y)
+        {
+            targetPosition.y = boundingBox.bounds.max.y;
+        }
+
         cinemachineVirtualCamera.transform.position = targetPosition;
     }
 

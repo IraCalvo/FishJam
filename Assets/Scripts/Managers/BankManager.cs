@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BankManager : MonoBehaviour
@@ -7,6 +8,7 @@ public class BankManager : MonoBehaviour
     public static BankManager instance;
     public int currentMoneyAmount;
     [SerializeField] int initialMoneyAmount;
+    [SerializeField] TextMeshProUGUI moneyAmountText;
 
     private void Awake()
     {
@@ -23,15 +25,23 @@ public class BankManager : MonoBehaviour
     private void Start()
     {
         currentMoneyAmount = initialMoneyAmount;
+        SetUIMoneyAmount();
     }
 
     public void AddMoney(int moneyToAdd)
     { 
         currentMoneyAmount += moneyToAdd;
+        SetUIMoneyAmount();
     }
 
     public void RemoveMoney(int moneyToSubtract) 
     {
         currentMoneyAmount -= moneyToSubtract;
+        SetUIMoneyAmount();
+    }
+
+    private void SetUIMoneyAmount()
+    {
+        moneyAmountText.text = currentMoneyAmount.ToString();
     }
 }
