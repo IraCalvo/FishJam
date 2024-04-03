@@ -9,10 +9,11 @@ public class BasicFish : MonoBehaviour
     [SerializeField] float fishMoveSpeed;
     [SerializeField] float minLocationPickTimer;
     [SerializeField] float maxLocationPickTimer;
-    float nextLocationTimer;
-    Vector2 targetPosition;
+    public float nextLocationTimer;
+    public Vector2 targetPosition;
     bool isMoving;
     bool canMove;
+    public bool isSpawning = true;
 
     [Header("Money Information")]
     [SerializeField] float minMoneyTimer;
@@ -35,7 +36,7 @@ public class BasicFish : MonoBehaviour
     }
     private void Start()
     {
-        PickRandomLocation();
+        isSpawning = true;
         ChooseMoneyTimer();
     }
 
@@ -46,7 +47,14 @@ public class BasicFish : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MoveFish();
+        if (isSpawning)
+        {
+            MoveFishToSpawn();
+        }
+        else
+        {
+            MoveFish();
+        }
     }
     
     void SpawnMoney()
@@ -79,6 +87,22 @@ public class BasicFish : MonoBehaviour
         else
         { 
             nextLocationTimer -= Time.deltaTime;
+        }
+    }
+
+    void MoveFishToSpawn()
+    {
+        if (Vector2.Distance(transform.position, targetPosition) > 0.1f)
+        {
+            float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
+            float t = 1f - Mathf.Clamp01(distanceToTarget / 10); // Clamping to ensure t is between 0 and 1
+            float easedT = Mathf.SmoothStep(0f, 1f, t); // Apply easing function
+            float spawnMoveSpeed = Mathf.Lerp(fishMoveSpeed * 6, 0f, easedT); // Interpolate movement speed based on eased t
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, spawnMoveSpeed * Time.fixedDeltaTime);
+        }
+        else
+        {
+            isSpawning = false;
         }
     }
 
