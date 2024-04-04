@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Resource
   - Ground
+  - Food
   layers:
   - Default
   - TransparentFX

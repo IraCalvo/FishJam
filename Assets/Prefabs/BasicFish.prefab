@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5600057492648021476}
   - component: {fileID: 3027939846634909540}
   - component: {fileID: 5370789163460840426}
+  - component: {fileID: 4218962754384485990}
   m_Layer: 0
   m_Name: BasicFish
   m_TagString: Untagged
@@ -102,6 +103,14 @@ MonoBehaviour:
   fishMoveSpeed: 8
   minLocationPickTimer: 3
   maxLocationPickTimer: 5
+  nextLocationTimer: 0
+  targetPosition: {x: 0, y: 0}
+  isSpawning: 1
+  isHungry: 0
+  fishHungerMoveSpeed: 8.5
+  foodDetectionRange: 15
+  hungerTimerMax: 10
+  hungerTimer: 0
   minMoneyTimer: 5
   maxMoneyTimer: 10
   moneyToDrop: {fileID: 4335957793588255294, guid: e85e4f10c91db9a42a0b650b7b7df7b2, type: 3}
@@ -153,3 +162,38 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!70 &4218962754384485990
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5415256789493638983}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.041912198, y: -0.049202394}
+  m_Size: {x: 1.3366762, y: 0.6040969}
+  m_Direction: 1
