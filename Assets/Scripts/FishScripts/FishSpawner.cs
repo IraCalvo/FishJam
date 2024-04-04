@@ -13,7 +13,6 @@ public class FishSpawner : MonoBehaviour
     public Bounds tankBounds;
     Camera mainCamera;
 
-
     private void Awake()
     {
         Instance = this;
@@ -40,7 +39,7 @@ public class FishSpawner : MonoBehaviour
 
     private void DropFish(GameObject fishGameObject)
     {
-        BasicFish fishScript = fishGameObject.GetComponent<BasicFish>();
+        FishMovement fishScript = fishGameObject.GetComponent<FishMovement>();
         Bounds viewportBounds = GetViewportBounds(mainCamera);
         Debug.Log(viewportBounds);
         Vector2 spawnPosition = new Vector2(Random.Range(viewportBounds.min.x, viewportBounds.max.x), 20f);

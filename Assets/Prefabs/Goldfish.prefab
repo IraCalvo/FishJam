@@ -9,13 +9,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8128727022327921946}
-  - component: {fileID: 5510317409862591210}
   - component: {fileID: 5600057492648021476}
+  - component: {fileID: -3766485631848344710}
+  - component: {fileID: 6277697942618328736}
+  - component: {fileID: 5908902714577221154}
+  - component: {fileID: -759206174066426646}
+  - component: {fileID: 5510317409862591210}
   - component: {fileID: 3027939846634909540}
   - component: {fileID: 5370789163460840426}
   - component: {fileID: 4218962754384485990}
   m_Layer: 0
-  m_Name: BasicFish
+  m_Name: Goldfish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,6 +40,70 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5600057492648021476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5415256789493638983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 805fefec805aa0d459ddd411a34cb73b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishSO: {fileID: 11400000, guid: 25a4d8d62af12a849bd46d42e92ba876, type: 2}
+  fishState: {fileID: -3766485631848344710}
+--- !u!114 &-3766485631848344710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5415256789493638983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a50cd43a5227d094abc904f697d6504d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 1
+--- !u!114 &6277697942618328736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5415256789493638983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5d278422fba83047a1eb86d7de0bebc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5908902714577221154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5415256789493638983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b05439a0fdd2af4eb4e000c5fc82427, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-759206174066426646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5415256789493638983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd7308d0077c7745a65041347300881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPosition: {x: 0, y: 0}
 --- !u!212 &5510317409862591210
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -88,32 +156,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5600057492648021476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5415256789493638983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 805fefec805aa0d459ddd411a34cb73b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fishMoveSpeed: 8
-  minLocationPickTimer: 3
-  maxLocationPickTimer: 5
-  nextLocationTimer: 0
-  targetPosition: {x: 0, y: 0}
-  isSpawning: 1
-  isHungry: 0
-  fishHungerMoveSpeed: 8.5
-  foodDetectionRange: 15
-  hungerTimerMax: 10
-  hungerTimer: 0
-  minMoneyTimer: 5
-  maxMoneyTimer: 10
-  moneyToDrop: {fileID: 4335957793588255294, guid: e85e4f10c91db9a42a0b650b7b7df7b2, type: 3}
 --- !u!50 &3027939846634909540
 Rigidbody2D:
   serializedVersion: 4
