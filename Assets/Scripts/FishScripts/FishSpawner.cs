@@ -26,9 +26,9 @@ public class FishSpawner : MonoBehaviour
 
     public void SpawnFish(int numberPressed)
     {
-        if (BankManager.instance.currentMoneyAmount >= fishCost)
+        if (BankManager.Instance.currentMoneyAmount >= fishCost)
         {
-            BankManager.instance.RemoveMoney(fishCost);
+            BankManager.Instance.RemoveMoney(fishCost);
             GameObject fishGameObject = Instantiate(fishPrefab);
             // TODO:
             // This should eventually select the specific fish prefab.

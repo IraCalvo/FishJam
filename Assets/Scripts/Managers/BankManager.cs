@@ -5,20 +5,20 @@ using UnityEngine;
 
 public class BankManager : MonoBehaviour
 {
-    public static BankManager instance;
+    public static BankManager Instance;
     public int currentMoneyAmount;
     [SerializeField] int initialMoneyAmount;
     [SerializeField] TextMeshProUGUI moneyAmountText;
 
     private void Awake()
     {
-        if (instance != null)
+        if (Instance != null)
         {
-            Destroy(instance);
+            Destroy(Instance);
         }
         else
         { 
-            instance = this;
+            Instance = this;
         }
     }
 
@@ -26,6 +26,11 @@ public class BankManager : MonoBehaviour
     {
         currentMoneyAmount = initialMoneyAmount;
         SetUIMoneyAmount();
+    }
+
+    public bool CanAfford(int cost)
+    {
+        return currentMoneyAmount >= cost;
     }
 
     public void AddMoney(int moneyToAdd)

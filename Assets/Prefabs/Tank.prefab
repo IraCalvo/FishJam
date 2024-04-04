@@ -708,6 +708,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2418893463374201032}
+  - component: {fileID: 7578299614080660558}
   m_Layer: 0
   m_Name: Fish Spawner
   m_TagString: Untagged
@@ -730,6 +731,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8784119496070903550}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7578299614080660558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691627053349917683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58f62888f5474de48a04628a88efce9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishPrefab: {fileID: 5415256789493638983, guid: a6c593db0bcf3d84fa372533b14be184, type: 3}
+  fishCost: 100
+  tankBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!1 &8865401063057092049
 GameObject:
   m_ObjectHideFlags: 0
