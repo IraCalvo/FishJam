@@ -1008,7 +1008,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 76ced5ed00f107c4da0f4b148108f12e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.15
+  m_Volume: 0.01
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1204,6 +1204,22 @@ PrefabInstance:
     - target: {fileID: 166832189390411634, guid: 926d1afee4c0e194a92cb1cfa99b29ea, type: 3}
       propertyPath: m_Name
       value: Shop
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892841685788933994, guid: 926d1afee4c0e194a92cb1cfa99b29ea, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6b630f007f861c646bdf36e44ad4bedb, type: 3}
+    - target: {fileID: 1892841685788933994, guid: 926d1afee4c0e194a92cb1cfa99b29ea, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892841685788933994, guid: 926d1afee4c0e194a92cb1cfa99b29ea, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892841685788933994, guid: 926d1afee4c0e194a92cb1cfa99b29ea, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2365109191165015565, guid: 926d1afee4c0e194a92cb1cfa99b29ea, type: 3}
       propertyPath: canvas

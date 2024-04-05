@@ -7,6 +7,7 @@ TagManager:
   - Resource
   - Ground
   - Food
+  - GoldFish
   layers:
   - Default
   - TransparentFX

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 552bfc3122cece54abce153f9af4752a, type: 3}
   m_Name: Crab
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  minLocationPickTimer: 0
-  maxLocationPickTimer: 0
-  foodDetectionRange: 0
-  hungerTimerMax: 0
-  minMoneyTimer: 0
+  moveSpeed: 0.5
+  minLocationPickTimer: 1
+  maxLocationPickTimer: 2
+  foodDetectionRange: 5
+  hungerTimerMax: 30
+  minMoneyTimer: 45
   maxMoneyTimer: 0
   moneyToDrop: {fileID: 0}
-  classes: 
+  classes: 01000000

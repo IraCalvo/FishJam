@@ -8,10 +8,11 @@ public class CrabMovement : MonoBehaviour
     private FishSO crabSO;
     private FishState crabState;
 
-    public Vector2 targetPosition;
+    private Vector2 targetPosition;
     private float nextLocationTimer;
 
     public float foodMoveSpeedEase;
+    public float jumpForce;
 
     Rigidbody2D rb;
     SpriteRenderer sr;
@@ -139,8 +140,8 @@ public class CrabMovement : MonoBehaviour
 
     void JumpAtFood()
     {
-        //later
-        Debug.Log("Snippy Snap");
+        rb.gravityScale = 1f;
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -171,13 +172,13 @@ public class CrabMovement : MonoBehaviour
 
     void SpriteDirection()
     {
-        //if ()
-        //{ 
-        
-        //}
-        //else
-        //{
-            
-        //}
+        if (targetPosition.x < transform.position.x)
+        {
+            sr.flipX = true;
+        }
+        else
+        {
+            sr.flipX = false;
+        }
     }
 }
