@@ -41,7 +41,7 @@ public class FishMovement : MonoBehaviour
             case FishState.State.Hungry:
                 MoveFishToFood();
                 break;
-            case FishState.State.Combat: 
+            case FishState.State.Combat:
                 break;
         }
         SpriteDirection();

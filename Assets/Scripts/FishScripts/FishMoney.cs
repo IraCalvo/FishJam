@@ -23,7 +23,14 @@ public class FishMoney : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SpawnMoney();
+        if (fishSO.moneyToDrop != null)
+        {
+            SpawnMoney();
+        }
+        else
+        {
+            return;
+        }
     }
 
     void SpawnMoney()

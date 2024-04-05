@@ -14,6 +14,7 @@ public class FishHunger : MonoBehaviour
         fish = GetComponent<Fish>();
         fishSO = fish.fishSO;
         fishState = fish.fishState;
+        hungerTimer = fishSO.hungerTimerMax;
     }
 
     // Update is called once per frame
