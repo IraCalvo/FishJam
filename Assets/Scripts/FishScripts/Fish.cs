@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Fish : MonoBehaviour
 {
-
     public FishSO fishSO;
+    public FishSpecies fishSpecies;
     public FishState fishState;
 
     [Header("Misc")]

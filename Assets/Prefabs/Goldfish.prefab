@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 4218962754384485990}
   m_Layer: 0
   m_Name: Goldfish
-  m_TagString: Untagged
+  m_TagString: GoldFish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishSO: {fileID: 11400000, guid: 25a4d8d62af12a849bd46d42e92ba876, type: 2}
+  fishSpecies: 0
   fishState: {fileID: -3766485631848344710}
 --- !u!114 &-3766485631848344710
 MonoBehaviour:
