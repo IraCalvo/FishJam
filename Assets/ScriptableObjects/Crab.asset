@@ -17,7 +17,7 @@ MonoBehaviour:
   minLocationPickTimer: 1
   maxLocationPickTimer: 2
   foodDetectionRange: 5
-  hungerTimerMax: 5
+  hungerTimerMax: 10
   dieFromHungerTimerMax: 8
   minMoneyTimer: 45
   maxMoneyTimer: 0

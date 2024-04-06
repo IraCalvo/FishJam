@@ -147,7 +147,7 @@ public class FishMovement : MonoBehaviour
         }
         float t = 1f - Mathf.Clamp01(distanceToTarget / 3); // Clamping to ensure t is between 0 and 1
         float easedT = Mathf.SmoothStep(0.5f, 1f, t); // Apply easing function
-        float easedFishHungerMoveSpeed = Mathf.Lerp(fishSO.moveSpeed, 0f, easedT); // Interpolate movement speed based on eased t
+        float easedFishHungerMoveSpeed = Mathf.Lerp(fishSO.moveSpeed, 1f, easedT); // Interpolate movement speed based on eased t
         transform.position = Vector2.MoveTowards(transform.position, deathPosition, easedFishHungerMoveSpeed * Time.fixedDeltaTime);
         
         sr.material.SetFloat("_DeadTimer", Mathf.Clamp(distanceToTarget, 0, 1));
