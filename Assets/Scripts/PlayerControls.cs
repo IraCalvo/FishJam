@@ -23,6 +23,20 @@ public class PlayerControls : MonoBehaviour
                     resourceScript.ResourceClicked();
                 }
             }
+            if (hit.collider.CompareTag("Enemy"))
+            {
+                Debug.Log("Detected enemy");
+                Enemy enemy = hit.collider.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    EnemyHealthBar.instance.ShowHealthBar(enemy);
+                }
+            }
+        }
+        else
+        {
+            EnemyHealthBar.instance.healthBarIsActive = false;
+            EnemyHealthBar.instance.gameObject.SetActive(false);
         }
     }
 

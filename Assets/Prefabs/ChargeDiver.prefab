@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7872782724293462448}
   m_Layer: 0
   m_Name: ChargeDiver
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySO: {fileID: 11400000, guid: b70bfd73bf7bbba4286932d76255ae40, type: 2}
+  currentHP: 0
 --- !u!114 &4509416109203791703
 MonoBehaviour:
   m_ObjectHideFlags: 0

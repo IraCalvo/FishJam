@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Food
   - GoldFish
+  - Enemy
   layers:
   - Default
   - TransparentFX

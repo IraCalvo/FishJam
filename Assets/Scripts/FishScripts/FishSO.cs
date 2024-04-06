@@ -7,6 +7,8 @@ public class FishSO : ScriptableObject
 {
     public int price;
     public float moveSpeed;
+    public int damage;
+    public int hp;
     public float minLocationPickTimer;
     public float maxLocationPickTimer;
     public float foodDetectionRange;

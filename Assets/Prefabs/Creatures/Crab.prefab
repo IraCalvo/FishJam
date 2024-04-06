@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8834276894692808537}
   - component: {fileID: 7760110595144303907}
-  - component: {fileID: 485292129076049103}
   - component: {fileID: 2671889942242416483}
+  - component: {fileID: 485292129076049103}
   - component: {fileID: 6936341526939708821}
   - component: {fileID: 6068340904432021836}
   - component: {fileID: 5061604681148110708}
@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 5859037257223601284}
   m_Layer: 0
   m_Name: Crab
-  m_TagString: Untagged
+  m_TagString: Crab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,6 +55,20 @@ MonoBehaviour:
   fishSO: {fileID: 11400000, guid: 887437fbe322fdf4590b098bc259ea7f, type: 2}
   fishSpecies: 1
   fishState: {fileID: 2671889942242416483}
+  isOnScreen: 0
+--- !u!114 &2671889942242416483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6518210591975832111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a50cd43a5227d094abc904f697d6504d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 1
 --- !u!114 &485292129076049103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,19 +84,6 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0}
   foodMoveSpeedEase: 15
   jumpForce: 0.45
---- !u!114 &2671889942242416483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6518210591975832111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a50cd43a5227d094abc904f697d6504d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: 1
 --- !u!114 &6936341526939708821
 MonoBehaviour:
   m_ObjectHideFlags: 0
