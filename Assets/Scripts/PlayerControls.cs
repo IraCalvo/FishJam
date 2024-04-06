@@ -10,17 +10,22 @@ public class PlayerControls : MonoBehaviour
     {
         Vector2 mousePos = Mouse.current.position.ReadValue();
 
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(mousePos), Vector2.zero);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(mousePos), Vector2.zero);
 
-        if (hit.collider != null)
+        // Variable to keep track of the topmost resource hit
+        Resource topmostResource = null;
+
+        // Iterate through all hits to find the topmost resource
+        foreach (RaycastHit2D hit in hits)
         {
-            if (hit.collider.CompareTag("Resource"))
+            if (hit.collider != null && hit.collider.CompareTag("Resource"))
             {
                 Resource resourceScript = hit.collider.GetComponent<Resource>();
 
-                if (resourceScript != null)
+                // Check if this resource is on top of previous resources
+                if (topmostResource == null || resourceScript.transform.position.z > topmostResource.transform.position.z)
                 {
-                    resourceScript.ResourceClicked();
+                    topmostResource = resourceScript;
                 }
             }
             if (hit.collider.CompareTag("Enemy"))
@@ -37,6 +42,12 @@ public class PlayerControls : MonoBehaviour
         {
             EnemyHealthBar.instance.healthBarIsActive = false;
             EnemyHealthBar.instance.gameObject.SetActive(false);
+        }
+
+        // If a resource was found, perform the action on the topmost resource
+        if (topmostResource != null)
+        {
+            topmostResource.ResourceClicked();
         }
     }
 

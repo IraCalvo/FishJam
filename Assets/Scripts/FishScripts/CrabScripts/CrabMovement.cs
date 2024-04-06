@@ -161,6 +161,7 @@ public class CrabMovement : MonoBehaviour
         {
             Destroy(collision.gameObject);
             crabState.SetStateTo(FishState.State.Normal);
+            sr.material = defaultMaterial;
             PickRandomLocation();
         }
         if (collision.gameObject.tag == "Ground")
