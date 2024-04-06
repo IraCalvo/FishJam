@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CrabMovement : MonoBehaviour
@@ -14,10 +15,14 @@ public class CrabMovement : MonoBehaviour
     public float foodMoveSpeedEase;
     public float jumpForce;
 
+    private bool didDie;
+    private Vector2 deathPosition;
+
     Rigidbody2D rb;
     SpriteRenderer sr;
     GameObject tank;
     Bounds tankBounds;
+    Animator animator;
 
     private void Awake()
     {
@@ -30,6 +35,7 @@ public class CrabMovement : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         tank = GameObject.Find("Tank");
         tankBounds = tank.GetComponent<PolygonCollider2D>().bounds;
+        animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -45,6 +51,13 @@ public class CrabMovement : MonoBehaviour
                 MoveCrabToFood();
                 break;
             case FishState.State.Combat:
+                break;
+            case FishState.State.Dead:
+                if (!didDie)
+                {
+                    SetDeathPosition();
+                }
+                MoveFishToDeath();
                 break;
         }
         SpriteDirection();
@@ -97,7 +110,7 @@ public class CrabMovement : MonoBehaviour
         List<Fish> preferredFood = new List<Fish>();
         foreach (Fish f in fish)
         {
-            if (f.fishSpecies == FishSpecies.GoldFish)
+            if (f.fishSpecies == FishSpecies.GoldFish && f.fishState.GetCurrentState() != FishState.State.Dead)
             { 
                 preferredFood.Add(f);
             }
@@ -157,6 +170,30 @@ public class CrabMovement : MonoBehaviour
             PickRandomLocation();
             crabState.SetStateTo(FishState.State.Normal);
         }
+    }
+
+    void MoveFishToDeath()
+    {
+        animator.enabled = false;
+        sr.flipY = true;
+
+        float distanceToTarget = Vector2.Distance(transform.position, deathPosition);
+        if (distanceToTarget <= 0.01f)
+        {
+            Destroy(gameObject);
+        }
+        float t = 1f - Mathf.Clamp01(distanceToTarget / 2); // Clamping to ensure t is between 0 and 1
+        float easedT = Mathf.SmoothStep(0.5f, 1f, t); // Apply easing function
+        float easedFishHungerMoveSpeed = Mathf.Lerp(crabSO.moveSpeed, 0f, easedT); // Interpolate movement speed based on eased t
+        transform.position = Vector2.MoveTowards(transform.position, deathPosition, easedFishHungerMoveSpeed * Time.fixedDeltaTime);
+
+        sr.material.SetFloat("_DeadTimer", Mathf.Clamp(distanceToTarget, 0, 1));
+    }
+
+    void SetDeathPosition()
+    {
+        didDie = true;
+        deathPosition = new Vector2(transform.position.x, transform.position.y - 1);
     }
 
     void PickWaitTimer()

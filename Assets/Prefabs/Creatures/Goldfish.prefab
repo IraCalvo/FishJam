@@ -82,6 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 5097b1ae8c82b4a47a825cb1bdd09783, type: 2}
   hungerMaterial: {fileID: -876546973899608171, guid: 120d4cde031667b4b9c5fb2f598fd89e, type: 3}
+  deadMaterial: {fileID: -876546973899608171, guid: e8205a68e13a0b14daf174269c883e0e, type: 3}
 --- !u!114 &5908902714577221154
 MonoBehaviour:
   m_ObjectHideFlags: 0

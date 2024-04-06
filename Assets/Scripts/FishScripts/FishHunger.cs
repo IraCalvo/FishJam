@@ -12,6 +12,7 @@ public class FishHunger : MonoBehaviour
 
     [SerializeField] Material defaultMaterial;
     [SerializeField] Material hungerMaterial;
+    [SerializeField] Material deadMaterial;
 
     private SpriteRenderer sr;
 
@@ -28,7 +29,7 @@ public class FishHunger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (fishState.GetCurrentState() != FishState.State.Spawning)
+        if (fishState.GetCurrentState() != FishState.State.Spawning && fishState.GetCurrentState() != FishState.State.Dead)
         {
             HungerTimer();
         }
@@ -51,7 +52,8 @@ public class FishHunger : MonoBehaviour
         {
             if (dieFromHungerTimer <= 0)
             {
-                Destroy(gameObject);
+                fishState.SetStateTo(FishState.State.Dead);
+                sr.material = deadMaterial;
             }
             else
             {

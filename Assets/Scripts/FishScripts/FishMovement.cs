@@ -16,6 +16,10 @@ public class FishMovement : MonoBehaviour
     GameObject tank;
     Bounds tankBounds;
 
+    Animator animator;
+    private bool didDie;
+    private Vector2 deathPosition;
+
     private void Awake()
     {
         fish = GetComponent<Fish>();
@@ -26,6 +30,8 @@ public class FishMovement : MonoBehaviour
         fishState = GetComponent<FishState>();
         tank = GameObject.Find("Tank");
         tankBounds = tank.GetComponent<PolygonCollider2D>().bounds;
+
+        animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -42,6 +48,13 @@ public class FishMovement : MonoBehaviour
                 MoveFishToFood();
                 break;
             case FishState.State.Combat:
+                break;
+            case FishState.State.Dead:
+                if (!didDie)
+                {
+                    SetDeathPosition();
+                }
+                MoveFishToDeath();
                 break;
         }
         SpriteDirection();
@@ -115,13 +128,35 @@ public class FishMovement : MonoBehaviour
             return;
         }
 
-        targetPosition = closestFood.transform.position;
-
-        float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
+        float distanceToTarget = Vector2.Distance(transform.position, closestFood.transform.position);
         float t = 1f - Mathf.Clamp01(distanceToTarget / 5); // Clamping to ensure t is between 0 and 1
         float easedT = Mathf.SmoothStep(1f, 0f, t); // Apply easing function
         float easedFishHungerMoveSpeed = Mathf.Lerp(fishSO.moveSpeed, 0f, easedT); // Interpolate movement speed based on eased t
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, easedFishHungerMoveSpeed * Time.fixedDeltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, closestFood.transform.position, easedFishHungerMoveSpeed * Time.fixedDeltaTime);
+    }
+
+    void MoveFishToDeath()
+    {
+        animator.enabled = false;
+        sr.flipY = true;
+        
+        float distanceToTarget = Vector2.Distance(transform.position, deathPosition);
+        if (distanceToTarget <= 0.01f)
+        {
+            Destroy(gameObject);
+        }
+        float t = 1f - Mathf.Clamp01(distanceToTarget / 3); // Clamping to ensure t is between 0 and 1
+        float easedT = Mathf.SmoothStep(0.5f, 1f, t); // Apply easing function
+        float easedFishHungerMoveSpeed = Mathf.Lerp(fishSO.moveSpeed, 0f, easedT); // Interpolate movement speed based on eased t
+        transform.position = Vector2.MoveTowards(transform.position, deathPosition, easedFishHungerMoveSpeed * Time.fixedDeltaTime);
+        
+        sr.material.SetFloat("_DeadTimer", Mathf.Clamp(distanceToTarget, 0, 1));
+    }
+
+    void SetDeathPosition()
+    {
+        didDie = true;
+        deathPosition = new Vector2(transform.position.x, transform.position.y - 5);
     }
 
     void PickWaitTimer()

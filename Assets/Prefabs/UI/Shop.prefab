@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopItems:
-  - {fileID: 5832840214205555446, guid: a0a4779882bbbe04bb88ecfebcefa1e8, type: 3}
+  - {fileID: 6356760857989537703}
   - {fileID: 5324730131109652863}
   - {fileID: 2851663206329952552}
   - {fileID: 4967122036796185622}
@@ -309,6 +309,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0a4779882bbbe04bb88ecfebcefa1e8, type: 3}
+--- !u!1 &6356760857989537703 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5832840214205555446, guid: a0a4779882bbbe04bb88ecfebcefa1e8, type: 3}
+  m_PrefabInstance: {fileID: 632097241007865169}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6548287782912181797 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5919304531984120692, guid: a0a4779882bbbe04bb88ecfebcefa1e8, type: 3}

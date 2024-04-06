@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/FishSO")]
 public class FishSO : ScriptableObject
 {
-    public float price;
+    public int price;
     public float moveSpeed;
     public float minLocationPickTimer;
     public float maxLocationPickTimer;

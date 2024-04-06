@@ -9,7 +9,6 @@ public class FishSpawner : MonoBehaviour
 {
     public static FishSpawner Instance { get; private set; }
     [SerializeField] GameObject fishPrefab;
-    [SerializeField] int fishCost;
     public Bounds tankBounds;
     Camera mainCamera;
 
@@ -25,11 +24,14 @@ public class FishSpawner : MonoBehaviour
 
     public void SpawnFish(GameObject fishObject)
     {
-        if (BankManager.Instance.currentMoneyAmount >= fishCost)
+        if (fishObject.TryGetComponent<Fish>(out Fish fish))
         {
-            BankManager.Instance.RemoveMoney(fishCost);
-            GameObject fishGameObject = Instantiate(fishObject);
-            SetSpawnPosition(fishGameObject);
+            if (BankManager.Instance.currentMoneyAmount >= fish.fishSO.price)
+            {
+                BankManager.Instance.RemoveMoney(fish.fishSO.price);
+                GameObject fishGameObject = Instantiate(fishObject);
+                SetSpawnPosition(fishGameObject);
+            }
         }
     }
 
