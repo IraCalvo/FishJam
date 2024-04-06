@@ -54,7 +54,7 @@ public class FishMovement : MonoBehaviour
             if (Vector2.Distance(transform.position, targetPosition) > 0.1f)
             {
                 float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
-                float t = 1f - Mathf.Clamp01(distanceToTarget / 50); // Clamping to ensure t is between 0 and 1
+                float t = 1f - Mathf.Clamp01(distanceToTarget / 30); // Clamping to ensure t is between 0 and 1
                 float easedT = Mathf.SmoothStep(0f, 1f, t); // Apply easing function
                 float easedMoveSpeed = Mathf.Lerp(fishSO.moveSpeed, 0f, easedT); // Interpolate movement speed based on eased t
                 transform.position = Vector2.MoveTowards(transform.position, targetPosition, easedMoveSpeed * Time.fixedDeltaTime);
@@ -78,7 +78,7 @@ public class FishMovement : MonoBehaviour
             float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
             float t = 1f - Mathf.Clamp01(distanceToTarget / 10); // Clamping to ensure t is between 0 and 1
             float easedT = Mathf.SmoothStep(0f, 1f, t); // Apply easing function
-            float spawnMoveSpeed = Mathf.Lerp(fishSO.moveSpeed * 6, 0f, easedT); // Interpolate movement speed based on eased t
+            float spawnMoveSpeed = Mathf.Lerp(fishSO.moveSpeed * 7, 0f, easedT); // Interpolate movement speed based on eased t
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, spawnMoveSpeed * Time.fixedDeltaTime);
         }
         else
@@ -124,16 +124,6 @@ public class FishMovement : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, easedFishHungerMoveSpeed * Time.fixedDeltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Food" && fishState.GetCurrentState() == FishState.State.Hungry)
-        {
-            Destroy(collision.gameObject);
-            fishState.SetStateTo(FishState.State.Normal);
-            PickRandomLocation();
-        }
-    }
-
     void PickWaitTimer()
     {
         nextLocationTimer = Random.Range(fishSO.minLocationPickTimer, fishSO.maxLocationPickTimer);
@@ -141,8 +131,8 @@ public class FishMovement : MonoBehaviour
 
     void PickRandomLocation()
     {
-        float randomX = Random.Range(tankBounds.min.x - 3f, tankBounds.max.x - 3f);
-        float randomY = Random.Range(tankBounds.min.y - 1f, tankBounds.max.y - 1f);
+        float randomX = Random.Range(tankBounds.min.x + 3f, tankBounds.max.x - 3f);
+        float randomY = Random.Range(tankBounds.min.y + 1f, tankBounds.max.y - 1f);
 
         targetPosition = new Vector2(randomX, randomY);
     }

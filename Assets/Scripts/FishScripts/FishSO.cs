@@ -5,11 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/FishSO")]
 public class FishSO : ScriptableObject
 {
+    public float price;
     public float moveSpeed;
     public float minLocationPickTimer;
     public float maxLocationPickTimer;
     public float foodDetectionRange;
     public float hungerTimerMax;
+    public float dieFromHungerTimerMax;
     public float minMoneyTimer;
     public float maxMoneyTimer;
     public GameObject moneyToDrop;

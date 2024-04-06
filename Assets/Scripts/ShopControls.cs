@@ -6,41 +6,44 @@ using UnityEngine.InputSystem;
 
 public class ShopControls : MonoBehaviour
 {
+
+    public ShopUIManager shopUIManager;
+    private List<ShopItem> shopItems;
+
+    private void Awake()
+    {
+        
+    }
+
     public void OnBuyItem(InputAction.CallbackContext callbackContext)
     {
-        if (callbackContext.performed)
-        {
-            switch (callbackContext.control.name)
+        CreateShopItemList();
+        int number;
+        if (int.TryParse(callbackContext.control.name, out number)) {
+            if (callbackContext.performed)
             {
-                case "1":
-                    FishSpawner.Instance.SpawnFish(1);
-                    break;
-                case "2":
-                    FishSpawner.Instance.SpawnFish(2);
-                    break;
-                case "3":
-                    FishSpawner.Instance.SpawnFish(3);
-                    break;
-                case "4":
-                    FishSpawner.Instance.SpawnFish(4);
-                    break;
-                case "5":
-                    FishSpawner.Instance.SpawnFish(5);
-                    break;
-                case "6":
-                    FishSpawner.Instance.SpawnFish(6);
-                    break;
-                case "7":
-                    FishSpawner.Instance.SpawnFish(7);
-                    break;
-                default:
-                    break;
+                FishSpawner.Instance.SpawnFish(shopItems[number-1].shopGameObject);
             }
         }
     }
 
+    private void CreateShopItemList()
+    {
+        List<ShopItem> temp = new List<ShopItem>();
+        foreach (GameObject gameObject in shopUIManager.shopItems)
+        {
+            if (gameObject.TryGetComponent<ShopItem>(out ShopItem shopItem)) {
+                temp.Add(shopItem);
+            }
+        }
+        shopItems = temp;
+    }
+
     public void OnClickItem(BaseEventData baseEventData)
     {
-        FishSpawner.Instance.SpawnFish(1);
+        if (TryGetComponent<ShopItem>(out ShopItem shopItem))
+        {
+            FishSpawner.Instance.SpawnFish(shopItem.shopGameObject);
+        }
     }
 }

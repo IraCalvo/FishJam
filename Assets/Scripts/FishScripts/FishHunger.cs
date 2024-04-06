@@ -8,6 +8,12 @@ public class FishHunger : MonoBehaviour
     private FishSO fishSO;
     private FishState fishState;
     private float hungerTimer;
+    private float dieFromHungerTimer;
+
+    [SerializeField] Material defaultMaterial;
+    [SerializeField] Material hungerMaterial;
+
+    private SpriteRenderer sr;
 
     private void Awake()
     {
@@ -15,6 +21,8 @@ public class FishHunger : MonoBehaviour
         fishSO = fish.fishSO;
         fishState = fish.fishState;
         hungerTimer = fishSO.hungerTimerMax;
+
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -26,18 +34,38 @@ public class FishHunger : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Food" && fishState.GetCurrentState() == FishState.State.Hungry)
+        {
+            Destroy(collision.gameObject);
+            fishState.SetStateTo(FishState.State.Normal);
+            sr.material = defaultMaterial;
+        }
+    }
+
     void HungerTimer()
     {
         // Already hungry
         if (fishState.GetCurrentState() == FishState.State.Hungry)
         {
+            if (dieFromHungerTimer <= 0)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                dieFromHungerTimer -= Time.deltaTime;
+            }
             return;
         }
 
         if (hungerTimer <= 0)
         {
             fishState.SetStateTo(FishState.State.Hungry);
+            sr.material = hungerMaterial;
             hungerTimer = fishSO.hungerTimerMax;
+            dieFromHungerTimer = fishSO.dieFromHungerTimerMax;
         }
         else
         {

@@ -23,32 +23,46 @@ public class FishSpawner : MonoBehaviour
         mainCamera = Camera.main;
     }
 
-    public void SpawnFish(int numberPressed)
+    public void SpawnFish(GameObject fishObject)
     {
         if (BankManager.Instance.currentMoneyAmount >= fishCost)
         {
             BankManager.Instance.RemoveMoney(fishCost);
-            GameObject fishGameObject = Instantiate(fishPrefab);
-            // TODO:
-            // This should eventually select the specific fish prefab.
-            int index = numberPressed - 1;
-            //
-            DropFish(fishGameObject);
+            GameObject fishGameObject = Instantiate(fishObject);
+            SetSpawnPosition(fishGameObject);
         }
     }
 
-    private void DropFish(GameObject fishGameObject)
+    public void SetSpawnPosition(GameObject fishGameObject)
     {
-        FishMovement fishScript = fishGameObject.GetComponent<FishMovement>();
+        Vector2 randomX = RandomX();
+        Vector2 targetPosition = DropFish(randomX);
+        fishGameObject.transform.position = randomX;
+
+        if (fishGameObject.TryGetComponent<FishMovement>(out FishMovement fishMovement))
+        {
+            fishMovement.targetPosition = targetPosition;
+        }
+        else if (fishGameObject.TryGetComponent<CrabMovement>(out CrabMovement crabMovement))
+        {
+            // Do nothing. The Crab will fall and and change to normal state
+        }
+        
+    }
+
+    private Vector2 RandomX()
+    {
         Bounds viewportBounds = GetViewportBounds(mainCamera);
-        Debug.Log(viewportBounds);
         Vector2 spawnPosition = new Vector2(Random.Range(viewportBounds.min.x, viewportBounds.max.x), 20f);
+        return spawnPosition;
+    }
 
-        fishGameObject.transform.position = spawnPosition;
-
+    private Vector2 DropFish(Vector2 spawnPosition)
+    {
+        Bounds viewportBounds = GetViewportBounds(mainCamera);
         float depth = Random.Range(viewportBounds.min.y, viewportBounds.max.y);
         Vector2 targetPosition = new Vector2(spawnPosition.x, depth);
-        fishScript.targetPosition = targetPosition;
+        return targetPosition;
     }
 
     Bounds GetViewportBounds(Camera camera)

@@ -8,7 +8,7 @@ public class CrabMovement : MonoBehaviour
     private FishSO crabSO;
     private FishState crabState;
 
-    private Vector2 targetPosition;
+    public Vector2 targetPosition;
     private float nextLocationTimer;
 
     public float foodMoveSpeedEase;
@@ -40,8 +40,6 @@ public class CrabMovement : MonoBehaviour
                 MoveCrab();
                 break;
             case FishState.State.Spawning:
-                PickRandomLocation();
-                //MoveCrabToSpawn();
                 break;
             case FishState.State.Hungry:
                 MoveCrabToFood();
@@ -80,7 +78,7 @@ public class CrabMovement : MonoBehaviour
     {
         if (Vector2.Distance(transform.position, targetPosition) > 0.1f)
         {
-            float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
+            //float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
             //float t = 1f - Mathf.Clamp01(distanceToTarget / 10); // Clamping to ensure t is between 0 and 1
             //float easedT = Mathf.SmoothStep(0f, 1f, t); // Apply easing function
             //float spawnMoveSpeed = Mathf.Lerp(crabSO.moveSpeed * 6, 0f, easedT); // Interpolate movement speed based on eased t
@@ -156,6 +154,8 @@ public class CrabMovement : MonoBehaviour
         {
             rb.gravityScale = 0;
             rb.velocity = Vector3.zero;
+            PickRandomLocation();
+            crabState.SetStateTo(FishState.State.Normal);
         }
     }
 
