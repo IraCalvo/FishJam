@@ -9,6 +9,7 @@ TagManager:
   - Food
   - GoldFish
   - Enemy
+  - Crab
   layers:
   - Default
   - TransparentFX

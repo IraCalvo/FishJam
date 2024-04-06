@@ -4,18 +4,36 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-
     public EnemySO enemySO;
+    public float currentHP;
+    FishState[] fishInTank;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        currentHP = enemySO.MaxHP;
+
+        fishInTank = FindObjectsOfType<FishState>();
+        foreach (FishState f in fishInTank)
+        { 
+            FishState fishState = f.GetComponent<FishState>();
+            Fish fish = f.GetComponent<Fish>();
+            if (!fish.fishSO.classes.Contains(FishClass.Resource))
+            {
+                fishState.SetStateTo(FishState.State.Combat);
+            }
+            else
+            {
+                return;
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void TakeDamage(int damageToTake)
+    { 
+        currentHP -= damageToTake;
+        if (EnemyHealthBar.instance.healthBarIsActive)
+        { 
+            EnemyHealthBar.instance.UpdateHealthBar();
+        }
     }
 }

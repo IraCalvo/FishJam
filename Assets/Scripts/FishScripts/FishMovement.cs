@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -89,15 +90,24 @@ public class FishMovement : MonoBehaviour
         if (Vector2.Distance(transform.position, targetPosition) > 0.1f)
         {
             float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
-            float t = 1f - Mathf.Clamp01(distanceToTarget / 10); // Clamping to ensure t is between 0 and 1
+            float t = 1f - Mathf.Clamp01(distanceToTarget / 5); // Clamping to ensure t is between 0 and 1
             float easedT = Mathf.SmoothStep(0f, 1f, t); // Apply easing function
-            float spawnMoveSpeed = Mathf.Lerp(fishSO.moveSpeed * 7, 0f, easedT); // Interpolate movement speed based on eased t
+            float spawnMoveSpeed = Mathf.Lerp(fishSO.moveSpeed * 7, 0.5f, easedT); // Interpolate movement speed based on eased t
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, spawnMoveSpeed * Time.fixedDeltaTime);
         }
         else
         {
-            fishState.SetStateTo(FishState.State.Normal);
-            PickRandomLocation();
+            Debug.Log("entered early");
+            Enemy[] enemiesInTank = FindObjectsOfType<Enemy>();
+            if (enemiesInTank.Length == 0 || fishSO.classes.Contains(FishClass.Resource))
+            {
+                fishState.SetStateTo(FishState.State.Normal);
+                PickRandomLocation();
+            }
+            else if (enemiesInTank != null && !fishSO.classes.Contains(FishClass.Resource))
+            {
+                fishState.SetStateTo(FishState.State.Combat);
+            }
         }
     }
 

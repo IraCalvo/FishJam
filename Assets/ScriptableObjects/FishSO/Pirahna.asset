@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 552bfc3122cece54abce153f9af4752a, type: 3}
-  m_Name: Crab
+  m_Name: Pirahna
   m_EditorClassIdentifier: 
-  price: 100
-  moveSpeed: 0.5
-  minLocationPickTimer: 1
-  maxLocationPickTimer: 2
-  foodDetectionRange: 5
-  hungerTimerMax: 10
-  dieFromHungerTimerMax: 8
-  minMoneyTimer: 45
+  price: 0
+  moveSpeed: 0
+  minLocationPickTimer: 0
+  maxLocationPickTimer: 0
+  foodDetectionRange: 0
+  hungerTimerMax: 0
+  dieFromHungerTimerMax: 0
+  minMoneyTimer: 0
   maxMoneyTimer: 0
   moneyToDrop: {fileID: 0}
-  classes: 01000000
+  classes: 

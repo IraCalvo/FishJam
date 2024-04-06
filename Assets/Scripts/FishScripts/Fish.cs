@@ -8,6 +8,7 @@ public class Fish : MonoBehaviour
     public FishSO fishSO;
     public FishSpecies fishSpecies;
     public FishState fishState;
+    public bool isOnScreen;
 
     [Header("Misc")]
     SpriteRenderer sr;
@@ -24,12 +25,18 @@ public class Fish : MonoBehaviour
         tank = GameObject.Find("Tank");
         tankBounds= tank.GetComponent<PolygonCollider2D>().bounds;
     }
-    private void Start()
-    {
-    }
 
     private void Update()
     {
     }
-    
+
+    private void OnBecameInvisible()
+    {
+        isOnScreen = false;
+    }
+
+    private void OnBecameVisible()
+    {
+        isOnScreen = true;
+    }
 }

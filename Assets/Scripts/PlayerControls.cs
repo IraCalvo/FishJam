@@ -37,12 +37,13 @@ public class PlayerControls : MonoBehaviour
                     EnemyHealthBar.instance.ShowHealthBar(enemy);
                 }
             }
+            else
+            {
+                EnemyHealthBar.instance.healthBarIsActive = false;
+                EnemyHealthBar.instance.gameObject.SetActive(false);
+            }
         }
-        else
-        {
-            EnemyHealthBar.instance.healthBarIsActive = false;
-            EnemyHealthBar.instance.gameObject.SetActive(false);
-        }
+
 
         // If a resource was found, perform the action on the topmost resource
         if (topmostResource != null)

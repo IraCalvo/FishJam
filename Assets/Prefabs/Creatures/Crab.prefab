@@ -84,6 +84,7 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0}
   foodMoveSpeedEase: 15
   jumpForce: 0.45
+  defaultMaterial: {fileID: 2100000, guid: 5097b1ae8c82b4a47a825cb1bdd09783, type: 2}
 --- !u!114 &6936341526939708821
 MonoBehaviour:
   m_ObjectHideFlags: 0

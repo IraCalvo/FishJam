@@ -23,6 +23,7 @@ public class CrabMovement : MonoBehaviour
     GameObject tank;
     Bounds tankBounds;
     Animator animator;
+    [SerializeField] Material defaultMaterial;
 
     private void Awake()
     {
@@ -168,8 +169,17 @@ public class CrabMovement : MonoBehaviour
         {
             rb.gravityScale = 0;
             rb.velocity = Vector3.zero;
-            PickRandomLocation();
-            crabState.SetStateTo(FishState.State.Normal);
+
+            Enemy[] enemiesInTank = FindObjectsOfType<Enemy>();
+            if (enemiesInTank.Length == 0)
+            {
+                PickRandomLocation();
+                crabState.SetStateTo(FishState.State.Normal);
+            }
+            else
+            {
+                crabState.SetStateTo(FishState.State.Combat);
+            }
         }
     }
 
