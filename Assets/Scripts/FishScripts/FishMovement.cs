@@ -68,8 +68,8 @@ public class FishMovement : MonoBehaviour
             if (Vector2.Distance(transform.position, targetPosition) > 0.1f)
             {
                 float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
-                float t = 1f - Mathf.Clamp01(distanceToTarget / 30); // Clamping to ensure t is between 0 and 1
-                float easedT = Mathf.SmoothStep(0f, 1f, t); // Apply easing function
+                float t = 1f - Mathf.Clamp01(distanceToTarget / 10); // Clamping to ensure t is between 0 and 1
+                float easedT = Mathf.SmoothStep(0.5f, 1f, t); // Apply easing function
                 float easedMoveSpeed = Mathf.Lerp(fishSO.moveSpeed, 0f, easedT); // Interpolate movement speed based on eased t
                 transform.position = Vector2.MoveTowards(transform.position, targetPosition, easedMoveSpeed * Time.fixedDeltaTime);
             }

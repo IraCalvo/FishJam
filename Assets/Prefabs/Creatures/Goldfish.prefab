@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6277697942618328736}
   - component: {fileID: 5908902714577221154}
   - component: {fileID: -759206174066426646}
+  - component: {fileID: 3732345601615448282}
   - component: {fileID: 5510317409862591210}
   - component: {fileID: 3027939846634909540}
   - component: {fileID: 5370789163460840426}
@@ -55,6 +56,7 @@ MonoBehaviour:
   fishSO: {fileID: 11400000, guid: 25a4d8d62af12a849bd46d42e92ba876, type: 2}
   fishSpecies: 0
   fishState: {fileID: -3766485631848344710}
+  isOnScreen: 0
 --- !u!114 &-3766485631848344710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +110,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0}
+--- !u!114 &3732345601615448282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5415256789493638983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f72dd4a4c56f9c549baa598340df12c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingMaterial: {fileID: 0}
+  selectionMaterial: {fileID: -876546973899608171, guid: 5dcc6dd47a4caac4e84b19994e135373, type: 3}
+  sr: {fileID: 0}
 --- !u!212 &5510317409862591210
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -128,7 +145,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 51f5f495c3fc3c34c98180e41906d2b3, type: 3}
+  - {fileID: 2100000, guid: 5097b1ae8c82b4a47a825cb1bdd09783, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
