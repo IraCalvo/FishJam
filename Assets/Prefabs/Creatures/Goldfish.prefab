@@ -124,7 +124,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingMaterial: {fileID: 0}
   selectionMaterial: {fileID: -876546973899608171, guid: 5dcc6dd47a4caac4e84b19994e135373, type: 3}
-  sr: {fileID: 0}
+  sr: {fileID: 5510317409862591210}
+  isSelected: 0
 --- !u!212 &5510317409862591210
 SpriteRenderer:
   m_ObjectHideFlags: 0

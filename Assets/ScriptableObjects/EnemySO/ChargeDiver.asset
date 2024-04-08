@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHP: 100
   speed: 4
+  damage: 5

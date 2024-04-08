@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9f2577ad820f04db9fed67c96a7c7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountWorth: 10
+  amountWorth: 25
   disappearTime: 3
 --- !u!95 &3563069974701627745
 Animator:

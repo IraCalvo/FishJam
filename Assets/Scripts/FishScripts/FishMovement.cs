@@ -97,7 +97,6 @@ public class FishMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log("entered early");
             Enemy[] enemiesInTank = FindObjectsOfType<Enemy>();
             if (enemiesInTank.Length == 0 || fishSO.classes.Contains(FishClass.Resource))
             {

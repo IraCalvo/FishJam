@@ -7,4 +7,5 @@ public class EnemySO : ScriptableObject
 {
     public float MaxHP;
     public float speed;
+    public int damage;
 }

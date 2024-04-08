@@ -24,7 +24,7 @@ MonoBehaviour:
   attackCooldown: 0
   foodDetectionRange: 15
   hungerTimerMax: 10
-  dieFromHungerTimerMax: 0
+  dieFromHungerTimerMax: 30
   minMoneyTimer: 5
   maxMoneyTimer: 10
   moneyToDrop: {fileID: 4335957793588255294, guid: e85e4f10c91db9a42a0b650b7b7df7b2, type: 3}

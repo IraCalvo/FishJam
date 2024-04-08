@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentMoneyAmount: 0
-  initialMoneyAmount: 5000
+  initialMoneyAmount: 200
   moneyAmountText: {fileID: 5020605464381656403}
 --- !u!1 &4053540211203626649
 GameObject:

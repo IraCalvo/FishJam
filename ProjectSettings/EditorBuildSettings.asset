@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Scenes/TitleScreen.unity
+    guid: e2e80698c8ef9794e91fa21233f724f0
+  - enabled: 1
+    path: Assets/Scenes/ZionScene.unity
+    guid: d391c674058bfae44970912ccae0fbce
+  - enabled: 1
+    path: Assets/Scenes/Survival.unity
+    guid: e90de96b485cd5148b6aef5e7e0afcba
   m_configObjects: {}

@@ -186,7 +186,7 @@ public class ChargeDiverMovement : MonoBehaviour
         {
             if (state == State.Attacking)
             {
-                fish.TakeDamage(5);
+                fish.TakeDamage(enemySO.damage);
             }
         }
     }

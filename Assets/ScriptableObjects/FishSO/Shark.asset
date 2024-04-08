@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 552bfc3122cece54abce153f9af4752a, type: 3}
+  m_Name: Shark
+  m_EditorClassIdentifier: 
+  price: 1500
+  moveSpeed: 12
+  classes: 0300000000000000
+  minLocationPickTimer: 3
+  maxLocationPickTimer: 15
+  damage: 15
+  hp: 20
+  attackRange: 9
+  combatMoveSpeed: 15
+  attackCooldown: 1.5
+  foodDetectionRange: 12
+  hungerTimerMax: 45
+  dieFromHungerTimerMax: 10
+  minMoneyTimer: 3
+  maxMoneyTimer: 5
+  moneyToDrop: {fileID: 4335957793588255294, guid: e85e4f10c91db9a42a0b650b7b7df7b2, type: 3}

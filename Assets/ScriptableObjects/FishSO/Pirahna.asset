@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 552bfc3122cece54abce153f9af4752a, type: 3}
   m_Name: Pirahna
   m_EditorClassIdentifier: 
-  price: 100
+  price: 350
   moveSpeed: 8
   classes: 02000000
   minLocationPickTimer: 5
   maxLocationPickTimer: 10
-  damage: 5
-  hp: 10
+  damage: 3
+  hp: 1
   attackRange: 5
   combatMoveSpeed: 10
-  attackCooldown: 3
-  foodDetectionRange: 0
-  hungerTimerMax: 90000
-  dieFromHungerTimerMax: 9000
+  attackCooldown: 1.5
+  foodDetectionRange: 8
+  hungerTimerMax: 90
+  dieFromHungerTimerMax: 45
   minMoneyTimer: 0
   maxMoneyTimer: 0
   moneyToDrop: {fileID: 0}
