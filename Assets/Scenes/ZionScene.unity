@@ -2232,6 +2232,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shop
       objectReference: {fileID: 0}
+    - target: {fileID: 1011110904965525163, guid: 926d1afee4c0e194a92cb1cfa99b29ea, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 1810963446699169533, guid: 926d1afee4c0e194a92cb1cfa99b29ea, type: 3}
       propertyPath: canvas
       value: 
@@ -2328,6 +2332,10 @@ PrefabInstance:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 553510306}
+    - target: {fileID: 7887447533216537493, guid: 926d1afee4c0e194a92cb1cfa99b29ea, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 8599567329761531562, guid: 926d1afee4c0e194a92cb1cfa99b29ea, type: 3}
       propertyPath: canvas
       value: 
