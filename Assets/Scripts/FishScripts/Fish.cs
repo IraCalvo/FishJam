@@ -10,6 +10,8 @@ public class Fish : MonoBehaviour
     public FishState fishState;
     public bool isOnScreen;
 
+    private int currentHP;
+
     [Header("Misc")]
     SpriteRenderer sr;
     Rigidbody2D rb;
@@ -24,10 +26,21 @@ public class Fish : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         tank = GameObject.Find("Tank");
         tankBounds= tank.GetComponent<PolygonCollider2D>().bounds;
+
+        currentHP = fishSO.hp;
     }
 
     private void Update()
     {
+        if (currentHP <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHP -= damage;
     }
 
     private void OnBecameInvisible()

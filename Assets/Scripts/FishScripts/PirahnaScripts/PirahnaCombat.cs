@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class PirahnaCombat : MonoBehaviour
     bool oppositePointPicked = false;
     [SerializeField] Vector2 positionAroundEnemy;
     [SerializeField] Vector2 oppositePoint;
+    SpriteRenderer sr;
 
     private void Awake()
     {
@@ -25,6 +27,7 @@ public class PirahnaCombat : MonoBehaviour
         pirahnaSO = pirahna.fishSO;
         pirahnaState = pirahna.fishState;
         attackCooldown = pirahnaSO.attackCooldown;
+        sr = GetComponent<SpriteRenderer>();
     }
 
     private void FixedUpdate()
@@ -83,6 +86,7 @@ public class PirahnaCombat : MonoBehaviour
                 //float easedCombatSpeed = Mathf.Lerp(pirahnaSO.combatMoveSpeed, 0f, easedT);
                 transform.position = Vector2.MoveTowards(transform.position, positionAroundEnemy, pirahnaSO.combatMoveSpeed * Time.fixedDeltaTime);
                 Debug.Log("still going to range");
+                SpriteDirection(positionAroundEnemy);
             }
             else 
             {
@@ -112,6 +116,7 @@ public class PirahnaCombat : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, oppositePoint, pirahnaSO.combatMoveSpeed * Time.fixedDeltaTime);
             isAttacking = true;
             Debug.Log("is dashing");
+            SpriteDirection(oppositePoint);
         }
         else
         {
@@ -138,5 +143,36 @@ public class PirahnaCombat : MonoBehaviour
         canAttack = false;
         yield return new WaitForSeconds(attackCooldown);
         canAttack = true;
+    }
+
+    IEnumerator Rotate(Vector2 targetPosition)
+    {
+        // Calculate the direction vector from the object to the target
+        Vector2 direction = targetPosition - (Vector2)transform.position;
+
+        // Calculate the angle in radians
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        // Create a Quaternion rotation around the Z axis
+        Quaternion rotation = Quaternion.AngleAxis(angle - 90f, Vector3.forward);
+
+        // Smoothly rotate towards the target rotation
+        while (Quaternion.Angle(transform.rotation, rotation) > 0.1f)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 5 * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    void SpriteDirection(Vector2 targetPosition)
+    {
+        if (transform.position.x < targetPosition.x)
+        {
+            sr.flipX = false;
+        }
+        else
+        {
+            sr.flipX = true;
+        }
     }
 }

@@ -1178,6 +1178,10 @@ PrefabInstance:
       propertyPath: shopGameObject
       value: 
       objectReference: {fileID: 5916023760988797180, guid: 1d7adb372b20b455592f4da34643faa8, type: 3}
+    - target: {fileID: 4877510352013120535, guid: 926d1afee4c0e194a92cb1cfa99b29ea, type: 3}
+      propertyPath: shopGameObject
+      value: 
+      objectReference: {fileID: 5415256789493638983, guid: 534c8f0d8c09541aeb06cd8ac2564f7f, type: 3}
     - target: {fileID: 5844370305058510671, guid: 926d1afee4c0e194a92cb1cfa99b29ea, type: 3}
       propertyPath: canvas
       value: 

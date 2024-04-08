@@ -14,14 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: 100
   moveSpeed: 8
-  damage: 0
-  hp: 1
+  classes: 0000000005000000
   minLocationPickTimer: 3
   maxLocationPickTimer: 5
+  damage: 0
+  hp: 1
+  attackRange: 0
+  combatMoveSpeed: 0
+  attackCooldown: 0
   foodDetectionRange: 15
   hungerTimerMax: 10
   dieFromHungerTimerMax: 0
   minMoneyTimer: 5
   maxMoneyTimer: 10
   moneyToDrop: {fileID: 4335957793588255294, guid: e85e4f10c91db9a42a0b650b7b7df7b2, type: 3}
-  classes: 0000000005000000
