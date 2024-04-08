@@ -338,28 +338,6 @@
                 },
                 {
                     "name": "",
-                    "id": "f69dcf01-83ca-4cc8-acda-62a6d95af00b",
-                    "path": "<Keyboard>/6",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Buy Item",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8b1fc2d9-ed0f-4dec-bda1-883e5180f705",
-                    "path": "<Keyboard>/7",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Buy Item",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "dce1a02b-cb18-4562-910b-0af946e553c8",
                     "path": "<Keyboard>/q",
                     "interactions": "",

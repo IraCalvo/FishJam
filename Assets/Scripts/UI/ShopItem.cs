@@ -28,6 +28,10 @@ public class ShopItem : MonoBehaviour
                 image.rectTransform.sizeDelta = new Vector2(32, 32);
             }
         }
+        else if (shopGameObject.TryGetComponent<Trophy>(out Trophy trophy))
+        {
+            price.text = "<sprite index=0> " + trophy.price;
+        }
     }
 
 }

@@ -22,7 +22,16 @@ public class ShopControls : MonoBehaviour
         if (int.TryParse(callbackContext.control.name, out number)) {
             if (callbackContext.performed)
             {
-                FishSpawner.Instance.SpawnFish(shopItems[number-1].shopGameObject);
+                int index = number - 1;
+                GameObject gameObject = shopItems[index].shopGameObject;
+                if (gameObject.TryGetComponent<Fish>(out Fish fish))
+                {
+                    FishSpawner.Instance.SpawnFish(shopItems[number - 1].shopGameObject);
+                }
+                else if (gameObject.TryGetComponent<Trophy>(out Trophy trophy))
+                {
+                    trophy.BuyTrophy();
+                }
             }
         }
     }
@@ -41,9 +50,14 @@ public class ShopControls : MonoBehaviour
 
     public void OnClickItem(BaseEventData baseEventData)
     {
-        if (TryGetComponent<ShopItem>(out ShopItem shopItem))
+        if (TryGetComponent<Trophy>(out Trophy trophy))
+        {
+            trophy.BuyTrophy();
+        }
+        else if (TryGetComponent<ShopItem>(out ShopItem shopItem))
         {
             FishSpawner.Instance.SpawnFish(shopItem.shopGameObject);
         }
+        
     }
 }
