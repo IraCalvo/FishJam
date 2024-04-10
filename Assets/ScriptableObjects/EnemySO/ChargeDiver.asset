@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a673904478947044891fc8ef66e667c, type: 3}
   m_Name: ChargeDiver
   m_EditorClassIdentifier: 
-  MaxHP: 100
+  MaxHP: 50
   speed: 4
   damage: 5
