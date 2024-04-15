@@ -5,8 +5,8 @@ using UnityEngine;
 public class Food : Item
 {
     [SerializeField] int amountWorth;
-    [SerializeField] float disappearTime;
     Rigidbody2D rb;
+    Fade fadeScript;
 
     public override void UseItem(Vector2 spawnPosition)
     {
@@ -19,6 +19,7 @@ public class Food : Item
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        fadeScript = GetComponent<Fade>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -27,14 +28,7 @@ public class Food : Item
         {
             rb.gravityScale = 0;
             rb.velocity = Vector3.zero;
-            StartCoroutine(ResourceCountDown());
+            fadeScript.StartFade();
         }
     }
-
-    IEnumerator ResourceCountDown()
-    {
-        yield return new WaitForSeconds(disappearTime);
-        Destroy(this.gameObject);
-    }
-
 }
