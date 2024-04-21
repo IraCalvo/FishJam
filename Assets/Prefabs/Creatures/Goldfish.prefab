@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8128727022327921946}
   - component: {fileID: 5600057492648021476}
+  - component: {fileID: 1403628887272900280}
   - component: {fileID: -3766485631848344710}
   - component: {fileID: 6277697942618328736}
   - component: {fileID: 5908902714577221154}
-  - component: {fileID: -759206174066426646}
   - component: {fileID: 3732345601615448282}
   - component: {fileID: 5510317409862591210}
   - component: {fileID: 3027939846634909540}
@@ -57,6 +57,19 @@ MonoBehaviour:
   fishSpecies: 0
   fishState: {fileID: -3766485631848344710}
   isOnScreen: 0
+--- !u!114 &1403628887272900280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5415256789493638983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75a3e3beba6b9fe4490dea5002b22536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPosition: {x: 0, y: 0}
 --- !u!114 &-3766485631848344710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,19 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b05439a0fdd2af4eb4e000c5fc82427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-759206174066426646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5415256789493638983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcd7308d0077c7745a65041347300881, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetPosition: {x: 0, y: 0}
 --- !u!114 &3732345601615448282
 MonoBehaviour:
   m_ObjectHideFlags: 0

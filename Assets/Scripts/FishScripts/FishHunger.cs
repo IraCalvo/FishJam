@@ -37,12 +37,32 @@ public class FishHunger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Food" && fishState.GetCurrentState() == FishState.State.Hungry)
+        GameObject collidedObject = collision.gameObject;
+        if (fishState.GetCurrentState() == FishState.State.Hungry)
         {
-            Destroy(collision.gameObject);
-            fishState.SetStateTo(FishState.State.Normal);
-            sr.material = defaultMaterial;
+            if (collidedObject.TryGetComponent<Food>(out Food food))
+            {
+                if (fishSO.preferredFoods.Contains(food.foodType))
+                {
+                    FeedFish(collidedObject);
+                }
+            }
+            else if (collidedObject.TryGetComponent<Fish>(out Fish fish))
+            {
+                if (fishSO.preferredFoods.Contains(fish.fishSO.foodType))
+                {
+                    FeedFish(collidedObject);
+                }
+            }
         }
+    }
+
+    private void FeedFish(GameObject gameObject)
+    {
+        Debug.Log("Feed Fish");
+        Destroy(gameObject);
+        fishState.SetStateTo(FishState.State.Normal);
+        sr.material = defaultMaterial;
     }
 
     void HungerTimer()

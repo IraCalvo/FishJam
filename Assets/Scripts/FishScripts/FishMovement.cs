@@ -4,11 +4,11 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
-public class FishMovement : MonoBehaviour
+public abstract class FishMovement : MonoBehaviour
 {
-    private Fish fish;
-    private FishSO fishSO;
-    private FishState fishState;
+    public Fish fish;
+    public FishSO fishSO;
+    public FishState fishState;
 
     public Vector2 targetPosition;
     private float nextLocationTimer;
@@ -19,7 +19,6 @@ public class FishMovement : MonoBehaviour
 
     Animator animator;
     private bool didDie;
-    private Vector2 deathPosition;
 
     private void Awake()
     {
@@ -33,7 +32,13 @@ public class FishMovement : MonoBehaviour
         tankBounds = tank.GetComponent<PolygonCollider2D>().bounds;
 
         animator = GetComponent<Animator>();
+
+        AbstractAwake();
     }
+
+    public abstract void AbstractAwake();
+
+    public abstract void AbstractFixedUpdate();
 
     private void FixedUpdate()
     {
@@ -59,9 +64,10 @@ public class FishMovement : MonoBehaviour
                 break;
         }
         SpriteDirection();
+        AbstractFixedUpdate();
     }
 
-    void MoveFish()
+    public virtual void MoveFish()
     {
         if (nextLocationTimer <= 0)
         {
@@ -85,7 +91,7 @@ public class FishMovement : MonoBehaviour
         }
     }
 
-    void MoveFishToSpawn()
+    public virtual void MoveFishToSpawn()
     {
         if (Vector2.Distance(transform.position, targetPosition) > 0.1f)
         {
@@ -110,22 +116,41 @@ public class FishMovement : MonoBehaviour
         }
     }
 
-    void MoveFishToFood()
+    public virtual void MoveFishToFood()
     {
-        Food[] foods = FindObjectsOfType<Food>();
-        Food closestFood = null;
+        Fish[] fish = FindObjectsOfType<Fish>();
+        Food[] food = FindObjectsOfType<Food>();
+
+        List<GameObject> preferredFood = new List<GameObject>();
+        foreach (Fish f in fish)
+        {
+            if (this.fishSO.preferredFoods.Contains(f.fishSO.foodType) && f.fishState.GetCurrentState() != FishState.State.Dead)
+            {
+                preferredFood.Add(f.gameObject);
+            }
+        }
+
+        foreach (Food f in food)
+        {
+            if (this.fishSO.preferredFoods.Contains(f.foodType))
+            {
+                preferredFood.Add(f.gameObject);
+            }
+        }
+
+        GameObject closestFood = null;
         float closestDistance = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
 
-        foreach (Food food in foods)
+        foreach (GameObject f in preferredFood)
         {
-            float distance = Vector3.Distance(currentPosition, food.transform.position);
+            float distance = Vector3.Distance(currentPosition, f.transform.position);
             if (distance < fishSO.foodDetectionRange)
             {
                 if (distance < closestDistance)
                 {
                     closestDistance = distance;
-                    closestFood = food;
+                    closestFood = f;
                 }
             }
         }
@@ -137,35 +162,37 @@ public class FishMovement : MonoBehaviour
             return;
         }
 
-        float distanceToTarget = Vector2.Distance(transform.position, closestFood.transform.position);
+        targetPosition = closestFood.transform.position;
+
+        float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
         float t = 1f - Mathf.Clamp01(distanceToTarget / 5); // Clamping to ensure t is between 0 and 1
-        float easedT = Mathf.SmoothStep(1f, 0f, t); // Apply easing function
+        float easedT = Mathf.SmoothStep(0.5f, 0.5f, t); // Apply easing function
         float easedFishHungerMoveSpeed = Mathf.Lerp(fishSO.moveSpeed, 0f, easedT); // Interpolate movement speed based on eased t
-        transform.position = Vector2.MoveTowards(transform.position, closestFood.transform.position, easedFishHungerMoveSpeed * Time.fixedDeltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, easedFishHungerMoveSpeed * Time.fixedDeltaTime);
     }
 
-    void MoveFishToDeath()
+    public virtual void MoveFishToDeath()
     {
         animator.enabled = false;
         sr.flipY = true;
         
-        float distanceToTarget = Vector2.Distance(transform.position, deathPosition);
+        float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
         if (distanceToTarget <= 0.01f)
         {
             Destroy(gameObject);
         }
         float t = 1f - Mathf.Clamp01(distanceToTarget / 3); // Clamping to ensure t is between 0 and 1
-        float easedT = Mathf.SmoothStep(0.5f, 1f, t); // Apply easing function
+        float easedT = Mathf.SmoothStep(0.5f, 0.5f, t); // Apply easing function
         float easedFishHungerMoveSpeed = Mathf.Lerp(fishSO.moveSpeed, 1f, easedT); // Interpolate movement speed based on eased t
-        transform.position = Vector2.MoveTowards(transform.position, deathPosition, easedFishHungerMoveSpeed * Time.fixedDeltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, easedFishHungerMoveSpeed * Time.fixedDeltaTime);
         
         sr.material.SetFloat("_DeadTimer", Mathf.Clamp(distanceToTarget, 0, 1));
     }
 
-    void SetDeathPosition()
+    private void SetDeathPosition()
     {
         didDie = true;
-        deathPosition = new Vector2(transform.position.x, transform.position.y - 5);
+        targetPosition = new Vector2(transform.position.x, transform.position.y - 5);
     }
 
     void PickWaitTimer()
@@ -173,7 +200,7 @@ public class FishMovement : MonoBehaviour
         nextLocationTimer = Random.Range(fishSO.minLocationPickTimer, fishSO.maxLocationPickTimer);
     }
 
-    void PickRandomLocation()
+    public virtual void PickRandomLocation()
     {
         float randomX = Random.Range(tankBounds.min.x + 3f, tankBounds.max.x - 3f);
         float randomY = Random.Range(tankBounds.min.y + 1f, tankBounds.max.y - 1f);
@@ -181,7 +208,7 @@ public class FishMovement : MonoBehaviour
         targetPosition = new Vector2(randomX, randomY);
     }
 
-    void SpriteDirection()
+    private void SpriteDirection()
     {
         if (targetPosition.x < transform.position.x)
         {

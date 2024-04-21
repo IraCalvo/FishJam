@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountWorth: 10
-  disappearTime: 2
+  foodType: 1
 --- !u!114 &7359456765496492141
 MonoBehaviour:
   m_ObjectHideFlags: 0

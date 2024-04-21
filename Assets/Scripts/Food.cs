@@ -7,6 +7,7 @@ public class Food : Item
     [SerializeField] int amountWorth;
     Rigidbody2D rb;
     Fade fadeScript;
+    public FoodType foodType;
 
     public override void UseItem(Vector2 spawnPosition)
     {

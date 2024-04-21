@@ -15,6 +15,7 @@ MonoBehaviour:
   price: 350
   moveSpeed: 8
   classes: 02000000
+  foodType: 4
   minLocationPickTimer: 5
   maxLocationPickTimer: 10
   damage: 3
@@ -22,6 +23,7 @@ MonoBehaviour:
   attackRange: 5
   combatMoveSpeed: 10
   attackCooldown: 1.5
+  preferredFoods: 02000000
   foodDetectionRange: 8
   hungerTimerMax: 90
   dieFromHungerTimerMax: 45

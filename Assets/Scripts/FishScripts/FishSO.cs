@@ -9,6 +9,7 @@ public class FishSO : ScriptableObject
     public int price;
     public float moveSpeed;
     public List<FishClass> classes;
+    public FoodType foodType;
     public float minLocationPickTimer;
     public float maxLocationPickTimer;
 
@@ -20,6 +21,7 @@ public class FishSO : ScriptableObject
     public float attackCooldown;
 
     [Header("Food Stats")]
+    public List<FoodType> preferredFoods;
     public float foodDetectionRange;
     public float hungerTimerMax;
     public float dieFromHungerTimerMax;

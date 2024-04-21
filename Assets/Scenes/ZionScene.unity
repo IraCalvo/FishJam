@@ -2669,6 +2669,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Resource Box
       objectReference: {fileID: 0}
+    - target: {fileID: 4775189562162538199, guid: b74a3e3b5513ff74ba42dfd9df68d6e9, type: 3}
+      propertyPath: initialMoneyAmount
+      value: 5000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
