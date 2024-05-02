@@ -60,7 +60,15 @@ public class FishHunger : MonoBehaviour
     private void FeedFish(GameObject gameObject)
     {
         Debug.Log("Feed Fish");
-        Destroy(gameObject);
+        if (gameObject.TryGetComponent<Food>(out Food food))
+        {
+            PoolManager.instance.DeactivateObjectInPool(gameObject, food.poolType);
+        }
+        else if (gameObject.TryGetComponent<Fish>(out Fish fish))
+        {
+            PoolManager.instance.DeactivateObjectInPool(fish.gameObject, fish.fishSO.fishPoolObjectType);
+        }
+        
         fishState.SetStateTo(FishState.State.Normal);
         sr.material = defaultMaterial;
     }

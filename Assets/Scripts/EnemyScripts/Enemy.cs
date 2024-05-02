@@ -29,11 +29,9 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damageToTake)
     {
-        if (currentHP > 0)
-        {
-            currentHP -= damageToTake;
-        }
-        else if (currentHP <= 0)
+        currentHP -= damageToTake;
+
+        if (currentHP <= 0)
         {
             //checks if this the last enemy in the tank
             Enemy[] otherEnemiesInTank = FindObjectsOfType<Enemy>();
@@ -45,8 +43,8 @@ public class Enemy : MonoBehaviour
                     FishState fishState = f.GetComponent<FishState>();
                     fishState.SetStateTo(FishState.State.Normal);
                 }
-            }            
-            Destroy(gameObject);
+            }
+            PoolManager.instance.DeactivateObjectInPool(this.gameObject, enemySO.enemyPoolObjectType);
         }
 
         if (EnemyHealthBar.instance.healthBarIsActive)

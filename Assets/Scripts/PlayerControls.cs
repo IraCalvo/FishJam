@@ -64,4 +64,16 @@ public class PlayerControls : MonoBehaviour
             item.UseItem(spawnPoint);
         }
     }
+
+    public void OnFishTab(CallbackContext callbackContext)
+    {
+        if (FishList.instance.fishListIsActive == false)
+        {
+            FishList.instance.ShowFishList();
+        }
+        else
+        {
+            FishList.instance.RemoveFishList();
+        }
+    }
 }

@@ -30,26 +30,40 @@ public class Fish : MonoBehaviour
         currentHP = fishSO.hp;
     }
 
+    private void Start()
+    {
+        FishList.instance.UpdateFishList();
+    }
+
     private void Update()
     {
-        if (currentHP <= 0)
+        if (!isOnScreen)
         {
-            Destroy(gameObject);
+            sr.enabled = true;
+        }
+        else 
+        {
+            sr.enabled = false;
         }
     }
 
     public void TakeDamage(int damage)
     {
         currentHP -= damage;
+        if (currentHP <= 0)
+        {
+            GameManager.instance.RemoveFishFromActiveList();
+            PoolManager.instance.DeactivateObjectInPool(this.gameObject, fishSO.fishPoolObjectType);
+        }
     }
 
-    private void OnBecameInvisible()
-    {
-        isOnScreen = false;
-    }
+    //private void OnBecameInvisible()
+    //{
+    //    isOnScreen = false;
+    //}
 
-    private void OnBecameVisible()
-    {
-        isOnScreen = true;
-    }
+    //private void OnBecameVisible()
+    //{
+    //    isOnScreen = true;
+    //}
 }

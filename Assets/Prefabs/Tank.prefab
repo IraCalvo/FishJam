@@ -845,7 +845,7 @@ GameObject:
   - component: {fileID: 2517789447479325435}
   - component: {fileID: 6728757192231153102}
   m_Layer: 2
-  m_Name: Sand Background
+  m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -29,8 +29,9 @@ public class FishSpawner : MonoBehaviour
             if (BankManager.Instance.currentMoneyAmount >= fish.fishSO.price)
             {
                 BankManager.Instance.RemoveMoney(fish.fishSO.price);
-                GameObject fishGameObject = Instantiate(fishObject);
-                SetSpawnPosition(fishGameObject);
+                GameObject obj = PoolManager.instance.GetPoolObject(fish.gameObject);
+
+                SetSpawnPosition(obj);
             }
         }
     }

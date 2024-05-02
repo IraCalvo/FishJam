@@ -5,6 +5,7 @@ using UnityEngine;
 public class Fade : MonoBehaviour
 {
     public float fadeDuration;
+    public PoolObjectType fadeObjectPoolType;
 
     private float fadeTimer;
     private Renderer objectRender;
@@ -38,6 +39,6 @@ public class Fade : MonoBehaviour
             yield return null;
         }
 
-        Destroy(gameObject);
+        PoolManager.instance.DeactivateObjectInPool(this.gameObject, fadeObjectPoolType);
     }
 }

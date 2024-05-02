@@ -16,6 +16,8 @@ public abstract class FishMovement : MonoBehaviour
     SpriteRenderer sr;
     GameObject tank;
     Bounds tankBounds;
+    GameObject ground;
+    Bounds groundBounds;
 
     Animator animator;
     private bool didDie;
@@ -30,6 +32,8 @@ public abstract class FishMovement : MonoBehaviour
         fishState = GetComponent<FishState>();
         tank = GameObject.Find("Tank");
         tankBounds = tank.GetComponent<PolygonCollider2D>().bounds;
+        ground = GameObject.Find("Ground");
+        groundBounds = ground.GetComponent<BoxCollider2D>().bounds;
 
         animator = GetComponent<Animator>();
 
@@ -203,7 +207,7 @@ public abstract class FishMovement : MonoBehaviour
     public virtual void PickRandomLocation()
     {
         float randomX = Random.Range(tankBounds.min.x + 3f, tankBounds.max.x - 3f);
-        float randomY = Random.Range(tankBounds.min.y + 1f, tankBounds.max.y - 1f);
+        float randomY = Random.Range(groundBounds.max.y + 1f, tankBounds.max.y - 1f);
 
         targetPosition = new Vector2(randomX, randomY);
     }

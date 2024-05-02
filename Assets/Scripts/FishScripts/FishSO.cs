@@ -6,6 +6,8 @@ using UnityEngine;
 public class FishSO : ScriptableObject
 {
     [Header("General Info")]
+    public string fishName;
+    public PoolObjectType fishPoolObjectType;
     public int price;
     public float moveSpeed;
     public List<FishClass> classes;

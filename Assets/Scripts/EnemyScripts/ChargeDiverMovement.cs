@@ -30,8 +30,11 @@ public class ChargeDiverMovement : MonoBehaviour
 
     public float minChargeDistance;
     public float maxChargeDistance;
+    public float attackRange;
     private bool didAim;
     private bool didCharge;
+
+    public GameObject targetSprite;
 
     private void Awake()
     {
@@ -215,5 +218,17 @@ public class ChargeDiverMovement : MonoBehaviour
 
         targetPosition = randomPosition;
         state = State.Aiming;
+    }
+
+    void PickFishToAttack()
+    {
+        Vector2 randomPosition = Vector2.zero;
+        bool validPositionFound = false;
+
+        Fish[] fishInTank = GameObject.FindObjectsOfType<Fish>();
+        while (!validPositionFound)
+        { 
+            
+        }
     }
 }

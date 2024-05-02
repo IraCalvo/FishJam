@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 552bfc3122cece54abce153f9af4752a, type: 3}
   m_Name: Shark
   m_EditorClassIdentifier: 
+  fishName: Shark
+  fishPoolObjectType: 3
   price: 1500
   moveSpeed: 12
   classes: 0300000000000000

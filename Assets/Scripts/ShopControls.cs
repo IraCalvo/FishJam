@@ -56,8 +56,10 @@ public class ShopControls : MonoBehaviour
         }
         else if (TryGetComponent<ShopItem>(out ShopItem shopItem))
         {
-            FishSpawner.Instance.SpawnFish(shopItem.shopGameObject);
+            if (shopItem.shopGameObject.TryGetComponent<Fish>(out Fish fish))
+            {
+                FishSpawner.Instance.SpawnFish(shopItem.shopGameObject);
+            }
         }
-        
     }
 }
