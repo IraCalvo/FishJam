@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-//using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public class Fish : MonoBehaviour
@@ -11,6 +10,7 @@ public class Fish : MonoBehaviour
     public bool isOnScreen;
 
     private int currentHP;
+    //List<
 
     [Header("Misc")]
     SpriteRenderer sr;
@@ -30,8 +30,9 @@ public class Fish : MonoBehaviour
         currentHP = fishSO.hp;
     }
 
-    private void Start()
+    private void OnEnable()
     {
+        fishState.SetStateTo(FishState.State.Spawning);
         FishList.instance.UpdateFishList();
     }
 
@@ -52,8 +53,7 @@ public class Fish : MonoBehaviour
         currentHP -= damage;
         if (currentHP <= 0)
         {
-            GameManager.instance.RemoveFishFromActiveList();
-            PoolManager.instance.DeactivateObjectInPool(this.gameObject, fishSO.fishPoolObjectType);
+            PoolManager.instance.DeactivateObjectInPool(gameObject);
         }
     }
 

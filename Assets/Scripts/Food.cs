@@ -55,6 +55,6 @@ public class Food : Item
             yield return null;
         }
 
-        PoolManager.instance.DeactivateObjectInPool(this.gameObject, poolType);
+        PoolManager.instance.DeactivateObjectInPool(gameObject);
     }
 }

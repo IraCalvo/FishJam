@@ -14,13 +14,11 @@ public class FishMoney : MonoBehaviour
         fishSO = fish.fishSO;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         ChooseMoneyTimer();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (fishSO.moneyToDrop != null)
@@ -37,7 +35,8 @@ public class FishMoney : MonoBehaviour
     {
         if (moneyTimer <= 0)
         {
-            Instantiate(fishSO.moneyToDrop, transform.position, Quaternion.identity);
+            GameObject resource = PoolManager.instance.GetPoolObject(fishSO.moneyToDrop);
+            resource.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
             ChooseMoneyTimer();
         }
         else

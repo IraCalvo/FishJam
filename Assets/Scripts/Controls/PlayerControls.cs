@@ -67,6 +67,7 @@ public class PlayerControls : MonoBehaviour
 
     public void OnFishTab(CallbackContext callbackContext)
     {
+        Debug.Log("Detected");
         if (FishList.instance.fishListIsActive == false)
         {
             FishList.instance.ShowFishList();

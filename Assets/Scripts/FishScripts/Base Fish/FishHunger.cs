@@ -62,11 +62,11 @@ public class FishHunger : MonoBehaviour
         Debug.Log("Feed Fish");
         if (gameObject.TryGetComponent<Food>(out Food food))
         {
-            PoolManager.instance.DeactivateObjectInPool(gameObject, food.poolType);
+            PoolManager.instance.DeactivateObjectInPool(gameObject);
         }
         else if (gameObject.TryGetComponent<Fish>(out Fish fish))
         {
-            PoolManager.instance.DeactivateObjectInPool(fish.gameObject, fish.fishSO.fishPoolObjectType);
+            PoolManager.instance.DeactivateObjectInPool(gameObject);
         }
         
         fishState.SetStateTo(FishState.State.Normal);

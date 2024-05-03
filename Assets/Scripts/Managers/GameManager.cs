@@ -7,9 +7,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    [SerializeField] int fishActiveInTank;
     [SerializeField] GameObject loseScreen;
     [SerializeField] GameObject player;
+    public List<GameObject> fishActive;
+    public List<GameObject> enemiesActive;
 
     private void Awake()
     {
@@ -23,25 +24,71 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AddFishToActiveList()
+    public void AddToActiveList(GameObject gameObject)
     {
-        fishActiveInTank++;
+        if (gameObject.GetComponent<Fish>())
+        {
+            fishActive.Add(gameObject);
+        }
+        else if (gameObject.GetComponent<Enemy>())
+        {
+            enemiesActive.Add(gameObject);
+            SwitchFishToCombat();
+        }
+        else 
+        {
+            return;
+        }
     }
 
-    public void RemoveFishFromActiveList()
-    { 
-        fishActiveInTank--;
-        CheckFishList();
+    public void RemoveFromActiveList(GameObject gameObject)
+    {
+        if (gameObject.GetComponent<Fish>())
+        {
+            fishActive.Remove(gameObject);
+            CheckFishList();
+        }
+        else if (gameObject.GetComponent<Enemy>())
+        {
+            enemiesActive.Remove(gameObject);
+            CheckEnemyList();
+        }
+        else
+        {
+            return;
+        }
     }
 
     void CheckFishList()
     {
-        if (fishActiveInTank <= 0)
+        if (fishActive.Count <= 0)
         { 
             PlayerLose();
         }
     }
 
+    void CheckEnemyList()
+    {
+        if (enemiesActive.Count <= 0)
+        {
+            Fish[] fish = new Fish[fishActive.Count];
+            foreach (Fish f in fish)
+            {
+                f.fishState.SetStateTo(FishState.State.Normal);
+            }
+        }
+    }
+
+    void SwitchFishToCombat()
+    {
+        Fish[] fish = new Fish[fishActive.Count];
+        foreach (Fish f in fish)
+        {
+            f.fishState.SetStateTo(FishState.State.Combat);
+        }
+    }
+
+    //TODO: make an actual lose process
     public void PlayerLose()
     {
         Destroy(player);

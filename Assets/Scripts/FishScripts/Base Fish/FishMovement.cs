@@ -100,20 +100,19 @@ public abstract class FishMovement : MonoBehaviour
         if (Vector2.Distance(transform.position, targetPosition) > 0.1f)
         {
             float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
-            float t = 1f - Mathf.Clamp01(distanceToTarget / 5); // Clamping to ensure t is between 0 and 1
-            float easedT = Mathf.SmoothStep(0f, 1f, t); // Apply easing function
-            float spawnMoveSpeed = Mathf.Lerp(fishSO.moveSpeed * 7, 0.5f, easedT); // Interpolate movement speed based on eased t
+            float t = 1f - Mathf.Clamp01(distanceToTarget / 5);
+            float easedT = Mathf.SmoothStep(0f, 1f, t);
+            float spawnMoveSpeed = Mathf.Lerp(fishSO.moveSpeed * 7, 0.5f, easedT);
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, spawnMoveSpeed * Time.fixedDeltaTime);
         }
         else
         {
-            Enemy[] enemiesInTank = FindObjectsOfType<Enemy>();
-            if (enemiesInTank.Length == 0 || fishSO.classes.Contains(FishClass.Resource))
+            if (GameManager.instance.enemiesActive.Count == 0 || fishSO.classes.Contains(FishClass.Resource))
             {
                 fishState.SetStateTo(FishState.State.Normal);
                 PickRandomLocation();
             }
-            else if (enemiesInTank != null && !fishSO.classes.Contains(FishClass.Resource))
+            else if (GameManager.instance.enemiesActive.Count > 0 && !fishSO.classes.Contains(FishClass.Resource))
             {
                 fishState.SetStateTo(FishState.State.Combat);
             }
@@ -183,7 +182,7 @@ public abstract class FishMovement : MonoBehaviour
         float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
         if (distanceToTarget <= 0.01f)
         {
-            Destroy(gameObject);
+            PoolManager.instance.DeactivateObjectInPool(gameObject);
         }
         float t = 1f - Mathf.Clamp01(distanceToTarget / 3); // Clamping to ensure t is between 0 and 1
         float easedT = Mathf.SmoothStep(0.5f, 0.5f, t); // Apply easing function
