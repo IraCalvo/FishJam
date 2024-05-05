@@ -10,20 +10,12 @@ public class FishHunger : MonoBehaviour
     private float hungerTimer;
     private float dieFromHungerTimer;
 
-    [SerializeField] Material defaultMaterial;
-    [SerializeField] Material hungerMaterial;
-    [SerializeField] Material deadMaterial;
-
-    private SpriteRenderer sr;
-
     private void Awake()
     {
         fish = GetComponent<Fish>();
         fishSO = fish.fishSO;
         fishState = fish.fishState;
         hungerTimer = fishSO.hungerTimerMax;
-
-        sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -70,7 +62,6 @@ public class FishHunger : MonoBehaviour
         }
         
         fishState.SetStateTo(FishState.State.Normal);
-        sr.material = defaultMaterial;
     }
 
     void HungerTimer()
@@ -81,7 +72,6 @@ public class FishHunger : MonoBehaviour
             if (dieFromHungerTimer <= 0)
             {
                 fishState.SetStateTo(FishState.State.Dead);
-                sr.material = deadMaterial;
             }
             else
             {
@@ -93,7 +83,6 @@ public class FishHunger : MonoBehaviour
         if (hungerTimer <= 0)
         {
             fishState.SetStateTo(FishState.State.Hungry);
-            sr.material = hungerMaterial;
             hungerTimer = fishSO.hungerTimerMax;
             dieFromHungerTimer = fishSO.dieFromHungerTimerMax;
         }

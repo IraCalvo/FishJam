@@ -1,0 +1,5 @@
+Fish Creation Procedure
+
+1) Create Fish Prefab
+2) Create FishSO
+3) Add fish type to FishSpecies and FoodType
