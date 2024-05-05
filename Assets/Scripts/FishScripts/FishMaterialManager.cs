@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class FishMaterialManager : MonoBehaviour
 {
-    [SerializeField] private Material defaultMaterial;
-    [SerializeField] private Material selectedMaterial;
-    [SerializeField] private Material hungerMaterial;
-    [SerializeField] private Material deadMaterial;
+    [SerializeField] public Material defaultMaterial;
+    [SerializeField] public Material selectedMaterial;
+    [SerializeField] public Material hungerMaterial;
+    [SerializeField] public Material deadMaterial;
 
     private Fish fish;
     private FishState fishState;

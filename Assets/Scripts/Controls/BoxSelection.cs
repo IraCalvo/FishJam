@@ -81,7 +81,10 @@ public class BoxSelection : MonoBehaviour
             // Check if the collider is not part of the same GameObject as the boxCollider
             if (collider != boxCollider && collider.gameObject != gameObject && collider.gameObject.TryGetComponent<Fish>(out Fish fish))
             {
-                selectedFish.Add(fish);
+                if (fish.fishState.GetCurrentState() != FishState.State.Dead)
+                {
+                    selectedFish.Add(fish);
+                }
             }
         }
     }
