@@ -2072,9 +2072,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3407fc29289d624c8071416c95ba217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishActiveInTank: 0
   loseScreen: {fileID: 0}
   player: {fileID: 0}
+  fishActive: []
+  enemiesActive: []
 --- !u!1 &851624565
 GameObject:
   m_ObjectHideFlags: 0
@@ -4471,33 +4472,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listOfPool:
   - type: 0
+    foodType: 1
     amountToPool: 25
     prefabToPool: {fileID: 1667850019855652915, guid: e28b79f50916bf44fb64e73f41938ce5, type: 3}
     container: {fileID: 248847534}
     willGrow: 0
     pool: []
   - type: 3
+    foodType: 2
     amountToPool: 100
     prefabToPool: {fileID: 5415256789493638983, guid: a6c593db0bcf3d84fa372533b14be184, type: 3}
     container: {fileID: 1982218738}
     willGrow: 1
     pool: []
   - type: 3
+    foodType: 4
     amountToPool: 100
     prefabToPool: {fileID: 5415256789493638983, guid: 534c8f0d8c09541aeb06cd8ac2564f7f, type: 3}
     container: {fileID: 1831685640}
     willGrow: 1
     pool: []
   - type: 3
+    foodType: 3
     amountToPool: 100
     prefabToPool: {fileID: 6518210591975832111, guid: 7d215a26e1320424f9668d50db202c49, type: 3}
     container: {fileID: 873789508}
     willGrow: 1
     pool: []
   - type: 1
+    foodType: 0
     amountToPool: 100
     prefabToPool: {fileID: 4335957793588255294, guid: e85e4f10c91db9a42a0b650b7b7df7b2, type: 3}
     container: {fileID: 1161811305}
+    willGrow: 1
+    pool: []
+  - type: 3
+    foodType: 5
+    amountToPool: 30
+    prefabToPool: {fileID: 7366362955333346453, guid: dc3bfc3aac8c91748ae28c175f9671bf, type: 3}
+    container: {fileID: 1578508661}
     willGrow: 1
     pool: []
 --- !u!1001 &320635901971429513
