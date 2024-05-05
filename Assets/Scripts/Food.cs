@@ -28,6 +28,11 @@ public class Food : Item
         }
     }
 
+    private void OnDisable()
+    {
+        ResetFood();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Ground")
@@ -55,6 +60,15 @@ public class Food : Item
             yield return null;
         }
 
-        PoolManager.instance.DeactivateObjectInPool(this.gameObject, poolType);
+        PoolManager.instance.DeactivateObjectInPool(gameObject);
+    }
+
+    private void ResetFood()
+    {
+        Color objColor = objectRenderer.material.color;
+        objColor.a = 1f;
+        objectRenderer.material.color = objColor;
+
+        rb.gravityScale = 1;
     }
 }

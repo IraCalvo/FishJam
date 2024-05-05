@@ -60,7 +60,7 @@ public class CrabCombat : MonoBehaviour
         if (targetEnemy != null)
         {
             Debug.Log("Trying to move to enemy");
-            Vector2 targetPos = new Vector2(targetEnemy.transform.position.x, transform.position.y);
+            Vector2 targetPos = new(targetEnemy.transform.position.x, transform.position.y);
             transform.position = Vector2.Lerp(transform.position, targetPos, crabSO.combatMoveSpeed * Time.fixedDeltaTime);
         }
         else 

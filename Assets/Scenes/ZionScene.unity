@@ -2072,9 +2072,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3407fc29289d624c8071416c95ba217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishActiveInTank: 0
   loseScreen: {fileID: 0}
   player: {fileID: 0}
+  fishActive: []
+  enemiesActive: []
 --- !u!1 &851624565
 GameObject:
   m_ObjectHideFlags: 0
@@ -3246,53 +3247,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2782764596843235220, guid: 926d1afee4c0e194a92cb1cfa99b29ea, type: 3}
   m_PrefabInstance: {fileID: 1880603223}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1341459472
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1341459473}
-  - component: {fileID: 1341459474}
-  m_Layer: 0
-  m_Name: FishManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1341459473
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1341459472}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1640074278}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1341459474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1341459472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed77429695602084693a400323cb24d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arrayOfFish: []
-  loseScreen: {fileID: 482300459}
-  player: {fileID: 1790355054}
 --- !u!1 &1383207198
 GameObject:
   m_ObjectHideFlags: 0
@@ -3662,7 +3616,6 @@ Transform:
   - {fileID: 66753387}
   - {fileID: 902063573}
   - {fileID: 252524922}
-  - {fileID: 1341459473}
   - {fileID: 1986035326}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3868,17 +3821,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736613875}
   m_CullTransparentMesh: 1
---- !u!1 &1790355054 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6040461225689712192, guid: 873410cc414d12245a1ff1092921c4ec, type: 3}
-  m_PrefabInstance: {fileID: 654479155644166491}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1790355056 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3742859022606895056, guid: 873410cc414d12245a1ff1092921c4ec, type: 3}
   m_PrefabInstance: {fileID: 654479155644166491}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1790355054}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13c5333fb29d98c44835735a44062e60, type: 3}
@@ -4524,27 +4472,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listOfPool:
   - type: 0
+    foodType: 1
     amountToPool: 25
     prefabToPool: {fileID: 1667850019855652915, guid: e28b79f50916bf44fb64e73f41938ce5, type: 3}
     container: {fileID: 248847534}
     willGrow: 0
     pool: []
   - type: 3
+    foodType: 2
     amountToPool: 100
     prefabToPool: {fileID: 5415256789493638983, guid: a6c593db0bcf3d84fa372533b14be184, type: 3}
     container: {fileID: 1982218738}
     willGrow: 1
     pool: []
-  - type: 4
+  - type: 3
+    foodType: 4
     amountToPool: 100
     prefabToPool: {fileID: 5415256789493638983, guid: 534c8f0d8c09541aeb06cd8ac2564f7f, type: 3}
     container: {fileID: 1831685640}
     willGrow: 1
     pool: []
-  - type: 5
+  - type: 3
+    foodType: 3
     amountToPool: 100
     prefabToPool: {fileID: 6518210591975832111, guid: 7d215a26e1320424f9668d50db202c49, type: 3}
     container: {fileID: 873789508}
+    willGrow: 1
+    pool: []
+  - type: 1
+    foodType: 0
+    amountToPool: 100
+    prefabToPool: {fileID: 4335957793588255294, guid: e85e4f10c91db9a42a0b650b7b7df7b2, type: 3}
+    container: {fileID: 1161811305}
+    willGrow: 1
+    pool: []
+  - type: 3
+    foodType: 5
+    amountToPool: 30
+    prefabToPool: {fileID: 7366362955333346453, guid: dc3bfc3aac8c91748ae28c175f9671bf, type: 3}
+    container: {fileID: 1578508661}
     willGrow: 1
     pool: []
 --- !u!1001 &320635901971429513
@@ -4810,14 +4776,14 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 553510307}
-  - {fileID: 320635901971429513}
   - {fileID: 619394802}
+  - {fileID: 1832028986}
+  - {fileID: 553510307}
   - {fileID: 1640074278}
   - {fileID: 654479155644166491}
+  - {fileID: 320635901971429513}
+  - {fileID: 1151759030}
   - {fileID: 1698211234}
-  - {fileID: 1832028986}
   - {fileID: 1845749861}
   - {fileID: 1090283199}
-  - {fileID: 1151759030}
   - {fileID: 1422013247}

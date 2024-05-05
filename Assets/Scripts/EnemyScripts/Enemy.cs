@@ -33,18 +33,7 @@ public class Enemy : MonoBehaviour
 
         if (currentHP <= 0)
         {
-            //checks if this the last enemy in the tank
-            Enemy[] otherEnemiesInTank = FindObjectsOfType<Enemy>();
-            if (otherEnemiesInTank.Length == 1)
-            {
-                FishState[] fishInTank = FindObjectsOfType<FishState>();
-                foreach (FishState f in fishInTank)
-                {
-                    FishState fishState = f.GetComponent<FishState>();
-                    fishState.SetStateTo(FishState.State.Normal);
-                }
-            }
-            PoolManager.instance.DeactivateObjectInPool(this.gameObject, enemySO.enemyPoolObjectType);
+            PoolManager.instance.DeactivateObjectInPool(gameObject);
         }
 
         if (EnemyHealthBar.instance.healthBarIsActive)

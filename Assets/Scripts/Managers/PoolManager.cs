@@ -6,7 +6,7 @@ using UnityEngine;
 public enum PoolObjectType
 { 
     Food,
-    Coin,
+    Resource,
     DamagePopUp,
     Fish,
     Enemy
@@ -16,6 +16,7 @@ public enum PoolObjectType
 public class PoolInfo
 {
     public PoolObjectType type;
+    public FoodType foodType;
     public int amountToPool;
     public GameObject prefabToPool;
     public GameObject container;
@@ -29,7 +30,7 @@ public class PoolManager : MonoBehaviour
 {
     public static PoolManager instance;
     [SerializeField]
-    List<PoolInfo> listOfPool;
+    public List<PoolInfo> listOfPool;
     private Vector3 defaultPos = new Vector3(0, 0, 0);
 
     private void Awake()
@@ -101,6 +102,10 @@ public class PoolManager : MonoBehaviour
         {
             selected = GetPoolByEnemyName(enemy.enemySO.enemyName);
         }
+        else if (gameObject.TryGetComponent<Resource>(out Resource resource))
+        {
+            selected = GetPoolByResourceName(resource.resourceSO.resourceName);
+        }
 
         List<GameObject> pool = selected.pool;
         List<GameObject> nonActiveObjectsInPool = new();
@@ -117,6 +122,7 @@ public class PoolManager : MonoBehaviour
         {
             int randomIndex = UnityEngine.Random.Range(0, nonActiveObjectsInPool.Count);
             objInstance = nonActiveObjectsInPool[randomIndex];
+            GameManager.instance.AddToActiveList(objInstance);
             objInstance.SetActive(true);
         }
         else if (nonActiveObjectsInPool.Count == 0 && selected.willGrow)
@@ -129,21 +135,16 @@ public class PoolManager : MonoBehaviour
     }
 
     //work on name of function, puts object back into the pool
-    public void DeactivateObjectInPool(GameObject obj, PoolObjectType type)
+    public void DeactivateObjectInPool(GameObject obj)
     {
         obj.SetActive(false);
+        GameManager.instance.RemoveFromActiveList(obj);
         obj.transform.position = defaultPos;
-
-        //PoolInfo selected = GetPoolByType(type);
-        //List<GameObject> pool = selected.pool;
-
-        //if (pool.Contains(obj) == false)
-        //{ 
-        //    pool.Add(obj);
-        //}
     }
 
-    private PoolInfo GetPoolByType(PoolObjectType type)
+    //
+
+    public PoolInfo GetPoolByType(PoolObjectType type)
     {
         for (int i = 0; i < listOfPool.Count; i++)
         {
@@ -156,7 +157,7 @@ public class PoolManager : MonoBehaviour
         return null;
     }
 
-    private PoolInfo GetPoolByFishName(string fishName)
+    public PoolInfo GetPoolByFishName(string fishName)
     {
         foreach (PoolInfo poolInfo in listOfPool)
         {
@@ -183,6 +184,34 @@ public class PoolManager : MonoBehaviour
                 {
                     return poolInfo;
                 }
+            }
+        }
+        return null;
+    }
+
+    public PoolInfo GetPoolByResourceName(string resourceName)
+    {
+        foreach (PoolInfo poolInfo in listOfPool)
+        {
+            if (poolInfo.type == PoolObjectType.Resource)
+            { 
+                Resource resourceComponent = poolInfo.prefabToPool.GetComponent<Resource>();
+                if (resourceComponent.resourceSO.resourceName == resourceName)
+                {
+                    return poolInfo;
+                }
+            }
+        }
+        return null;
+    }
+
+    public PoolInfo GetPoolByFoodType(FoodType foodType)
+    {
+        foreach (PoolInfo poolInfo in listOfPool)
+        {
+            if (poolInfo.foodType == foodType)
+            {
+                return poolInfo;
             }
         }
         return null;
