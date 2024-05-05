@@ -33,6 +33,14 @@ public class Fish : MonoBehaviour
     private void OnEnable()
     {
         fishState.SetStateTo(FishState.State.Spawning);
+        if (FishList.instance != null)
+        {
+            FishList.instance.UpdateFishList();
+        }
+    }
+
+    private void OnDestroy()
+    {
         FishList.instance.UpdateFishList();
     }
 

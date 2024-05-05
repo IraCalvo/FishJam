@@ -121,24 +121,26 @@ public abstract class FishMovement : MonoBehaviour
 
     public virtual void MoveFishToFood()
     {
-        Fish[] fish = FindObjectsOfType<Fish>();
-        Food[] food = FindObjectsOfType<Food>();
 
         List<GameObject> preferredFood = new List<GameObject>();
-        foreach (Fish f in fish)
+
+        PoolManager poolManager = PoolManager.instance;
+        foreach (FoodType preferredFoodType in fishSO.preferredFoods)
         {
-            if (this.fishSO.preferredFoods.Contains(f.fishSO.foodType) && f.fishState.GetCurrentState() != FishState.State.Dead)
+            PoolInfo pool = poolManager.GetPoolByFoodType(preferredFoodType);
+            foreach (GameObject go in pool.pool)
             {
-                preferredFood.Add(f.gameObject);
+                if (go.activeInHierarchy)
+                {
+                    preferredFood.Add(go);
+                }
             }
         }
 
-        foreach (Food f in food)
+        if (preferredFood.Count == 0)
         {
-            if (this.fishSO.preferredFoods.Contains(f.foodType))
-            {
-                preferredFood.Add(f.gameObject);
-            }
+            MoveFish();
+            return;
         }
 
         GameObject closestFood = null;
@@ -180,13 +182,13 @@ public abstract class FishMovement : MonoBehaviour
         sr.flipY = true;
         
         float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
-        if (distanceToTarget <= 0.01f)
+        if (distanceToTarget <= 0.1f)
         {
             PoolManager.instance.DeactivateObjectInPool(gameObject);
         }
         float t = 1f - Mathf.Clamp01(distanceToTarget / 3); // Clamping to ensure t is between 0 and 1
         float easedT = Mathf.SmoothStep(0.5f, 0.5f, t); // Apply easing function
-        float easedFishHungerMoveSpeed = Mathf.Lerp(fishSO.moveSpeed, 1f, easedT); // Interpolate movement speed based on eased t
+        float easedFishHungerMoveSpeed = Mathf.Lerp(fishSO.moveSpeed, 0f, easedT); // Interpolate movement speed based on eased t
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, easedFishHungerMoveSpeed * Time.fixedDeltaTime);
         
         sr.material.SetFloat("_DeadTimer", Mathf.Clamp(distanceToTarget, 0, 1));

@@ -16,6 +16,7 @@ public enum PoolObjectType
 public class PoolInfo
 {
     public PoolObjectType type;
+    public FoodType foodType;
     public int amountToPool;
     public GameObject prefabToPool;
     public GameObject container;
@@ -143,7 +144,7 @@ public class PoolManager : MonoBehaviour
 
     //
 
-    private PoolInfo GetPoolByType(PoolObjectType type)
+    public PoolInfo GetPoolByType(PoolObjectType type)
     {
         for (int i = 0; i < listOfPool.Count; i++)
         {
@@ -156,7 +157,7 @@ public class PoolManager : MonoBehaviour
         return null;
     }
 
-    private PoolInfo GetPoolByFishName(string fishName)
+    public PoolInfo GetPoolByFishName(string fishName)
     {
         foreach (PoolInfo poolInfo in listOfPool)
         {
@@ -188,7 +189,7 @@ public class PoolManager : MonoBehaviour
         return null;
     }
 
-    private PoolInfo GetPoolByResourceName(string resourceName)
+    public PoolInfo GetPoolByResourceName(string resourceName)
     {
         foreach (PoolInfo poolInfo in listOfPool)
         {
@@ -199,6 +200,18 @@ public class PoolManager : MonoBehaviour
                 {
                     return poolInfo;
                 }
+            }
+        }
+        return null;
+    }
+
+    public PoolInfo GetPoolByFoodType(FoodType foodType)
+    {
+        foreach (PoolInfo poolInfo in listOfPool)
+        {
+            if (poolInfo.foodType == foodType)
+            {
+                return poolInfo;
             }
         }
         return null;

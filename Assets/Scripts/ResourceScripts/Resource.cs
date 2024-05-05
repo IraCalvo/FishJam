@@ -20,6 +20,11 @@ public abstract class Resource : MonoBehaviour
     public abstract void AbstractAwake();
     public abstract void AbstractFixedUpdate();
 
+    private void OnDisable()
+    {
+        ResetResource();
+    }
+
     public virtual void ResourceClicked()
     {
         BankManager.Instance.AddMoney(resourceSO.resourceValue);
@@ -55,5 +60,14 @@ public abstract class Resource : MonoBehaviour
         }
 
         PoolManager.instance.DeactivateObjectInPool(gameObject);
+    }
+
+    private void ResetResource()
+    {
+        Color objColor = objRenderer.material.color;
+        objColor.a = 1f;
+        objRenderer.material.color = objColor;
+
+        rb.gravityScale = 1;
     }
 }
