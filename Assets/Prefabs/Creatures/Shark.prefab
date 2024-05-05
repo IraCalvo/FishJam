@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2979641855247569097}
   - component: {fileID: 6218216129345867190}
   - component: {fileID: 2449403003858839395}
+  - component: {fileID: -7855665249500747260}
   - component: {fileID: 9138529416738297863}
   - component: {fileID: 6240926310361212765}
   - component: {fileID: 4218287692860308468}
@@ -83,6 +84,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 5097b1ae8c82b4a47a825cb1bdd09783, type: 2}
+  hungerMaterial: {fileID: -876546973899608171, guid: 120d4cde031667b4b9c5fb2f598fd89e, type: 3}
+  deadMaterial: {fileID: -876546973899608171, guid: e8205a68e13a0b14daf174269c883e0e, type: 3}
+--- !u!114 &-7855665249500747260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7366362955333346453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fbf2c17ae1a467469310411edc81d78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultMaterial: {fileID: 2100000, guid: 5097b1ae8c82b4a47a825cb1bdd09783, type: 2}
+  selectedMaterial: {fileID: -876546973899608171, guid: 5dcc6dd47a4caac4e84b19994e135373, type: 3}
   hungerMaterial: {fileID: -876546973899608171, guid: 120d4cde031667b4b9c5fb2f598fd89e, type: 3}
   deadMaterial: {fileID: -876546973899608171, guid: e8205a68e13a0b14daf174269c883e0e, type: 3}
 --- !u!114 &9138529416738297863
@@ -244,6 +261,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd4546cb706f8cb4ba4d77208030b85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fish: {fileID: 0}
+  fishSO: {fileID: 0}
+  fishState: {fileID: 0}
   targetPosition: {x: 0, y: 0}
 --- !u!114 &5179771941013761909
 MonoBehaviour:

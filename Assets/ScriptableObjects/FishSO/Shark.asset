@@ -27,7 +27,7 @@ MonoBehaviour:
   attackCooldown: 1.5
   preferredFoods: 0400000002000000
   foodDetectionRange: 12
-  hungerTimerMax: 45
+  hungerTimerMax: 1
   dieFromHungerTimerMax: 10
   minMoneyTimer: 3
   maxMoneyTimer: 5

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -3766485631848344710}
   - component: {fileID: 6277697942618328736}
   - component: {fileID: 5908902714577221154}
+  - component: {fileID: -4994331531770775000}
   - component: {fileID: 3732345601615448282}
   - component: {fileID: 5510317409862591210}
   - component: {fileID: 3027939846634909540}
@@ -69,6 +70,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75a3e3beba6b9fe4490dea5002b22536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fish: {fileID: 0}
+  fishSO: {fileID: 0}
+  fishState: {fileID: 0}
   targetPosition: {x: 0, y: 0}
 --- !u!114 &-3766485631848344710
 MonoBehaviour:
@@ -110,6 +114,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b05439a0fdd2af4eb4e000c5fc82427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-4994331531770775000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5415256789493638983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fbf2c17ae1a467469310411edc81d78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultMaterial: {fileID: 2100000, guid: 5097b1ae8c82b4a47a825cb1bdd09783, type: 2}
+  selectedMaterial: {fileID: -876546973899608171, guid: 5dcc6dd47a4caac4e84b19994e135373, type: 3}
+  hungerMaterial: {fileID: -876546973899608171, guid: 120d4cde031667b4b9c5fb2f598fd89e, type: 3}
+  deadMaterial: {fileID: -876546973899608171, guid: e8205a68e13a0b14daf174269c883e0e, type: 3}
 --- !u!114 &3732345601615448282
 MonoBehaviour:
   m_ObjectHideFlags: 0

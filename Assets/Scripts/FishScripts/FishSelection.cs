@@ -9,22 +9,8 @@ public class FishSelection : MonoBehaviour
     [SerializeField] SpriteRenderer sr;
     public bool isSelected = false;
 
-    private void Awake()
-    {
-        sr = GetComponent<SpriteRenderer>();
-        startingMaterial = sr.material;
-    }
-
     private void Update()
     {
-        if (BoxSelection.Instance.ContainsFish(GetComponent<Fish>()))
-        {
-            sr.material = selectionMaterial;
-        }
-        else
-        {
-            sr.material = startingMaterial;
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -39,7 +25,7 @@ public class FishSelection : MonoBehaviour
     {
         if (collision.tag == "Selector")
         {
-            sr.material = startingMaterial;
+            isSelected = false;
         }
     }
 }
