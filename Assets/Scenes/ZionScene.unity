@@ -296,6 +296,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &81495283 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5415256789493638983, guid: a6c593db0bcf3d84fa372533b14be184, type: 3}
+  m_PrefabInstance: {fileID: 1845749861}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &81495296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81495283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62e53bef807091f4eb008f40140a141e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &89272515
 GameObject:
   m_ObjectHideFlags: 0
@@ -2074,8 +2091,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loseScreen: {fileID: 0}
   player: {fileID: 0}
-  fishActive: []
-  enemiesActive: []
+  activeFish: []
+  activeEnemies: []
 --- !u!1 &851624565
 GameObject:
   m_ObjectHideFlags: 0
@@ -2201,7 +2218,7 @@ Transform:
   m_GameObject: {fileID: 873789508}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.3610018, y: 0.5631982, z: -10.859499}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3577,7 +3594,7 @@ Transform:
   m_GameObject: {fileID: 1578508661}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.3610018, y: 0.5631982, z: -10.859499}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3857,7 +3874,7 @@ Transform:
   m_GameObject: {fileID: 1831685640}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.3610018, y: 0.5631982, z: -10.859499}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3975,7 +3992,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5415256789493638983, guid: a6c593db0bcf3d84fa372533b14be184, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 81495296}
   m_SourcePrefab: {fileID: 100100000, guid: a6c593db0bcf3d84fa372533b14be184, type: 3}
 --- !u!1 &1869808220
 GameObject:
@@ -4420,7 +4440,7 @@ Transform:
   m_GameObject: {fileID: 1982218738}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.3610018, y: 0.5631982, z: -10.859499}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4480,7 +4500,7 @@ MonoBehaviour:
     pool: []
   - type: 3
     foodType: 2
-    amountToPool: 100
+    amountToPool: 5
     prefabToPool: {fileID: 5415256789493638983, guid: a6c593db0bcf3d84fa372533b14be184, type: 3}
     container: {fileID: 1982218738}
     willGrow: 1

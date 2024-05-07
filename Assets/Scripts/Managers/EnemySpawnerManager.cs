@@ -63,7 +63,10 @@ public class EnemySpawnerManager : MonoBehaviour
         Vector2 randomSpawnPos = new Vector2(randomX, randomY);
         int randomEnemy = Random.Range(0, enemyList.Count);
 
-        Instantiate(enemyList[randomEnemy], randomSpawnPos, Quaternion.identity);
+        Enemy enemy = enemyList[randomEnemy];
+        GameObject enemyObj = PoolManager.instance.GetPoolObject(enemy.gameObject);
+        enemyObj.transform.localPosition = randomSpawnPos;
+
         enemySpawnTimer = Random.Range(enemySpawnTimerMin, enemySpawnTimerMax);
     }
 }

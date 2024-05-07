@@ -158,9 +158,9 @@ public class CrabMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "GoldFish" && crabState.GetCurrentState() == FishState.State.Hungry)
+        if (collision.gameObject.CompareTag("GoldFish") && crabState.GetCurrentState() == FishState.State.Hungry)
         {
-            Destroy(collision.gameObject);
+            PoolManager.instance.DeactivateObjectInPool(collision.gameObject);
             crabState.SetStateTo(FishState.State.Normal);
             sr.material = defaultMaterial;
             PickRandomLocation();

@@ -107,12 +107,12 @@ public abstract class FishMovement : MonoBehaviour
         }
         else
         {
-            if (GameManager.instance.enemiesActive.Count == 0 || fishSO.classes.Contains(FishClass.Resource))
+            if (GameManager.instance.activeEnemies.Count == 0 || fishSO.classes.Contains(FishClass.Resource))
             {
                 fishState.SetStateTo(FishState.State.Normal);
                 PickRandomLocation();
             }
-            else if (GameManager.instance.enemiesActive.Count > 0 && !fishSO.classes.Contains(FishClass.Resource))
+            else if (GameManager.instance.activeEnemies.Count > 0 && !fishSO.classes.Contains(FishClass.Resource))
             {
                 fishState.SetStateTo(FishState.State.Combat);
             }

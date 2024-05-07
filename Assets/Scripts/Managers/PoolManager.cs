@@ -67,7 +67,6 @@ public class PoolManager : MonoBehaviour
 
         for (int i = 0; i < pool.Count; i++)
         {
-            //check if game object is active
             if (pool[i].activeInHierarchy == false)
             {
                 nonActiveObjectsInPool.Add(pool[i]);
@@ -177,7 +176,7 @@ public class PoolManager : MonoBehaviour
     {
         foreach (PoolInfo poolInfo in listOfPool)
         {
-            if (poolInfo.type == PoolObjectType.Fish)
+            if (poolInfo.type == PoolObjectType.Enemy)
             {
                 Enemy enemyComponent = poolInfo.prefabToPool.GetComponent<Enemy>();
                 if (enemyComponent.enemySO.enemyName == enemyName)

@@ -9,8 +9,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     [SerializeField] GameObject loseScreen;
     [SerializeField] GameObject player;
-    public List<GameObject> fishActive;
-    public List<GameObject> enemiesActive;
+
+    public List<Fish> activeFish;
+    public List<Enemy> activeEnemies;
 
     private void Awake()
     {
@@ -28,11 +29,13 @@ public class GameManager : MonoBehaviour
     {
         if (gameObject.GetComponent<Fish>())
         {
-            fishActive.Add(gameObject);
+            Fish fish = gameObject.GetComponent<Fish>();
+            activeFish.Add(fish);
         }
         else if (gameObject.GetComponent<Enemy>())
         {
-            enemiesActive.Add(gameObject);
+            Enemy enemy = gameObject.GetComponent<Enemy>();
+            activeEnemies.Add(enemy);
             SwitchFishToCombat();
         }
         else 
@@ -45,12 +48,14 @@ public class GameManager : MonoBehaviour
     {
         if (gameObject.GetComponent<Fish>())
         {
-            fishActive.Remove(gameObject);
+            Fish fish = gameObject.GetComponent<Fish>();
+            activeFish.Remove(fish);
             CheckFishList();
         }
         else if (gameObject.GetComponent<Enemy>())
         {
-            enemiesActive.Remove(gameObject);
+            Enemy enemy = gameObject.GetComponent<Enemy>();
+            activeEnemies.Remove(enemy);
             CheckEnemyList();
         }
         else
@@ -61,7 +66,7 @@ public class GameManager : MonoBehaviour
 
     void CheckFishList()
     {
-        if (fishActive.Count <= 0)
+        if (activeFish.Count <= 0)
         { 
             PlayerLose();
         }
@@ -69,10 +74,9 @@ public class GameManager : MonoBehaviour
 
     void CheckEnemyList()
     {
-        if (enemiesActive.Count <= 0)
+        if (activeEnemies.Count <= 0)
         {
-            Fish[] fish = new Fish[fishActive.Count];
-            foreach (Fish f in fish)
+            foreach (Fish f in activeFish)
             {
                 f.fishState.SetStateTo(FishState.State.Normal);
             }
@@ -81,14 +85,13 @@ public class GameManager : MonoBehaviour
 
     void SwitchFishToCombat()
     {
-        Fish[] fish = new Fish[fishActive.Count];
-        foreach (Fish f in fish)
+        foreach (Fish f in activeFish)
         {
             f.fishState.SetStateTo(FishState.State.Combat);
         }
     }
 
-    //TODO: make an actual lose process
+    //TODO: make an actual lose proccess
     public void PlayerLose()
     {
         Destroy(player);

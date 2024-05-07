@@ -68,17 +68,9 @@ public class FishList : MonoBehaviour
     public int FindFishInTank(string fishToFind)
     {
         int fishCount = 0;
-        List<Fish> fishList = new List<Fish>();
-        foreach (GameObject gameObject in GameManager.instance.fishActive)
+        for (int i = 0; i < GameManager.instance.activeFish.Count; i++)
         {
-            if (gameObject.TryGetComponent<Fish>(out Fish fish))
-            {
-                fishList.Add(fish);
-            }
-        }
-        foreach (Fish f in fishList)
-        {
-            if (f.fishSO.fishName == fishToFind)
+            if (GameManager.instance.activeFish[i].fishSO.fishName == fishToFind)
             {
                 fishCount++;
             }

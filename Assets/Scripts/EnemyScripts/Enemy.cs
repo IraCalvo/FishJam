@@ -11,19 +11,9 @@ public class Enemy : MonoBehaviour
     {
         currentHP = enemySO.MaxHP;
 
-        FishState[] fishInTank = FindObjectsOfType<FishState>();
-        foreach (FishState f in fishInTank)
-        { 
-            FishState fishState = f.GetComponent<FishState>();
-            Fish fish = f.GetComponent<Fish>();
-            if (!fish.fishSO.classes.Contains(FishClass.Resource))
-            {
-                fishState.SetStateTo(FishState.State.Combat);
-            }
-            else
-            {
-                return;
-            }
+        foreach (Fish f in GameManager.instance.activeFish)
+        {
+            f.fishState.SetStateTo(FishState.State.Combat);
         }
     }
 
@@ -34,6 +24,9 @@ public class Enemy : MonoBehaviour
         if (currentHP <= 0)
         {
             PoolManager.instance.DeactivateObjectInPool(gameObject);
+            GameObject damagePopUp = PoolManager.instance.GetPoolObject(PoolObjectType.DamagePopUp);
+            damagePopUp.transform.position = transform.position;
+            damagePopUp.GetComponent<DamagePopup>().Setup(damageToTake);
         }
 
         if (EnemyHealthBar.instance.healthBarIsActive)
