@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     public EnemySO enemySO;
     public float currentHP;
 
-    private void Awake()
+    private void OnEnable()
     {
         currentHP = enemySO.MaxHP;
 
@@ -20,13 +20,13 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damageToTake)
     {
         currentHP -= damageToTake;
+        GameObject damagePopUp = PoolManager.instance.GetPoolObject(PoolObjectType.DamagePopUp);
+        damagePopUp.transform.position = transform.position;
+        damagePopUp.GetComponent<DamagePopup>().Setup(damageToTake);
 
         if (currentHP <= 0)
         {
             PoolManager.instance.DeactivateObjectInPool(gameObject);
-            GameObject damagePopUp = PoolManager.instance.GetPoolObject(PoolObjectType.DamagePopUp);
-            damagePopUp.transform.position = transform.position;
-            damagePopUp.GetComponent<DamagePopup>().Setup(damageToTake);
         }
 
         if (EnemyHealthBar.instance.healthBarIsActive)

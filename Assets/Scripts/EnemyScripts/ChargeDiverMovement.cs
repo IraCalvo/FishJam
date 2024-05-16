@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -196,28 +197,73 @@ public class ChargeDiverMovement : MonoBehaviour
 
     void PickRandomLocation()
     {
-        Vector2 randomPosition = Vector2.zero;
-        bool validPositionFound = false;
+        //Vector2 randomPosition = Vector2.zero;
+        //bool validPositionFound = false;
 
-        while (!validPositionFound)
+        //while (!validPositionFound)
+        //{
+        //    float randomX = Random.Range(tankBounds.min.x + 3f, tankBounds.max.x - 3f);
+        //    float randomY = Random.Range(tankBounds.min.y + 1f, tankBounds.max.y - 1f);
+
+        //    randomPosition = new Vector2(randomX, randomY);
+
+        //    // Calculate the distance between the tank and the random position
+        //    float distance = Vector2.Distance(randomPosition, transform.position);
+
+        //    // Check if the distance is at least the minimum distance
+        //    if (minChargeDistance <= distance && distance <= maxChargeDistance)
+        //    {
+        //        validPositionFound = true;
+        //    }
+        //}
+
+        //targetPosition = randomPosition;
+        //state = State.Aiming;
+
+        Vector2 fishTargetPosition = Vector2.zero;
+        float currentClosestFish = float.MaxValue;
+        bool validFishFound = false;
+        bool lureFishInTank = false;
+        List<Fish> lureFishInTankList = new List<Fish>();
+
+        while(validFishFound == false) 
         {
-            float randomX = Random.Range(tankBounds.min.x + 3f, tankBounds.max.x - 3f);
-            float randomY = Random.Range(tankBounds.min.y + 1f, tankBounds.max.y - 1f);
-
-            randomPosition = new Vector2(randomX, randomY);
-
-            // Calculate the distance between the tank and the random position
-            float distance = Vector2.Distance(randomPosition, transform.position);
-
-            // Check if the distance is at least the minimum distance
-            if (minChargeDistance <= distance && distance <= maxChargeDistance)
+            foreach (Fish f in GameManager.instance.activeFish)
             {
-                validPositionFound = true;
+                if (f.TryGetComponent<LureClass>(out LureClass lure))
+                {
+                    lureFishInTank = true;
+                    lureFishInTankList.Add(f);
+                }
+                else 
+                {
+                    return;
+                }
+            }
+
+            if (lureFishInTank)
+            {
+                foreach (Fish lureFish in lureFishInTankList)
+                {
+                    float distanceOfFish = Vector2.Distance(lureFish.transform.position, transform.position);
+                    if (distanceOfFish < enemySO.attackRange)
+                    {
+                        if (distanceOfFish < currentClosestFish)
+                        {
+                            currentClosestFish = distanceOfFish;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (Fish f in GameManager.instance.activeFish)
+                {
+
+                }
             }
         }
-
-        targetPosition = randomPosition;
-        state = State.Aiming;
+        fishTargetPosition = currentClosestFish
     }
 
     void PickFishToAttack()

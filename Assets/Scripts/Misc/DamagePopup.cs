@@ -5,14 +5,15 @@ using TMPro;
 
 public class DamagePopup : MonoBehaviour
 {
-    TextMeshProUGUI text;
+    TextMeshPro text;
     public float fadeDuration;
-    private Renderer objectRenderer;
+    private MeshRenderer objectRenderer;
 
     private void Awake()
     {
-        text = GetComponent<TextMeshProUGUI>();
-        objectRenderer = GetComponent<Renderer>();
+        text = GetComponent<TextMeshPro>();
+        objectRenderer = GetComponent<MeshRenderer>();
+        objectRenderer.sortingOrder = 10;
     }
 
     private void OnDisable()
