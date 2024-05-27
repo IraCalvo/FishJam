@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Piranha
   m_EditorClassIdentifier: 
   fishName: Piranha
-  fishPoolObjectType: 3
+  fishPoolObjectType: 4
   price: 350
   moveSpeed: 8
   classes: 02000000
@@ -27,7 +27,7 @@ MonoBehaviour:
   attackCooldown: 1.5
   preferredFoods: 02000000
   foodDetectionRange: 8
-  hungerTimerMax: 1
+  hungerTimerMax: 60
   dieFromHungerTimerMax: 45
   minMoneyTimer: 0
   maxMoneyTimer: 0

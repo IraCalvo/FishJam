@@ -45,7 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c20ec0e8789b9462191c11fec8bccc2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 5000
+  isMainLevel: 0
+  levelIndex: 0
+  price: 100
+  winScreen: {fileID: 0}
 --- !u!212 &1187516303231400738
 SpriteRenderer:
   m_ObjectHideFlags: 0

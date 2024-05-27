@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shark
   m_EditorClassIdentifier: 
   fishName: Shark
-  fishPoolObjectType: 3
+  fishPoolObjectType: 4
   price: 1500
   moveSpeed: 12
   classes: 0300000000000000

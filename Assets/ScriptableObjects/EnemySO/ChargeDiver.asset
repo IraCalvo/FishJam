@@ -16,4 +16,5 @@ MonoBehaviour:
   MaxHP: 50
   speed: 4
   damage: 5
-  enemyPoolObjectType: 8
+  attackRange: 4
+  enemyPoolObjectType: 5

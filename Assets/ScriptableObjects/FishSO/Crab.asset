@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Crab
   m_EditorClassIdentifier: 
   fishName: Crab
-  fishPoolObjectType: 3
+  fishPoolObjectType: 4
   price: 200
   moveSpeed: 0.5
   classes: 0100000002000000

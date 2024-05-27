@@ -8,6 +8,7 @@ public enum PoolObjectType
     Food,
     Resource,
     DamagePopUp,
+    BloodFX,
     Fish,
     Enemy
 }
@@ -15,6 +16,7 @@ public enum PoolObjectType
 [Serializable]
 public class PoolInfo
 {
+    public string name;
     public PoolObjectType type;
     public FoodType foodType;
     public int amountToPool;
@@ -140,8 +142,6 @@ public class PoolManager : MonoBehaviour
         GameManager.instance.RemoveFromActiveList(obj);
         obj.transform.position = defaultPos;
     }
-
-    //
 
     public PoolInfo GetPoolByType(PoolObjectType type)
     {

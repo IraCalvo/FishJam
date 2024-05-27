@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Goldfish
   m_EditorClassIdentifier: 
   fishName: Goldfish
-  fishPoolObjectType: 3
+  fishPoolObjectType: 4
   price: 100
   moveSpeed: 8
   classes: 0000000005000000

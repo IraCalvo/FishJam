@@ -24,23 +24,22 @@ public class DamagePopup : MonoBehaviour
     public void Setup(int damageToShow)
     {
         text.text = damageToShow.ToString();
+    }
+
+    public void AnimEventStartFade()
+    {
         StartCoroutine(FadeAwayCoroutine());
     }
 
     IEnumerator FadeAwayCoroutine()
     {
-        float timer = fadeDuration;
-        while (timer > 0f)
+        float startAlpha = text.color.a;
+        float currentTime = 0.0f;
+        while (currentTime < fadeDuration)
         {
-            float alphaAmount = timer / fadeDuration;
-            alphaAmount = Mathf.Clamp01(alphaAmount);
-
-            Color objectColor = objectRenderer.material.color;
-            objectColor.a = alphaAmount;
-            objectRenderer.material.color = objectColor;
-
-            timer -= Time.deltaTime;
-
+            float newAlpha = Mathf.Lerp(startAlpha, 0f, currentTime / fadeDuration);
+            text.color = new Color(text.color.r, text.color.g, text.color.b, newAlpha);
+            currentTime += Time.deltaTime;
             yield return null;
         }
 
@@ -49,8 +48,8 @@ public class DamagePopup : MonoBehaviour
 
     private void ResetPopup()
     {
-        Color objColor = objectRenderer.material.color;
-        objColor.a = 1f;
-        objectRenderer.material.color = objColor;
+        Color textColor = text.color;
+        textColor.a = 1f;
+        text.color = textColor;
     }
 }

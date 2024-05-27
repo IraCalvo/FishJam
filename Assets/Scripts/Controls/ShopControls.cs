@@ -17,20 +17,24 @@ public class ShopControls : MonoBehaviour
 
     public void OnBuyItem(InputAction.CallbackContext callbackContext)
     {
-        CreateShopItemList();
-        int number;
-        if (int.TryParse(callbackContext.control.name, out number)) {
-            if (callbackContext.performed)
+        if (PauseMenuManager.instance.pauseMenu.activeSelf == false)
+        {
+            CreateShopItemList();
+            int number;
+            if (int.TryParse(callbackContext.control.name, out number))
             {
-                int index = number - 1;
-                GameObject gameObject = shopItems[index].shopGameObject;
-                if (gameObject.TryGetComponent<Fish>(out Fish fish))
+                if (callbackContext.performed)
                 {
-                    FishSpawner.Instance.SpawnFish(shopItems[number - 1].shopGameObject);
-                }
-                else if (gameObject.TryGetComponent<Trophy>(out Trophy trophy))
-                {
-                    trophy.BuyTrophy();
+                    int index = number - 1;
+                    GameObject gameObject = shopItems[index].shopGameObject;
+                    if (gameObject.TryGetComponent<Fish>(out Fish fish))
+                    {
+                        FishSpawner.Instance.SpawnFish(shopItems[number - 1].shopGameObject);
+                    }
+                    else if (gameObject.TryGetComponent<Trophy>(out Trophy trophy))
+                    {
+                        trophy.BuyTrophy();
+                    }
                 }
             }
         }
@@ -50,16 +54,20 @@ public class ShopControls : MonoBehaviour
 
     public void OnClickItem(BaseEventData baseEventData)
     {
-        if (TryGetComponent<Trophy>(out Trophy trophy))
+        if (PauseMenuManager.instance.pauseMenu.activeSelf == false)
         {
-            trophy.BuyTrophy();
-        }
-        else if (TryGetComponent<ShopItem>(out ShopItem shopItem))
-        {
-            if (shopItem.shopGameObject.TryGetComponent<Fish>(out Fish fish))
+            if (TryGetComponent<Trophy>(out Trophy trophy))
             {
-                FishSpawner.Instance.SpawnFish(shopItem.shopGameObject);
+                trophy.BuyTrophy();
+            }
+            else if (TryGetComponent<ShopItem>(out ShopItem shopItem))
+            {
+                if (shopItem.shopGameObject.TryGetComponent<Fish>(out Fish fish))
+                {
+                    FishSpawner.Instance.SpawnFish(shopItem.shopGameObject);
+                }
             }
         }
+
     }
 }

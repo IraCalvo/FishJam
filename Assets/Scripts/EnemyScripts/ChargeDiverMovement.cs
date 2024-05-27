@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -31,11 +32,13 @@ public class ChargeDiverMovement : MonoBehaviour
 
     public float minChargeDistance;
     public float maxChargeDistance;
-    public float attackRange;
-    private bool didAim;
+    [SerializeField] private bool didAim;
     private bool didCharge;
+    private bool validPositionFound = false;
 
     public GameObject targetSprite;
+    private GameObject target;
+    public List<GameObject> targets;
 
     private void Awake()
     {
@@ -72,6 +75,7 @@ public class ChargeDiverMovement : MonoBehaviour
                 Move();
                 break;
             case State.Resetting:
+                Reset();
                 break;
         }
     }
@@ -82,14 +86,15 @@ public class ChargeDiverMovement : MonoBehaviour
         {
             float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
             float t = 1f - Mathf.Clamp01(distanceToTarget / 3); // Clamping to ensure t is between 0 and 1
-            float easedT = Mathf.SmoothStep(0f, 1f, t); // Apply easing function
-            float easedMoveSpeed = Mathf.Lerp(enemySO.speed, 0f, easedT); // Interpolate movement speed based on eased t
+            float easedT = Mathf.SmoothStep(0.5f, 0.5f, t); // Apply easing function
+            float easedMoveSpeed = Mathf.Lerp(enemySO.speed, 0.5f, easedT); // Interpolate movement speed based on eased t
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, easedMoveSpeed * Time.fixedDeltaTime);
+            validPositionFound = false;
+            Destroy(target);
         }
         else
         {
             state = State.Resetting;
-            StartCoroutine(ResetRotation());
         }
     }
 
@@ -105,14 +110,23 @@ public class ChargeDiverMovement : MonoBehaviour
         // Create a Quaternion rotation around the Z axis
         Quaternion rotation = Quaternion.AngleAxis(angle - 90f, Vector3.forward);
 
-        StartCoroutine(WaitForRotateAndMove(rotation));
+        transform.rotation = rotation;
+        animator.SetBool("isCharging", true);
+        state = State.Charging;
+
+        //StartCoroutine(WaitForRotateAndMove(rotation));
     }
 
     IEnumerator WaitForRotateAndMove(Quaternion targetRotation)
     {
+        
         // Smoothly rotate towards the target rotation
         while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
         {
+            Debug.Log("Angle: " + Quaternion.Angle(transform.rotation, targetRotation));
+            Debug.Log("Target.rotation: " + targetRotation);
+            Debug.Log("Current Transform.rotation: " + transform.rotation);
+            Debug.Log("New Transform.rotation: " + Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime));
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             yield return null;
         }
@@ -167,6 +181,12 @@ public class ChargeDiverMovement : MonoBehaviour
         state = State.Attacking;
     }
 
+    private void Reset()
+    {
+        targetPosition = Vector2.zero;
+        StartCoroutine(ResetRotation());
+    }
+
     IEnumerator ResetRotation()
     {
 
@@ -184,6 +204,8 @@ public class ChargeDiverMovement : MonoBehaviour
         didAim = false;
     }
 
+
+    //need something for OnTriggerStay incase the 'closest fish' is inside the enemy as the attack starts
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.TryGetComponent<Fish>(out  Fish fish))
@@ -220,50 +242,77 @@ public class ChargeDiverMovement : MonoBehaviour
         //targetPosition = randomPosition;
         //state = State.Aiming;
 
-        Vector2 fishTargetPosition = Vector2.zero;
+        bool validPositionFound = false;
         float currentClosestFish = float.MaxValue;
-        bool validFishFound = false;
-        bool lureFishInTank = false;
-        List<Fish> lureFishInTankList = new List<Fish>();
+        bool lureFishInRange = false;
+        List<Fish> fishInRangeList = new List<Fish>();
+        List<LureClass> lureInRangeList = new List<LureClass>();
 
-        while(validFishFound == false) 
+
+        while (validPositionFound == false)
         {
-            foreach (Fish f in GameManager.instance.activeFish)
+            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, enemySO.attackRange);
+            if (hits != null)
             {
-                if (f.TryGetComponent<LureClass>(out LureClass lure))
+                foreach (Collider2D hit in hits)
                 {
-                    lureFishInTank = true;
-                    lureFishInTankList.Add(f);
-                }
-                else 
-                {
-                    return;
-                }
-            }
-
-            if (lureFishInTank)
-            {
-                foreach (Fish lureFish in lureFishInTankList)
-                {
-                    float distanceOfFish = Vector2.Distance(lureFish.transform.position, transform.position);
-                    if (distanceOfFish < enemySO.attackRange)
+                    if (hit.TryGetComponent<Fish>(out Fish fish))
                     {
-                        if (distanceOfFish < currentClosestFish)
+                        fishInRangeList.Add(fish);
+                    }
+                }
+
+                foreach (Fish f in fishInRangeList)
+                {
+                    if (f.TryGetComponent<LureClass>(out LureClass lure))
+                    {
+                        lureFishInRange = true;
+                        lureInRangeList.Add(lure);
+                    }
+                }
+
+                if (lureFishInRange)
+                {
+                    //iterate through lureList and find closest
+                    foreach (LureClass lure in lureInRangeList)
+                    {
+                        float distanceOfFish = Mathf.Abs(Vector2.Distance(lure.transform.position, transform.position));
+                        if (distanceOfFish <= currentClosestFish)
                         {
                             currentClosestFish = distanceOfFish;
+                            float offsetMultiplier = Mathf.Clamp(distanceOfFish / enemySO.attackRange, 0.1f, 1f);
+                            Vector2 dashOffset = offsetMultiplier * lure.transform.position;
+                            targetPosition = (Vector2)lure.transform.position + dashOffset;
+                            target = Instantiate(targetSprite, targetPosition, Quaternion.identity);
                         }
                     }
                 }
+                else
+                {
+                    //no lure so find closest fish
+                    foreach (Fish f in fishInRangeList)
+                    {
+                        float distanceOfFish = Mathf.Abs(Vector2.Distance(f.transform.position, transform.position));
+                        if (distanceOfFish <= currentClosestFish)
+                        {
+                            currentClosestFish = distanceOfFish;
+                            float offsetMultipler = Mathf.Clamp(distanceOfFish / enemySO.attackRange, 0.1f, 1f);
+                            Vector2 dashOffset = offsetMultipler * f.transform.position;
+                            targetPosition = (Vector2)f.transform.position + dashOffset;
+                            target = Instantiate(targetSprite, targetPosition, Quaternion.identity);
+                        }
+                    }
+                }
+                state = State.Aiming;
             }
             else
             {
-                foreach (Fish f in GameManager.instance.activeFish)
-                {
-
-                }
+                //No fish in range do something
             }
+
+            validPositionFound = true;
         }
-        fishTargetPosition = currentClosestFish
+
     }
 
     void PickFishToAttack()
@@ -276,5 +325,16 @@ public class ChargeDiverMovement : MonoBehaviour
         { 
             
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red; // Change color as desired
+
+        // Get the position of the game object
+        Vector2 center = transform.position;
+
+        // Draw the circle using Gizmos.DrawWireSphere
+        Gizmos.DrawWireSphere(center, enemySO.attackRange);
     }
 }

@@ -69,6 +69,8 @@ MonoBehaviour:
   chargeTimer: 0
   minChargeDistance: 8
   maxChargeDistance: 15
+  didAim: 0
+  targetSprite: {fileID: 8830859093895283578, guid: 2046e6119ae3f6a48b3845aab9ef7f02, type: 3}
 --- !u!212 &7939992843742124470
 SpriteRenderer:
   m_ObjectHideFlags: 0

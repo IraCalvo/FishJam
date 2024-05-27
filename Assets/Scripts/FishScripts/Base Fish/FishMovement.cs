@@ -11,7 +11,7 @@ public abstract class FishMovement : MonoBehaviour
     public FishState fishState;
 
     public Vector2 targetPosition;
-    private float nextLocationTimer;
+    public float nextLocationTimer;
 
     SpriteRenderer sr;
     GameObject tank;

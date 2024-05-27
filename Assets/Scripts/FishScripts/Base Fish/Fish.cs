@@ -39,11 +39,6 @@ public class Fish : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        FishList.instance.UpdateFishList();
-    }
-
     private void Update()
     {
         if (!isOnScreen)
@@ -62,6 +57,8 @@ public class Fish : MonoBehaviour
         if (currentHP <= 0)
         {
             PoolManager.instance.DeactivateObjectInPool(gameObject);
+            FishList.instance.UpdateFishList();
+            PoolManager.instance.GetPoolObject(PoolObjectType.BloodFX);
         }
     }
 
