@@ -23,6 +23,7 @@ public class PingControls : MonoBehaviour
                         FishMovement fishMovement = fish.GetComponent<FishMovement>();
                         Vector2 randomPosition = centerMovePosition + new Vector2(Random.Range(-5f, 5f), Random.Range(-5f, 5f));
                         fishMovement.targetPosition = randomPosition;
+                        fishMovement.nextLocationTimer = 0;
                     }
                     else if (fish.TryGetComponent<CrabMovement>(out CrabMovement crabMovement1))
                     {

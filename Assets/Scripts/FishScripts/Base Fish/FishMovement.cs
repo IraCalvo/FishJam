@@ -58,6 +58,7 @@ public abstract class FishMovement : MonoBehaviour
                 MoveFishToFood();
                 break;
             case FishState.State.Combat:
+                MoveFish();
                 break;
             case FishState.State.Dead:
                 if (!didDie)
@@ -167,13 +168,13 @@ public abstract class FishMovement : MonoBehaviour
             return;
         }
 
-        targetPosition = closestFood.transform.position;
+        Vector2 closestFoodPosition = closestFood.transform.position;
 
-        float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
+        float distanceToTarget = Vector2.Distance(transform.position, closestFoodPosition);
         float t = 1f - Mathf.Clamp01(distanceToTarget / 5); // Clamping to ensure t is between 0 and 1
         float easedT = Mathf.SmoothStep(0.5f, 0.5f, t); // Apply easing function
         float easedFishHungerMoveSpeed = Mathf.Lerp(fishSO.moveSpeed, 0f, easedT); // Interpolate movement speed based on eased t
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, easedFishHungerMoveSpeed * Time.fixedDeltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, closestFoodPosition, easedFishHungerMoveSpeed * Time.fixedDeltaTime);
     }
 
     public virtual void MoveFishToDeath()

@@ -86,7 +86,8 @@ public class FishHunger : MonoBehaviour
             hungerTimer = fishSO.hungerTimerMax;
             dieFromHungerTimer = fishSO.dieFromHungerTimerMax;
         }
-        else
+        // Don't remove timer when the fish is in Combat
+        else if (fishState.GetCurrentState() != FishState.State.Combat)
         {
             hungerTimer -= Time.deltaTime;
         }

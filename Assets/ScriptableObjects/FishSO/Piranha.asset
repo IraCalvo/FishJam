@@ -18,8 +18,8 @@ MonoBehaviour:
   moveSpeed: 8
   classes: 02000000
   foodType: 4
-  minLocationPickTimer: 5
-  maxLocationPickTimer: 10
+  minLocationPickTimer: 2
+  maxLocationPickTimer: 5
   damage: 3
   hp: 1
   attackRange: 5

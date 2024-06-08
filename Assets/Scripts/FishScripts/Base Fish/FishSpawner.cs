@@ -64,6 +64,8 @@ public class FishSpawner : MonoBehaviour
     {
         Bounds viewportBounds = GetViewportBounds(mainCamera);
         float depth = Random.Range(viewportBounds.min.y, viewportBounds.max.y);
+        // TODO: Use actual tank bounds when implemented
+        depth = Mathf.Clamp(depth, -10, 15);
         Vector2 targetPosition = new Vector2(spawnPosition.x, depth);
         return targetPosition;
     }

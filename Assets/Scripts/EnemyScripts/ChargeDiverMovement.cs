@@ -280,10 +280,18 @@ public class ChargeDiverMovement : MonoBehaviour
                         if (distanceOfFish <= currentClosestFish)
                         {
                             currentClosestFish = distanceOfFish;
-                            float offsetMultiplier = Mathf.Clamp(distanceOfFish / enemySO.attackRange, 0.1f, 1f);
+                            float offsetMultiplier = Mathf.Clamp(distanceOfFish / enemySO.attackRange, 1f, 2f);
                             Vector2 dashOffset = offsetMultiplier * lure.transform.position;
                             targetPosition = (Vector2)lure.transform.position + dashOffset;
-                            target = Instantiate(targetSprite, targetPosition, Quaternion.identity);
+                            targetPosition = new Vector2(Mathf.Clamp(targetPosition.x, -15, 15), Mathf.Clamp(targetPosition.y, -10, 15));
+                            if (target == null)
+                            {
+                                target = Instantiate(targetSprite, targetPosition, Quaternion.identity);
+                            }
+                            else
+                            {
+                                target.transform.position = lure.transform.position;
+                            }
                         }
                     }
                 }
@@ -296,10 +304,18 @@ public class ChargeDiverMovement : MonoBehaviour
                         if (distanceOfFish <= currentClosestFish)
                         {
                             currentClosestFish = distanceOfFish;
-                            float offsetMultipler = Mathf.Clamp(distanceOfFish / enemySO.attackRange, 0.1f, 1f);
+                            float offsetMultipler = Mathf.Clamp(distanceOfFish / enemySO.attackRange, 1f, 2f);
                             Vector2 dashOffset = offsetMultipler * f.transform.position;
                             targetPosition = (Vector2)f.transform.position + dashOffset;
-                            target = Instantiate(targetSprite, targetPosition, Quaternion.identity);
+                            targetPosition = new Vector2(Mathf.Clamp(targetPosition.x, -15, 15), Mathf.Clamp(targetPosition.y, -10, 15));
+                            if (target == null)
+                            {
+                                target = Instantiate(targetSprite, targetPosition, Quaternion.identity);
+                            }
+                            else
+                            {
+                                target.transform.position = f.transform.position;
+                            }
                         }
                     }
                 }
