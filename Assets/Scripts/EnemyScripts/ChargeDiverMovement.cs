@@ -40,6 +40,8 @@ public class ChargeDiverMovement : MonoBehaviour
     private GameObject target;
     public List<GameObject> targets;
 
+    public HashSet<GameObject> alreadyHitTargets;
+
     private void Awake()
     {
         state = State.Idle;
@@ -85,9 +87,14 @@ public class ChargeDiverMovement : MonoBehaviour
         if (Vector2.Distance(transform.position, targetPosition) > 0.1f)
         {
             float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
+            if (distanceToTarget < minChargeDistance)
+            {
+                distanceToTarget = minChargeDistance;
+            }
             float t = 1f - Mathf.Clamp01(distanceToTarget / 3); // Clamping to ensure t is between 0 and 1
             float easedT = Mathf.SmoothStep(0.5f, 0.5f, t); // Apply easing function
             float easedMoveSpeed = Mathf.Lerp(enemySO.speed, 0.5f, easedT); // Interpolate movement speed based on eased t
+
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, easedMoveSpeed * Time.fixedDeltaTime);
             validPositionFound = false;
             Destroy(target);
@@ -95,6 +102,7 @@ public class ChargeDiverMovement : MonoBehaviour
         else
         {
             state = State.Resetting;
+            alreadyHitTargets.Clear();
         }
     }
 
@@ -208,10 +216,15 @@ public class ChargeDiverMovement : MonoBehaviour
     //need something for OnTriggerStay incase the 'closest fish' is inside the enemy as the attack starts
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Fish>(out  Fish fish))
+        if (collision.gameObject.TryGetComponent<Fish>(out Fish fish))
         {
             if (state == State.Attacking)
             {
+                if (alreadyHitTargets.Contains(collision.gameObject))
+                {
+                    return;
+                }
+                alreadyHitTargets.Add(collision.gameObject);
                 fish.TakeDamage(enemySO.damage);
             }
         }

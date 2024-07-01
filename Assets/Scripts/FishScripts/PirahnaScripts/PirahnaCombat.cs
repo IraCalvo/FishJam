@@ -131,6 +131,8 @@ public class PirahnaCombat : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy") && isAttacking)
         {
             targetEnemy.TakeDamage(pirahnaSO.damage);
+            // Set false here so that we don't double hit. It will be set back to true when it dashes again
+            isAttacking = false;
         }
     }
 
