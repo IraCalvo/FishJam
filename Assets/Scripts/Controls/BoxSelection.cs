@@ -10,6 +10,8 @@ public class BoxSelection : MonoBehaviour
     [SerializeField] private Vector2 currentMousePosition;
     private BoxCollider2D boxCollider;
 
+    private int minimumDistance = 3;
+    private bool didEnable = false;
     [SerializeField] public List<Fish> selectedFish;
 
     private void Awake()
@@ -46,6 +48,17 @@ public class BoxSelection : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             currentMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            float distance = Vector2.Distance(initialMousePosition, currentMousePosition);
+
+            if (!didEnable)
+            {
+                lineRenderer.enabled = distance >= minimumDistance;
+                if (lineRenderer.enabled)
+                {
+                    didEnable = true;
+                }
+            }
             lineRenderer.SetPosition(0, new Vector2(initialMousePosition.x, initialMousePosition.y));
             lineRenderer.SetPosition(1, new Vector2(initialMousePosition.x, currentMousePosition.y));
             lineRenderer.SetPosition(2, new Vector2(currentMousePosition.x, currentMousePosition.y));
@@ -68,6 +81,7 @@ public class BoxSelection : MonoBehaviour
             lineRenderer.positionCount = 0;
             Destroy(boxCollider);
             transform.position = Vector3.zero;
+            didEnable = false;
         }
     }
 
@@ -81,7 +95,7 @@ public class BoxSelection : MonoBehaviour
             // Check if the collider is not part of the same GameObject as the boxCollider
             if (collider != boxCollider && collider.gameObject != gameObject && collider.gameObject.TryGetComponent<Fish>(out Fish fish))
             {
-                if (fish.fishState.GetCurrentState() != FishState.State.Dead)
+                if (fish.fishState.GetCurrentState() != FishState.State.Dead && fish.fishState.GetCurrentState() != FishState.State.Spawning)
                 {
                     selectedFish.Add(fish);
                 }
