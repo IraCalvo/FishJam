@@ -20,13 +20,14 @@ public abstract class Resource : MonoBehaviour
     public abstract void AbstractAwake();
     public abstract void AbstractFixedUpdate();
 
-    private void OnDisable()
+    public virtual void OnDisable()
     {
         ResetResource();
     }
 
     public virtual void ResourceClicked()
     {
+        SFXManager.instance.PlaySFX(SoundType.CoinCollected);
         BankManager.Instance.AddMoney(resourceSO.resourceValue);
         //move it towards the bank
         PoolManager.instance.DeactivateObjectInPool(gameObject);
@@ -34,7 +35,7 @@ public abstract class Resource : MonoBehaviour
 
     public virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Ground")
+        if(collision.gameObject.CompareTag("Ground"))
         {
             rb.gravityScale = 0;
             rb.velocity = Vector3.zero;

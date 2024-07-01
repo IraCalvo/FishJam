@@ -111,9 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5d278422fba83047a1eb86d7de0bebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultMaterial: {fileID: 2100000, guid: 5097b1ae8c82b4a47a825cb1bdd09783, type: 2}
-  hungerMaterial: {fileID: -876546973899608171, guid: 120d4cde031667b4b9c5fb2f598fd89e, type: 3}
-  deadMaterial: {fileID: -876546973899608171, guid: e8205a68e13a0b14daf174269c883e0e, type: 3}
 --- !u!114 &-6924488239572100235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,7 +180,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6b630f007f861c646bdf36e44ad4bedb, type: 3}
+  m_Sprite: {fileID: 1929479125, guid: cd706f9db75a6374caffd59395c4e08b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

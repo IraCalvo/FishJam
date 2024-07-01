@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 552bfc3122cece54abce153f9af4752a, type: 3}
+  m_Name: Angler
+  m_EditorClassIdentifier: 
+  fishName: Angler
+  fishPoolObjectType: 4
+  price: 500
+  sellAmount: 350
+  moveSpeed: 5
+  classes: 06000000
+  foodType: 6
+  minLocationPickTimer: 5
+  maxLocationPickTimer: 8
+  damage: 0
+  hp: 15
+  attackRange: 0
+  combatMoveSpeed: 8
+  attackCooldown: 0
+  preferredFoods: 0200000004000000
+  foodDetectionRange: 8
+  hungerTimerMax: 15
+  dieFromHungerTimerMax: 15
+  minMoneyTimer: 4.5
+  maxMoneyTimer: 8
+  moneyToDrop: {fileID: 4335957793588255294, guid: e85e4f10c91db9a42a0b650b7b7df7b2, type: 3}

@@ -7,5 +7,6 @@ public enum FishSpecies
     GoldFish,
     Crab,
     Pirahna,
-    Shark
+    Shark,
+    Angler
 }

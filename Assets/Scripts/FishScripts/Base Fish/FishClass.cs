@@ -9,5 +9,6 @@ public enum FishClass
     Swarm,
     Apex,
     Stationary,
-    Resource
+    Resource,
+    Lure
 }

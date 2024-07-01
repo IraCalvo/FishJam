@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemySpawnerManager : MonoBehaviour
@@ -16,6 +17,12 @@ public class EnemySpawnerManager : MonoBehaviour
 
     GameObject tank;
     Bounds tankBounds;
+
+    public delegate void EnemySpawnedEventHandler();
+    public delegate void EnemyDefeatedEventHandler();
+
+    public static event EnemySpawnedEventHandler OnEnemySpawned;
+    public static event EnemyDefeatedEventHandler OnEnemyDefeated;
 
     private void Awake()
     {
@@ -68,5 +75,15 @@ public class EnemySpawnerManager : MonoBehaviour
         enemyObj.transform.localPosition = randomSpawnPos;
 
         enemySpawnTimer = Random.Range(enemySpawnTimerMin, enemySpawnTimerMax);
+    }
+
+    public static void EnemySpawned()
+    {
+        OnEnemySpawned?.Invoke();
+    }
+
+    public static void EnemyDefeated()
+    {
+        OnEnemyDefeated?.Invoke();
     }
 }

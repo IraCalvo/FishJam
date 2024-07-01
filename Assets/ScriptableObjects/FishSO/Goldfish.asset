@@ -15,6 +15,7 @@ MonoBehaviour:
   fishName: Goldfish
   fishPoolObjectType: 4
   price: 100
+  sellAmount: 9999
   moveSpeed: 8
   classes: 0000000005000000
   foodType: 2

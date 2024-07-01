@@ -9,5 +9,6 @@ public enum FoodType
     GoldFish,
     Crab,
     Pirahna,
-    Shark
+    Shark,
+    Angler
 }

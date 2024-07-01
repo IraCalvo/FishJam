@@ -24,6 +24,24 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "SellFish",
+                    "type": "Button",
+                    "id": "9047cabb-92b9-4f0a-aa22-854e9e81f4f6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Move Fish",
+                    "type": "Button",
+                    "id": "d753e2f0-20e3-45da-8c7a-1823d0e1e798",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Look",
                     "type": "Value",
                     "id": "08f4afe6-d752-4e5b-94bc-3bdce6c98a48",
@@ -49,15 +67,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Move Fish",
-                    "type": "Button",
-                    "id": "d753e2f0-20e3-45da-8c7a-1823d0e1e798",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 },
                 {
                     "name": "FishList",
@@ -356,23 +365,23 @@
                 },
                 {
                     "name": "",
+                    "id": "8a208d97-63e9-4300-8255-0d80e5d37865",
+                    "path": "<Keyboard>/6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Buy Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "dce1a02b-cb18-4562-910b-0af946e553c8",
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Use Item",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a7d27bc8-f47b-4d59-aedf-08cda5f36cc8",
-                    "path": "<Keyboard>/g",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move Fish",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -395,6 +404,28 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Esc",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8c975ac9-8863-4b85-908c-8f7e095772d3",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SellFish",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a7d27bc8-f47b-4d59-aedf-08cda5f36cc8",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move Fish",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

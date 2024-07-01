@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 45
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -118,14 +118,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40bd461b0a163b447b91fea59e043057
-      internalID: 1443516414
+      spriteID: 7806c642e4009e544af79a3ce9875bb5
+      internalID: 1018213551
       vertices: []
       indices: 
       edges: []
@@ -139,14 +139,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 61a9920db7f8c904882802480f7bbd60
-      internalID: -1438551195
+      spriteID: f3cb9eae0b1cff249be473f986b364f2
+      internalID: 333176814
       vertices: []
       indices: 
       edges: []
@@ -160,14 +160,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e05bf6b634870c14799c9754a39e151b
-      internalID: -792752364
+      spriteID: 8fcca5d323c6cdc40a4d0fd76c16eae1
+      internalID: -287298596
       vertices: []
       indices: 
       edges: []
@@ -181,14 +181,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14b82551c609e6943bee8e7752c863d2
-      internalID: 374163619
+      spriteID: 9e503abf576e15849b6c44c19efcf8a2
+      internalID: 168999468
       vertices: []
       indices: 
       edges: []
@@ -202,14 +202,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17acbc420b6e78c40ac52151da22be30
-      internalID: 1789571160
+      spriteID: c55a0456892d3ce47846d0ea36f48cc0
+      internalID: 422121508
       vertices: []
       indices: 
       edges: []
@@ -223,14 +223,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9aec263fb46dc0e43b08df26ccbaa0ac
-      internalID: 1587537853
+      spriteID: 7d8fac1b74b12144dbfa253ab048a37b
+      internalID: 419073286
       vertices: []
       indices: 
       edges: []
@@ -244,14 +244,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 71f0fca744e7d4347bfe2e34baa1d583
-      internalID: -1524680017
+      spriteID: 6174e5aa81469c8489cae99760eb3d94
+      internalID: 1107704792
       vertices: []
       indices: 
       edges: []
@@ -267,13 +267,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Sand Dollar-Sheet_0: 1443516414
-      Sand Dollar-Sheet_1: -1438551195
-      Sand Dollar-Sheet_2: -792752364
-      Sand Dollar-Sheet_3: 374163619
-      Sand Dollar-Sheet_4: 1789571160
-      Sand Dollar-Sheet_5: 1587537853
-      Sand Dollar-Sheet_6: -1524680017
+      Sand Dollar-Sheet_0: 1018213551
+      Sand Dollar-Sheet_1: 333176814
+      Sand Dollar-Sheet_2: -287298596
+      Sand Dollar-Sheet_3: 168999468
+      Sand Dollar-Sheet_4: 422121508
+      Sand Dollar-Sheet_5: 419073286
+      Sand Dollar-Sheet_6: 1107704792
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

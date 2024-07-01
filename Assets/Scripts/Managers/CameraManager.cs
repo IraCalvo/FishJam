@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private Camera camera;
+    [SerializeField] private Camera _camera;
     [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
     [SerializeField] private CinemachineConfiner confiner;
     [SerializeField] private Collider2D boundingBox;
@@ -78,10 +78,10 @@ public class CameraManager : MonoBehaviour
 
         cinemachineVirtualCamera.m_Lens.OrthographicSize = orthographicSize;
 
-        float distance = Vector2.Distance(cinemachineVirtualCamera.transform.position, camera.transform.position);
+        float distance = Vector2.Distance(cinemachineVirtualCamera.transform.position, _camera.transform.position);
         if (distance > 1)
         {
-            cinemachineVirtualCamera.transform.position = camera.transform.position;
+            cinemachineVirtualCamera.transform.position = _camera.transform.position;
         }
     }
 

@@ -15,6 +15,7 @@ MonoBehaviour:
   fishName: Crab
   fishPoolObjectType: 4
   price: 200
+  sellAmount: 99999
   moveSpeed: 0.5
   classes: 0100000002000000
   foodType: 0
@@ -23,9 +24,9 @@ MonoBehaviour:
   damage: 10
   hp: 10
   attackRange: 0
-  combatMoveSpeed: 0.5
-  attackCooldown: 2
-  preferredFoods: 
+  combatMoveSpeed: 8
+  attackCooldown: 0
+  preferredFoods: 0000000000000000
   foodDetectionRange: 5
   hungerTimerMax: 30
   dieFromHungerTimerMax: 20

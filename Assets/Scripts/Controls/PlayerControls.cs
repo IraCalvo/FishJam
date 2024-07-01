@@ -111,13 +111,30 @@ public class PlayerControls : MonoBehaviour
                 pauseMenu.settingsMenu.SetActive(false);
                 return;
             }
-            //this if statement is being caleld after the other 2 if statements and instantly closing the pause menu
-            //when I dont want that to happen. I want the player to press esc to leav the settings menu then esc to leave the pause menu
             else if (pauseMenu != null)
             {
                 pauseMenu.OnPause();
             }
 
+        }
+    }
+
+    public void OnSellFish(CallbackContext callbackContext)
+    {
+        if (callbackContext.performed)
+        {
+            foreach (Fish fish in BoxSelection.Instance.selectedFish)
+            { 
+                if(fish != null)
+                {
+                    if (GameManager.instance.activeFish.Count > 1)
+                    {
+                        SFXManager.instance.PlaySFX(SoundType.FishSold);
+                        BankManager.Instance.AddMoney(fish.fishSO.sellAmount);
+                        PoolManager.instance.DeactivateObjectInPool(fish.gameObject);
+                    }
+                }
+            }
         }
     }
 }

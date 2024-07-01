@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     [SerializeField] GameObject loseScreen;
-    [SerializeField] GameObject player;
 
     public List<Fish> activeFish;
     public List<Enemy> activeEnemies;
@@ -36,7 +35,6 @@ public class GameManager : MonoBehaviour
         {
             Enemy enemy = gameObject.GetComponent<Enemy>();
             activeEnemies.Add(enemy);
-            SwitchFishToCombat();
         }
         else 
         {
@@ -56,7 +54,6 @@ public class GameManager : MonoBehaviour
         {
             Enemy enemy = gameObject.GetComponent<Enemy>();
             activeEnemies.Remove(enemy);
-            CheckEnemyList();
         }
         else
         {
@@ -72,29 +69,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void CheckEnemyList()
-    {
-        if (activeEnemies.Count <= 0)
-        {
-            foreach (Fish f in activeFish)
-            {
-                f.fishState.SetStateTo(FishState.State.Normal);
-            }
-        }
-    }
-
-    void SwitchFishToCombat()
-    {
-        foreach (Fish f in activeFish)
-        {
-            f.fishState.SetStateTo(FishState.State.Combat);
-        }
-    }
-
     //TODO: make an actual lose proccess
     public void PlayerLose()
     {
-        Destroy(player);
+        Time.timeScale = 0;
         loseScreen.SetActive(true);
     }
 }

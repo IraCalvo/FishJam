@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class StarterFish : MonoBehaviour
 {
-    private float delayTimer = 1f;
-
     void Start()
     {
-        StartCoroutine(SetToPool());
+        SetToPool();
     }
 
-    IEnumerator SetToPool()
+    void SetToPool()
     {
-        yield return new WaitForSeconds(delayTimer);
 
         if (TryGetComponent<Fish>(out var starterFish))
         {
@@ -25,7 +22,12 @@ public class StarterFish : MonoBehaviour
 
             GameManager.instance.AddToActiveList(gameObject);
             gameObject.SetActive(true);
-            starterFish.fishState.SetStateTo(FishState.State.Spawning);
+            starterFish.fishState.SetStateTo(FishState.State.Normal);
+
+            if (TryGetComponent<FishMovement>(out FishMovement moventScipt))
+            {
+                moventScipt.PickRandomLocation();
+            }
         }
     }
 }

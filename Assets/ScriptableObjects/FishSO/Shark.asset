@@ -15,6 +15,7 @@ MonoBehaviour:
   fishName: Shark
   fishPoolObjectType: 4
   price: 1500
+  sellAmount: 99999
   moveSpeed: 12
   classes: 0300000000000000
   foodType: 5

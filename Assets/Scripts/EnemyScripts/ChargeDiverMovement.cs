@@ -27,7 +27,7 @@ public class ChargeDiverMovement : MonoBehaviour
     SpriteRenderer spriteRenderer;
     public float chargeTimer;
     GameObject tank;
-    Bounds tankBounds;
+    [SerializeField] Bounds tankBounds;
     Animator animator;
 
     public float minChargeDistance;

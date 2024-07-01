@@ -15,6 +15,7 @@ MonoBehaviour:
   fishName: Piranha
   fishPoolObjectType: 4
   price: 350
+  sellAmount: 99999
   moveSpeed: 8
   classes: 02000000
   foodType: 4

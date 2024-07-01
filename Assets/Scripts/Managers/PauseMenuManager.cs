@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
+
 public class PauseMenuManager : MonoBehaviour
 {
     public static PauseMenuManager instance;
@@ -108,4 +109,6 @@ public class PauseMenuManager : MonoBehaviour
         keyBindingsMenu.SetActive(false);
         audioSettingMenu.SetActive(false);
     }
+
+
 }

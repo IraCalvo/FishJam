@@ -7,7 +7,8 @@ public class FishHunger : MonoBehaviour
     private Fish fish;
     private FishSO fishSO;
     private FishState fishState;
-    private float hungerTimer;
+    [HideInInspector]
+    public float hungerTimer;
     private float dieFromHungerTimer;
 
     private void Awake()
@@ -51,7 +52,6 @@ public class FishHunger : MonoBehaviour
 
     private void FeedFish(GameObject gameObject)
     {
-        Debug.Log("Feed Fish");
         if (gameObject.TryGetComponent<Food>(out Food food))
         {
             PoolManager.instance.DeactivateObjectInPool(gameObject);

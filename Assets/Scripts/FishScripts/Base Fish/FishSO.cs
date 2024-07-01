@@ -9,6 +9,7 @@ public class FishSO : ScriptableObject
     public string fishName;
     public PoolObjectType fishPoolObjectType;
     public int price;
+    public int sellAmount;
     public float moveSpeed;
     public List<FishClass> classes;
     public FoodType foodType;

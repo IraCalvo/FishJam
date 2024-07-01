@@ -13,7 +13,7 @@ public class DamagePopup : MonoBehaviour
     {
         text = GetComponent<TextMeshPro>();
         objectRenderer = GetComponent<MeshRenderer>();
-        objectRenderer.sortingOrder = 10;
+        objectRenderer.sortingOrder = 100;
     }
 
     private void OnDisable()

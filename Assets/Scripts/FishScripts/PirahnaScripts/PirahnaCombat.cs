@@ -41,8 +41,8 @@ public class PirahnaCombat : MonoBehaviour
 
     void ChooseEnemyToTarget()
     {
-        Enemy[] enemiesInTank = FindObjectsOfType<Enemy>();
-        if (enemiesInTank.Length > 0)
+        List<Enemy> enemiesInTank = GameManager.instance.activeEnemies;
+        if (enemiesInTank.Count > 0)
         {
             float shortestDistance = Mathf.Infinity;
             Enemy closestEnemy = null;
@@ -85,7 +85,6 @@ public class PirahnaCombat : MonoBehaviour
                 //float easedT = Mathf.SmoothStep(0f, 1f, t);
                 //float easedCombatSpeed = Mathf.Lerp(pirahnaSO.combatMoveSpeed, 0f, easedT);
                 transform.position = Vector2.MoveTowards(transform.position, positionAroundEnemy, pirahnaSO.combatMoveSpeed * Time.fixedDeltaTime);
-                Debug.Log("still going to range");
                 SpriteDirection(positionAroundEnemy);
             }
             else 
@@ -107,7 +106,6 @@ public class PirahnaCombat : MonoBehaviour
             float xDistance = targetEnemy.transform.position.x - transform.position.x;
             float yDistance = targetEnemy.transform.position.y - transform.position.y;
             oppositePoint = new Vector2(targetEnemy.transform.position.x + xDistance, targetEnemy.transform.position.y + yDistance);
-            Debug.Log("This is the fish current pos:" + transform.position + "This is the opposite point to dash to:" + oppositePoint);
             oppositePointPicked = true;
         }
 
@@ -115,12 +113,10 @@ public class PirahnaCombat : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(transform.position, oppositePoint, pirahnaSO.combatMoveSpeed * Time.fixedDeltaTime);
             isAttacking = true;
-            Debug.Log("is dashing");
             SpriteDirection(oppositePoint);
         }
         else
         {
-            Debug.Log("Resetting");
             pickedPos = false;
             attackRangeReached = false;
             isAttacking = false;

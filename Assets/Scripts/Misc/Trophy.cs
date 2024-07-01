@@ -15,9 +15,9 @@ public class Trophy : MonoBehaviour
         if (BankManager.Instance.CanAfford(price))
         {
             BankManager.Instance.RemoveMoney(price);
+            winScreen.SetActive(true);
             Time.timeScale = 0;
             Debug.Log("Congrats you won");
-            winScreen.SetActive(true);
             UnlockNewLevel();
         }
     }
