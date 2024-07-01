@@ -40,7 +40,7 @@ public class ChargeDiverMovement : MonoBehaviour
     private GameObject target;
     public List<GameObject> targets;
 
-    public HashSet<GameObject> alreadyHitTargets;
+    public HashSet<GameObject> alreadyHitTargets = new HashSet<GameObject>();
 
     private void Awake()
     {
@@ -232,29 +232,6 @@ public class ChargeDiverMovement : MonoBehaviour
 
     void PickRandomLocation()
     {
-        //Vector2 randomPosition = Vector2.zero;
-        //bool validPositionFound = false;
-
-        //while (!validPositionFound)
-        //{
-        //    float randomX = Random.Range(tankBounds.min.x + 3f, tankBounds.max.x - 3f);
-        //    float randomY = Random.Range(tankBounds.min.y + 1f, tankBounds.max.y - 1f);
-
-        //    randomPosition = new Vector2(randomX, randomY);
-
-        //    // Calculate the distance between the tank and the random position
-        //    float distance = Vector2.Distance(randomPosition, transform.position);
-
-        //    // Check if the distance is at least the minimum distance
-        //    if (minChargeDistance <= distance && distance <= maxChargeDistance)
-        //    {
-        //        validPositionFound = true;
-        //    }
-        //}
-
-        //targetPosition = randomPosition;
-        //state = State.Aiming;
-
         bool validPositionFound = false;
         float currentClosestFish = float.MaxValue;
         bool lureFishInRange = false;
@@ -293,10 +270,24 @@ public class ChargeDiverMovement : MonoBehaviour
                         if (distanceOfFish <= currentClosestFish)
                         {
                             currentClosestFish = distanceOfFish;
-                            float offsetMultiplier = Mathf.Clamp(distanceOfFish / enemySO.attackRange, 1f, 2f);
+                            float offsetMultiplier = Mathf.Clamp(distanceOfFish / enemySO.attackRange, 0.25f, 0.5f);
                             Vector2 dashOffset = offsetMultiplier * lure.transform.position;
-                            targetPosition = (Vector2)lure.transform.position + dashOffset;
-                            targetPosition = new Vector2(Mathf.Clamp(targetPosition.x, -15, 15), Mathf.Clamp(targetPosition.y, -10, 15));
+
+                            // Clamp if we don't overshoot past the bounds. If we pass the bounds, we should just go straight to the fish
+                            if (
+                                targetPosition.x < tankBounds.min.x || targetPosition.x > tankBounds.max.x ||
+                                targetPosition.y < tankBounds.min.y || targetPosition.y > tankBounds.max.y
+                            )
+                            {
+                                // We got clamped, don't add anyoffset
+                                targetPosition = (Vector2)lure.transform.position;
+                            }
+                            else
+                            {
+                                targetPosition = (Vector2)lure.transform.position + dashOffset;
+                            }
+
+                            // targetPosition = new Vector2(Mathf.Clamp(targetPosition.x, tankBounds.min.x, tankBounds.max.x), Mathf.Clamp(targetPosition.y, tankBounds.min.y, tankBounds.max.y));
                             if (target == null)
                             {
                                 target = Instantiate(targetSprite, targetPosition, Quaternion.identity);
@@ -317,10 +308,24 @@ public class ChargeDiverMovement : MonoBehaviour
                         if (distanceOfFish <= currentClosestFish)
                         {
                             currentClosestFish = distanceOfFish;
-                            float offsetMultipler = Mathf.Clamp(distanceOfFish / enemySO.attackRange, 1f, 2f);
+                            float offsetMultipler = Mathf.Clamp(distanceOfFish / enemySO.attackRange, 0.25f, 0.5f);
                             Vector2 dashOffset = offsetMultipler * f.transform.position;
-                            targetPosition = (Vector2)f.transform.position + dashOffset;
-                            targetPosition = new Vector2(Mathf.Clamp(targetPosition.x, -15, 15), Mathf.Clamp(targetPosition.y, -10, 15));
+
+                            // Clamp if we don't overshoot past the bounds. If we pass the bounds, we should just go straight to the fish
+                            if (
+                                targetPosition.x < tankBounds.min.x || targetPosition.x > tankBounds.max.x ||
+                                targetPosition.y < tankBounds.min.y || targetPosition.y > tankBounds.max.y
+                            )
+                            {
+                                // We got clamped, don't add anyoffset
+                                targetPosition = (Vector2)f.transform.position;
+                            }
+                            else
+                            {
+                                targetPosition = (Vector2)f.transform.position + dashOffset;
+                            }
+
+                            //targetPosition = new Vector2(Mathf.Clamp(targetPosition.x, tankBounds.min.x, tankBounds.max.x), Mathf.Clamp(targetPosition.y, tankBounds.min.y, tankBounds.max.y));
                             if (target == null)
                             {
                                 target = Instantiate(targetSprite, targetPosition, Quaternion.identity);

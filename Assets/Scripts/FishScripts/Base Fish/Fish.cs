@@ -54,6 +54,7 @@ public class Fish : MonoBehaviour
             FishList.instance.UpdateFishList();
         }
 
+        sr.flipY = false;
         EnemySpawnerManager.OnEnemySpawned += EnterCombatState;
         EnemySpawnerManager.OnEnemyDefeated += LeaveCombatState;
     }
@@ -64,7 +65,6 @@ public class Fish : MonoBehaviour
         {
             Destroy(starterFish);
         }
-
         EnemySpawnerManager.OnEnemySpawned -= EnterCombatState;
         EnemySpawnerManager.OnEnemyDefeated -= LeaveCombatState;
     }
