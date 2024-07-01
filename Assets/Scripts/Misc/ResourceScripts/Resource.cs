@@ -7,6 +7,9 @@ using UnityEngine;
 public abstract class Resource : MonoBehaviour 
 {
     public ResourceSO resourceSO;
+    private bool didClick = false;
+    private float timer;
+    private float moveSpeed = 50;
 
     Rigidbody2D rb;
     Renderer objRenderer;
@@ -27,8 +30,33 @@ public abstract class Resource : MonoBehaviour
 
     public virtual void ResourceClicked()
     {
-        BankManager.Instance.AddMoney(resourceSO.resourceValue);
+        if (didClick) { return; }
+        didClick = true;
+
+        // Reset alpha
+        Color objColor = objRenderer.material.color;
+        objColor.a = 1f;
+        objRenderer.material.color = objColor;
+
         //move it towards the bank
+        StartCoroutine(AnimateResourceCollected());
+    }
+
+    IEnumerator AnimateResourceCollected()
+    {
+        Vector2 topRightCorner = new Vector2(Screen.width, Screen.height);
+        Vector3 bankPosition = Camera.main.ScreenToWorldPoint(topRightCorner);
+
+        while (Vector2.Distance(transform.position, bankPosition) > 1f)
+        {
+            Vector2 direction = bankPosition - transform.position;
+            direction.Normalize();
+            Vector2 movement = direction * moveSpeed * Time.deltaTime;
+            transform.position += new Vector3(movement.x, movement.y, 0);
+
+            yield return null;
+        }
+        BankManager.Instance.AddMoney(resourceSO.resourceValue);
         PoolManager.instance.DeactivateObjectInPool(gameObject);
     }
 
@@ -44,7 +72,7 @@ public abstract class Resource : MonoBehaviour
 
     IEnumerator FadeAwayCoroutine() 
     {
-        float timer = resourceSO.disappearTime;
+        timer = resourceSO.disappearTime;
         while (timer > 0)
         { 
             float alphaAmount = timer / resourceSO.disappearTime;
@@ -52,6 +80,10 @@ public abstract class Resource : MonoBehaviour
 
             Color objColor = objRenderer.material.color;
             objColor.a = alphaAmount;
+            if (didClick) { 
+                objColor.a = 1f;
+                break; 
+            }
             objRenderer.material.color = objColor;
 
             timer -= Time.deltaTime;
@@ -59,7 +91,10 @@ public abstract class Resource : MonoBehaviour
             yield return null;
         }
 
-        PoolManager.instance.DeactivateObjectInPool(gameObject);
+        if (!didClick)
+        {
+            PoolManager.instance.DeactivateObjectInPool(gameObject);
+        }
     }
 
     private void ResetResource()
@@ -69,5 +104,7 @@ public abstract class Resource : MonoBehaviour
         objRenderer.material.color = objColor;
 
         rb.gravityScale = 1;
+
+        didClick = false;
     }
 }
