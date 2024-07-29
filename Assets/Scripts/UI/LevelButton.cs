@@ -15,6 +15,7 @@ public class LevelButton : MonoBehaviour
 
     public void ButtonClicked()
     {
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         SceneManager.LoadScene(levelIndex);
     }
 }

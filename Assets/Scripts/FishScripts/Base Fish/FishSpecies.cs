@@ -8,5 +8,6 @@ public enum FishSpecies
     Crab,
     Pirahna,
     Shark,
-    Angler
+    Angler,
+    Snail
 }

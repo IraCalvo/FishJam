@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 552bfc3122cece54abce153f9af4752a, type: 3}
+  m_Name: Snail
+  m_EditorClassIdentifier: 
+  fishName: Snail
+  fishPoolObjectType: 4
+  price: 350
+  sellAmount: 200
+  moveSpeed: 0.2
+  classes: 0100000005000000
+  foodType: 7
+  minLocationPickTimer: 4
+  maxLocationPickTimer: 10
+  damage: 0
+  hp: 15
+  attackRange: 0
+  combatMoveSpeed: 0
+  attackCooldown: 0
+  preferredFoods: 00000000
+  foodDetectionRange: 10
+  hungerTimerMax: 15
+  dieFromHungerTimerMax: 15
+  minMoneyTimer: 0
+  maxMoneyTimer: 0
+  moneyToDrop: {fileID: 2442986486265758773, guid: 08a796f1ed82d3948addd12212214581, type: 3}

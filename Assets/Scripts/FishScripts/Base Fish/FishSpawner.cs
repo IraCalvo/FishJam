@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine.InputSystem;
+using System.Diagnostics;
 
 public class FishSpawner : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class FishSpawner : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        tankBounds = GameObject.Find("Tank").GetComponent<PolygonCollider2D>().bounds;
     }
 
     void Start()
@@ -26,12 +28,17 @@ public class FishSpawner : MonoBehaviour
     {
         if (fishObject.TryGetComponent<Fish>(out Fish fish))
         {
-            if (BankManager.Instance.currentMoneyAmount >= fish.fishSO.price)
+            if (BankManager.Instance.CanAfford(fish.fishSO.price))
             {
+                SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
                 BankManager.Instance.RemoveMoney(fish.fishSO.price);
                 GameObject obj = PoolManager.instance.GetPoolObject(fish.gameObject);
 
                 SetSpawnPosition(obj);
+            }
+            else
+            {
+                SFXManager.instance.PlaySFX(SoundType.NotEnoughMoney);
             }
         }
     }
@@ -46,7 +53,8 @@ public class FishSpawner : MonoBehaviour
         {
             fishMovement.targetPosition = targetPosition;
         }
-        else if (fishGameObject.TryGetComponent<CrabMovement>(out CrabMovement crabMovement))
+        else if (fishGameObject.TryGetComponent<CrabMovement>(out CrabMovement crabMovement) 
+            || fishGameObject.TryGetComponent<SnailMovement>(out SnailMovement snailMovement))
         {
             // Do nothing. The Crab will fall and and change to normal state
         }
@@ -65,7 +73,7 @@ public class FishSpawner : MonoBehaviour
         Bounds viewportBounds = GetViewportBounds(mainCamera);
         float depth = Random.Range(viewportBounds.min.y, viewportBounds.max.y);
         // TODO: Use actual tank bounds when implemented
-        depth = Mathf.Clamp(depth, -10, 15);
+        depth = Mathf.Clamp(depth, tankBounds.min.y, tankBounds.max.y);
         Vector2 targetPosition = new Vector2(spawnPosition.x, depth);
         return targetPosition;
     }

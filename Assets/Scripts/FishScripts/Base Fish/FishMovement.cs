@@ -221,6 +221,12 @@ public abstract class FishMovement : MonoBehaviour
 
     private void SpriteDirection()
     {
+        //TODO: implement this later as 'healthier'
+        if (fishSO.fishName == "Piranha" && fishState.GetCurrentState() == FishState.State.Combat)
+        {
+            return;
+        }
+
         if (targetPosition.x < transform.position.x)
         {
             sr.flipX = true;

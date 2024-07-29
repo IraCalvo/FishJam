@@ -87,6 +87,11 @@ public class Fish : MonoBehaviour
 
     void EnterCombatState()
     {
+        if (fishSO.classes.Contains(FishClass.Resource))
+        {
+            return;
+        }
+
         if (gameObject.activeSelf != false)
         {
             fishState.SetStateTo(FishState.State.Combat);

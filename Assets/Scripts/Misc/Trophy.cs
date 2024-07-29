@@ -14,11 +14,15 @@ public class Trophy : MonoBehaviour
     {
         if (BankManager.Instance.CanAfford(price))
         {
+            SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
             BankManager.Instance.RemoveMoney(price);
             winScreen.SetActive(true);
             Time.timeScale = 0;
-            Debug.Log("Congrats you won");
             UnlockNewLevel();
+        }
+        else
+        {
+            SFXManager.instance.PlaySFX(SoundType.NotEnoughMoney);
         }
     }
 

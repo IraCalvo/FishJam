@@ -8,12 +8,19 @@ public class DamagePopup : MonoBehaviour
     TextMeshPro text;
     public float fadeDuration;
     private MeshRenderer objectRenderer;
+    Animator anim;
 
     private void Awake()
     {
         text = GetComponent<TextMeshPro>();
         objectRenderer = GetComponent<MeshRenderer>();
         objectRenderer.sortingOrder = 100;
+        anim = GetComponent<Animator>();
+    }
+
+    private void OnEnable()
+    {
+        anim.SetTrigger("StartAnim");
     }
 
     private void OnDisable()
@@ -26,23 +33,8 @@ public class DamagePopup : MonoBehaviour
         text.text = damageToShow.ToString();
     }
 
-    public void AnimEventStartFade()
+    public void AnimEventDisableObj()
     {
-        StartCoroutine(FadeAwayCoroutine());
-    }
-
-    IEnumerator FadeAwayCoroutine()
-    {
-        float startAlpha = text.color.a;
-        float currentTime = 0.0f;
-        while (currentTime < fadeDuration)
-        {
-            float newAlpha = Mathf.Lerp(startAlpha, 0f, currentTime / fadeDuration);
-            text.color = new Color(text.color.r, text.color.g, text.color.b, newAlpha);
-            currentTime += Time.deltaTime;
-            yield return null;
-        }
-
         PoolManager.instance.DeactivateObjectInPool(gameObject);
     }
 

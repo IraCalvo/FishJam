@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class StarterFish : MonoBehaviour
 {
+    [SerializeField] bool isProtectionFish;
+
+    private void OnDisable()
+    {
+        if (isProtectionFish)
+        {
+            ProtectionLevel.instance.RemoveFishFromList(this);
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
         SetToPool();

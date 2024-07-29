@@ -19,26 +19,31 @@ public class MainMenu : MonoBehaviour
 
     public void QuitButton()
     {
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         Application.Quit();
     }
 
     public void InfoButton()
-    { 
+    {
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         infoImage.gameObject.SetActive(true);
     }
 
     public void ShopButton()
-    { 
+    {
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         shopMenu.gameObject.SetActive(true);
     }
 
     public void PlayButton()
-    { 
+    {
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         playMenu.SetActive(true);
     }
 
     public void SurvivaLButton()
-    { 
+    {
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         survivalMenu.SetActive(true);
     }
 }

@@ -27,14 +27,13 @@ public class ChargeDiverMovement : MonoBehaviour
     SpriteRenderer spriteRenderer;
     public float chargeTimer;
     GameObject tank;
-    [SerializeField] Bounds tankBounds;
+    Bounds tankBounds;
     Animator animator;
 
     public float minChargeDistance;
     public float maxChargeDistance;
     [SerializeField] private bool didAim;
     private bool didCharge;
-    private bool validPositionFound = false;
 
     public GameObject targetSprite;
     private GameObject target;
@@ -87,16 +86,11 @@ public class ChargeDiverMovement : MonoBehaviour
         if (Vector2.Distance(transform.position, targetPosition) > 0.1f)
         {
             float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
-            if (distanceToTarget < minChargeDistance)
-            {
-                distanceToTarget = minChargeDistance;
-            }
-            float t = 1f - Mathf.Clamp01(distanceToTarget / 3); // Clamping to ensure t is between 0 and 1
-            float easedT = Mathf.SmoothStep(0.5f, 0.5f, t); // Apply easing function
-            float easedMoveSpeed = Mathf.Lerp(enemySO.speed, 0.5f, easedT); // Interpolate movement speed based on eased t
+            //float t = 1f - Mathf.Clamp01(distanceToTarget / 3); // Clamping to ensure t is between 0 and 1
+            //float easedT = Mathf.SmoothStep(0.5f, 0.5f, t); // Apply easing function
+            //float easedMoveSpeed = Mathf.Lerp(enemySO.speed, 0.5f, easedT); // Interpolate movement speed based on eased t
 
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, easedMoveSpeed * Time.fixedDeltaTime);
-            validPositionFound = false;
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, enemySO.speed * Time.fixedDeltaTime);
             Destroy(target);
         }
         else
@@ -232,133 +226,115 @@ public class ChargeDiverMovement : MonoBehaviour
 
     void PickRandomLocation()
     {
-        bool validPositionFound = false;
+
         float currentClosestFish = float.MaxValue;
+        Fish currentClosestFishObject = null;
         bool lureFishInRange = false;
         List<Fish> fishInRangeList = new List<Fish>();
         List<LureClass> lureInRangeList = new List<LureClass>();
 
-
-        while (validPositionFound == false)
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, enemySO.attackRange);
+        if (hits != null)
         {
-            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, enemySO.attackRange);
-            if (hits != null)
+            foreach (Collider2D hit in hits)
             {
-                foreach (Collider2D hit in hits)
+                if (hit.TryGetComponent<Fish>(out Fish fish))
                 {
-                    if (hit.TryGetComponent<Fish>(out Fish fish))
-                    {
-                        fishInRangeList.Add(fish);
-                    }
+                    fishInRangeList.Add(fish);
                 }
+            }
 
-                foreach (Fish f in fishInRangeList)
+            foreach (Fish f in fishInRangeList)
+            {
+                if (f.TryGetComponent<LureClass>(out LureClass lure))
                 {
-                    if (f.TryGetComponent<LureClass>(out LureClass lure))
-                    {
-                        lureFishInRange = true;
-                        lureInRangeList.Add(lure);
-                    }
+                    lureFishInRange = true;
+                    lureInRangeList.Add(lure);
                 }
+            }
 
-                if (lureFishInRange)
+            if (lureFishInRange)
+            {
+                //iterate through lureList and find closest
+                foreach (LureClass lure in lureInRangeList)
                 {
-                    //iterate through lureList and find closest
-                    foreach (LureClass lure in lureInRangeList)
+                    float distanceOfFish = Mathf.Abs(Vector2.Distance(lure.transform.position, transform.position));
+                    if (distanceOfFish <= currentClosestFish)
                     {
-                        float distanceOfFish = Mathf.Abs(Vector2.Distance(lure.transform.position, transform.position));
-                        if (distanceOfFish <= currentClosestFish)
+                        currentClosestFish = distanceOfFish;
+                        if (lure.TryGetComponent<Fish>(out Fish f))
                         {
-                            currentClosestFish = distanceOfFish;
-                            float offsetMultiplier = Mathf.Clamp(distanceOfFish / enemySO.attackRange, 0.25f, 0.5f);
-                            Vector2 dashOffset = offsetMultiplier * lure.transform.position;
-
-                            // Clamp if we don't overshoot past the bounds. If we pass the bounds, we should just go straight to the fish
-                            if (
-                                targetPosition.x < tankBounds.min.x || targetPosition.x > tankBounds.max.x ||
-                                targetPosition.y < tankBounds.min.y || targetPosition.y > tankBounds.max.y
-                            )
-                            {
-                                // We got clamped, don't add anyoffset
-                                targetPosition = (Vector2)lure.transform.position;
-                            }
-                            else
-                            {
-                                targetPosition = (Vector2)lure.transform.position + dashOffset;
-                            }
-
-                            // targetPosition = new Vector2(Mathf.Clamp(targetPosition.x, tankBounds.min.x, tankBounds.max.x), Mathf.Clamp(targetPosition.y, tankBounds.min.y, tankBounds.max.y));
-                            if (target == null)
-                            {
-                                target = Instantiate(targetSprite, targetPosition, Quaternion.identity);
-                            }
-                            else
-                            {
-                                target.transform.position = lure.transform.position;
-                            }
+                            currentClosestFishObject = f;
                         }
                     }
                 }
-                else
-                {
-                    //no lure so find closest fish
-                    foreach (Fish f in fishInRangeList)
-                    {
-                        float distanceOfFish = Mathf.Abs(Vector2.Distance(f.transform.position, transform.position));
-                        if (distanceOfFish <= currentClosestFish)
-                        {
-                            currentClosestFish = distanceOfFish;
-                            float offsetMultipler = Mathf.Clamp(distanceOfFish / enemySO.attackRange, 0.25f, 0.5f);
-                            Vector2 dashOffset = offsetMultipler * f.transform.position;
+                AssignTargetedFish(currentClosestFish, currentClosestFishObject);
 
-                            // Clamp if we don't overshoot past the bounds. If we pass the bounds, we should just go straight to the fish
-                            if (
-                                targetPosition.x < tankBounds.min.x || targetPosition.x > tankBounds.max.x ||
-                                targetPosition.y < tankBounds.min.y || targetPosition.y > tankBounds.max.y
-                            )
-                            {
-                                // We got clamped, don't add anyoffset
-                                targetPosition = (Vector2)f.transform.position;
-                            }
-                            else
-                            {
-                                targetPosition = (Vector2)f.transform.position + dashOffset;
-                            }
-
-                            //targetPosition = new Vector2(Mathf.Clamp(targetPosition.x, tankBounds.min.x, tankBounds.max.x), Mathf.Clamp(targetPosition.y, tankBounds.min.y, tankBounds.max.y));
-                            if (target == null)
-                            {
-                                target = Instantiate(targetSprite, targetPosition, Quaternion.identity);
-                            }
-                            else
-                            {
-                                target.transform.position = f.transform.position;
-                            }
-                        }
-                    }
-                }
-                state = State.Aiming;
             }
             else
             {
-                //No fish in range do something
+                //no lure so find closest fish
+                foreach (Fish f in fishInRangeList)
+                {
+                    float distanceOfFish = Mathf.Abs(Vector2.Distance(f.transform.position, transform.position));
+                    if (distanceOfFish <= currentClosestFish)
+                    {
+                        currentClosestFish = distanceOfFish;
+                        currentClosestFishObject = f;
+                    }
+                }
+                AssignTargetedFish(currentClosestFish, currentClosestFishObject);
+                    
             }
-
-            validPositionFound = true;
+                
+        }
+        else
+        {
+            //No fish in range do something
+            // Set a timer for like 3s, and then just default to 0,0 (or at least closer to fish)
         }
 
     }
 
-    void PickFishToAttack()
+    void AssignTargetedFish(float currentClosestFishDistance, Fish currentClosestFishObject)
     {
-        Vector2 randomPosition = Vector2.zero;
-        bool validPositionFound = false;
+        if (currentClosestFishObject == null ) { return; }
 
-        Fish[] fishInTank = GameObject.FindObjectsOfType<Fish>();
-        while (!validPositionFound)
-        { 
-            
+        targetPosition = (Vector2)currentClosestFishObject.transform.position;
+
+        float offsetMultiplier = Mathf.Clamp(currentClosestFishDistance / enemySO.attackRange, 0.25f, 0.5f);
+        Vector2 direction = targetPosition - (Vector2)transform.position;
+        direction.Normalize();
+
+        targetPosition = targetPosition + direction * offsetMultiplier;
+       
+        // Check if we go minimum distance, if not add distance
+        float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
+        if (distanceToTarget < minChargeDistance)
+        {
+            targetPosition = targetPosition + (direction * minChargeDistance);
         }
+
+        // Clamp if we don't overshoot past the bounds. If we pass the bounds, we should just go straight to the fish
+        if (
+            targetPosition.x < tankBounds.min.x || targetPosition.x > tankBounds.max.x ||
+            targetPosition.y < tankBounds.min.y || targetPosition.y > tankBounds.max.y
+        )
+        {
+            // We got clamped, don't remove all offsets
+            targetPosition = (Vector2)currentClosestFishObject.transform.position;
+        }
+
+        if (target == null)
+        {
+            target = Instantiate(targetSprite, targetPosition, Quaternion.identity);
+        }
+        else
+        {
+            target.transform.position = currentClosestFishObject.transform.position;
+        }
+
+        state = State.Aiming;
     }
 
     void OnDrawGizmos()

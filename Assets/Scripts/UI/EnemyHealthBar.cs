@@ -12,7 +12,7 @@ public class EnemyHealthBar : MonoBehaviour
     [SerializeField] Image fillSlider;
     [SerializeField] Gradient healthColors;
     public bool healthBarIsActive = false;
-    Enemy enemyHPToShow;
+    public Enemy enemyHPToShow;
     
 
 
@@ -43,6 +43,12 @@ public class EnemyHealthBar : MonoBehaviour
         healthBarIsActive = true;
         gameObject.SetActive(true);
         enemyHPToShow = enemyPressed;
+    }
+
+    public void DeactivateHealthBar()
+    {
+        healthBarIsActive = false;
+        gameObject.SetActive(false);
     }
 
     //this should only be called when it takes damage, and should take a param but this is just testing

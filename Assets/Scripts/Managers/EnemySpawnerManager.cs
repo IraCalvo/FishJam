@@ -38,29 +38,33 @@ public class EnemySpawnerManager : MonoBehaviour
 
     private void Update()
     {
-        if (firstEnemySpawned == false)
+        if (enemyList.Count >= 1)
         {
-            if (firstEnemySpawnTimer <= 0)
+            if (firstEnemySpawned == false)
             {
-                SpawnEnemy();
-                firstEnemySpawned = true;
+                if (firstEnemySpawnTimer <= 0)
+                {
+                    SpawnEnemy();
+                    firstEnemySpawned = true;
+                }
+                else
+                {
+                    firstEnemySpawnTimer -= Time.deltaTime;
+                }
             }
             else
             {
-                firstEnemySpawnTimer -= Time.deltaTime;
+                if (enemySpawnTimer <= 0)
+                {
+                    SpawnEnemy();
+                }
+                else
+                {
+                    enemySpawnTimer -= Time.deltaTime;
+                }
             }
         }
-        else
-        {
-            if (enemySpawnTimer <= 0)
-            {
-                SpawnEnemy();
-            }
-            else 
-            {
-                enemySpawnTimer -= Time.deltaTime;
-            }
-        }
+
     }
 
     void SpawnEnemy()

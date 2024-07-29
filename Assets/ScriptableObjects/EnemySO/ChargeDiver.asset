@@ -18,3 +18,5 @@ MonoBehaviour:
   damage: 5
   attackRange: 10
   enemyPoolObjectType: 5
+  moneyToDrop: {fileID: 0}
+  sandDollarToDrop: {fileID: 1954054243205382334, guid: 0b3a15b463051c24d98604bf4fedbf81, type: 3}

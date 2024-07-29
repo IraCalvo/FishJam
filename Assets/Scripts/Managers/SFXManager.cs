@@ -11,7 +11,10 @@ public enum SoundType
     FishEat,
     CoinCollected,
     FishSold,
-    SandDollar
+    SandDollar,
+    ButtonPressed,
+    NotEnoughMoney,
+    Splash
 }
 
 public class SFXManager : MonoBehaviour
@@ -34,6 +37,20 @@ public class SFXManager : MonoBehaviour
         else
         {
             instance = this;
+        }
+
+        float musicVol = PlayerPrefs.GetFloat("Music Volume", 1f);
+
+        if (musicVol == 0)
+        {
+            musicSource.mute = true;
+        }
+        else
+        {
+            musicSource.mute = false;
+
+            float musicBeforeMuted = PlayerPrefs.GetFloat("Music Volume Before Muted", 1f);
+            musicSource.volume = musicBeforeMuted;
         }
     }
 
@@ -69,7 +86,8 @@ public class SFXManager : MonoBehaviour
     }
 
     public void ToggleMusic()
-    { 
+    {
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         if (musicSource.mute == false)
         {
             PlayerPrefs.SetFloat("Music Volume", 0f);
@@ -86,6 +104,7 @@ public class SFXManager : MonoBehaviour
 
     public void ToggleSFX()
     {
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         if (sfxSource.mute == false)
         {
             PlayerPrefs.SetFloat("SFX Volume", 0f);

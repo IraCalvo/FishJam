@@ -8,7 +8,7 @@ public class CloseButton : MonoBehaviour
 
     public void ButtonPressed()
     {
-        Debug.Log("Detected");
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         thingToClose.SetActive(false);
     }
 }

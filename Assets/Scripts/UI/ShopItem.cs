@@ -27,6 +27,10 @@ public class ShopItem : MonoBehaviour
             {
                 image.rectTransform.sizeDelta = new Vector2(32, 32);
             }
+            if (fish.fishSpecies == FishSpecies.Angler)
+            {
+                image.rectTransform.sizeDelta = new Vector2(64, 32);
+            }
         }
         else if (shopGameObject.TryGetComponent<Trophy>(out Trophy trophy))
         {

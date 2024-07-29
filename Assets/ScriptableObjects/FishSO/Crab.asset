@@ -18,7 +18,7 @@ MonoBehaviour:
   sellAmount: 99999
   moveSpeed: 0.5
   classes: 0100000002000000
-  foodType: 0
+  foodType: 3
   minLocationPickTimer: 1
   maxLocationPickTimer: 4
   damage: 10

@@ -33,6 +33,7 @@ public class PauseMenuManager : MonoBehaviour
 
     public void OnPause()
     {
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         if (pauseMenu.activeSelf == false)
         {
             pauseMenu.SetActive(true);
@@ -47,22 +48,26 @@ public class PauseMenuManager : MonoBehaviour
 
     public void OnResumeClicked()
     {
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
     }
 
     public void OnSettingsClicked()
     {
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         settingsMenu.SetActive(true);
     }
 
     public void OnExitClicked()
-    { 
+    {
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         confirmationExitPU.SetActive(true);
     }
 
     public void OnYesExitClicked()
     {
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         //TODO: add way to 'save' the state of the tank so they can return to it
         SceneManager.LoadScene(0);
         Time.timeScale = 1;
@@ -70,27 +75,32 @@ public class PauseMenuManager : MonoBehaviour
 
     public void OnNoExitClicked()
     {
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         confirmationExitPU.SetActive(false);
     }
 
     public void OnRestartClicked()
     {
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         confirmationRestartPU.SetActive(true);
     }
 
     public void OnRestartPUYesClicked()
-    { 
+    {
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
     }
 
     public void OnRestartPUNoClicked()
     {
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         confirmationRestartPU.SetActive(false);
     }
 
     public void OnKeyBindingsClicked()
     {
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         keyBindingsMenu.SetActive(true);
         audioSettingMenu.SetActive(false);
         graphicsSettingsMenu.SetActive(false);
@@ -98,6 +108,7 @@ public class PauseMenuManager : MonoBehaviour
 
     public void OnAudioSettingClicked()
     {
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         audioSettingMenu.SetActive(true);
         keyBindingsMenu.SetActive(false);
         graphicsSettingsMenu.SetActive(false);
@@ -105,6 +116,7 @@ public class PauseMenuManager : MonoBehaviour
 
     public void OnGraphicsSettingClicked()
     {
+        SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
         graphicsSettingsMenu.SetActive(true);
         keyBindingsMenu.SetActive(false);
         audioSettingMenu.SetActive(false);

@@ -169,8 +169,10 @@ public class CrabMovement : MonoBehaviour
         {
             rb.gravityScale = 0;
             rb.velocity = Vector3.zero;
+            PickRandomLocation();
+            crabState.SetStateTo(FishState.State.Normal);
 
-            Enemy[] enemiesInTank = FindObjectsOfType<Enemy>();
+            Enemy[] enemiesInTank = FindObjectsOfType<Enemy>(false);
             if (enemiesInTank.Length == 0)
             {
                 PickRandomLocation();

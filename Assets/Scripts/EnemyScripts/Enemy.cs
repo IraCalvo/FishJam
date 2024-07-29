@@ -42,6 +42,14 @@ public class Enemy : MonoBehaviour
                 money.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
             }
             PoolManager.instance.DeactivateObjectInPool(gameObject);
+
+            if (EnemyHealthBar.instance.healthBarIsActive)
+            { 
+                if(EnemyHealthBar.instance.enemyHPToShow.gameObject == this.gameObject)
+                {
+                    EnemyHealthBar.instance.DeactivateHealthBar();  
+                }
+            }
         }
 
         if (EnemyHealthBar.instance.healthBarIsActive)

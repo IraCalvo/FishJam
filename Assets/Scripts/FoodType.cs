@@ -10,5 +10,7 @@ public enum FoodType
     Crab,
     Pirahna,
     Shark,
-    Angler
+    Angler,
+    Snail,
+    Coin
 }
