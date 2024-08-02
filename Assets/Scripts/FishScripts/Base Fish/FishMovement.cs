@@ -122,8 +122,8 @@ public abstract class FishMovement : MonoBehaviour
 
     public virtual void MoveFishToFood()
     {
-
         List<GameObject> preferredFood = new List<GameObject>();
+        preferredFood.Clear();
 
         PoolManager poolManager = PoolManager.instance;
         foreach (FoodType preferredFoodType in fishSO.preferredFoods)
@@ -168,13 +168,15 @@ public abstract class FishMovement : MonoBehaviour
             return;
         }
 
-        Vector2 closestFoodPosition = closestFood.transform.position;
+        //Vector2 closestFoodPosition = closestFood.transform.position;
+        targetPosition = closestFood.transform.position;
+        SpriteDirection();
 
-        float distanceToTarget = Vector2.Distance(transform.position, closestFoodPosition);
+        float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
         float t = 1f - Mathf.Clamp01(distanceToTarget / 5); // Clamping to ensure t is between 0 and 1
         float easedT = Mathf.SmoothStep(0.5f, 0.5f, t); // Apply easing function
         float easedFishHungerMoveSpeed = Mathf.Lerp(fishSO.moveSpeed, 0f, easedT); // Interpolate movement speed based on eased t
-        transform.position = Vector2.MoveTowards(transform.position, closestFoodPosition, easedFishHungerMoveSpeed * Time.fixedDeltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, easedFishHungerMoveSpeed * Time.fixedDeltaTime);
     }
 
     public virtual void MoveFishToDeath()

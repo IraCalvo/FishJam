@@ -14,7 +14,8 @@ public enum SoundType
     SandDollar,
     ButtonPressed,
     NotEnoughMoney,
-    Splash
+    Splash,
+    Slurp
 }
 
 public class SFXManager : MonoBehaviour

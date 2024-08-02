@@ -10,6 +10,7 @@ public class EnemySO : ScriptableObject
     public float speed;
     public int damage;
     public float attackRange;
+    public float attackCD;
     public PoolObjectType enemyPoolObjectType;
     public GameObject moneyToDrop;
     public GameObject sandDollarToDrop;

@@ -16,7 +16,7 @@ MonoBehaviour:
   fishPoolObjectType: 4
   price: 350
   sellAmount: 200
-  moveSpeed: 0.2
+  moveSpeed: 1
   classes: 0100000005000000
   foodType: 7
   minLocationPickTimer: 4
@@ -26,10 +26,10 @@ MonoBehaviour:
   attackRange: 0
   combatMoveSpeed: 0
   attackCooldown: 0
-  preferredFoods: 00000000
-  foodDetectionRange: 10
-  hungerTimerMax: 15
-  dieFromHungerTimerMax: 15
+  preferredFoods: 08000000
+  foodDetectionRange: 20
+  hungerTimerMax: 20
+  dieFromHungerTimerMax: 20
   minMoneyTimer: 0
   maxMoneyTimer: 0
   moneyToDrop: {fileID: 2442986486265758773, guid: 08a796f1ed82d3948addd12212214581, type: 3}

@@ -8,7 +8,7 @@ public class SnailHunger : MonoBehaviour
     private FishSO fishSO;
     private FishState fishState;
     private float dieFromHungerTimer;
-    private int coinsToEatToConvert;
+    [SerializeField] private int coinsToEatToConvert;
     private int coinsEaten;
     private int pearlWorth;
     public int moneyToTakeAwayFromInitialCollect;
@@ -45,7 +45,7 @@ public class SnailHunger : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<Resource>(out Resource resource))
         { 
-            if(resource.resourceSO.resourceName != "Pearl")
+            if(resource.resourceSO.resourceName != "Pearl" && resource.didClick == false)
             {
                 FeedSnail(resource);
             }
@@ -60,10 +60,12 @@ public class SnailHunger : MonoBehaviour
         PoolManager.instance.DeactivateObjectInPool(resource.gameObject);
         dieFromHungerTimer = fishSO.hungerTimerMax;
         coinsEaten++;
+        //add eating sfx here
+        SFXManager.instance.PlaySFX(SoundType.Slurp);
         if (coinsEaten >= coinsToEatToConvert)
         {
             GameObject pearl = PoolManager.instance.GetPoolObject(fishSO.moneyToDrop);
-            resource.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
+            pearl.transform.SetPositionAndRotation(gameObject.transform.position, Quaternion.identity);
             pearl.GetComponent<Pearl>().resourceSO.resourceValue = pearlWorth;
             pearlWorth = 0;
             coinsEaten = 0;

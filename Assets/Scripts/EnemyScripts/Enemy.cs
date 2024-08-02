@@ -2,9 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IClickable
 {
+    public void OnClick()
+    {
+        EnemyHealthBar.instance.ShowHealthBar(this);
+    }
+
     public EnemySO enemySO;
     public float currentHP;
 

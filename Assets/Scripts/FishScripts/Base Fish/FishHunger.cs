@@ -60,7 +60,8 @@ public class FishHunger : MonoBehaviour
         {
             PoolManager.instance.DeactivateObjectInPool(gameObject);
         }
-        
+
+        SFXManager.instance.PlaySFX(SoundType.FishEat);
         fishState.SetStateTo(FishState.State.Normal);
     }
 

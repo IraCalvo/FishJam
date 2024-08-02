@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-//using TreeEditor;
 using UnityEngine;
 
 public class CrabCombat : MonoBehaviour
@@ -32,7 +31,6 @@ public class CrabCombat : MonoBehaviour
 
     void ChooseEnemyToTarget()
     {
-        Debug.Log("Enemy Detected");
         Enemy[] enemiesInTank = FindObjectsOfType<Enemy>();
         if (enemiesInTank.Length > 0)
         {
@@ -59,7 +57,6 @@ public class CrabCombat : MonoBehaviour
     {
         if (targetEnemy != null)
         {
-            Debug.Log("Trying to move to enemy");
             Vector2 targetPos = new(targetEnemy.transform.position.x, transform.position.y);
             transform.position = Vector2.Lerp(transform.position, targetPos, crabSO.combatMoveSpeed * Time.fixedDeltaTime);
         }

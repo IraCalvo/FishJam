@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using JetBrains.Annotations;
+using Unity.VisualScripting;
 
 public class FishList : MonoBehaviour
 {
     public static FishList instance;
     public bool fishListIsActive;
     public List<TextMeshProUGUI> fishAmountText;
+    public List<Image> fishRenders;
 
     private void Awake()
     {
@@ -53,9 +54,13 @@ public class FishList : MonoBehaviour
                 {
                     fishAmountText[s].gameObject.SetActive(true);
                     int fishTotal = FindFishInTank(fish.fishSO.fishName);
+                    Debug.Log(fishTotal);
 
-                    fishAmountText[s].text = 
-                        $"{fish.fishSO.fishName}: {fishTotal}";
+                    fishAmountText[s].text = $":{fishTotal}";
+                    //$"{fish.fishSO.fishName}: {fishTotal}";
+
+                    fishRenders[s].sprite = shopItem.image.sprite;
+
                 }
                 else
                 {

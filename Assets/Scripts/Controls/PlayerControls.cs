@@ -37,22 +37,19 @@ public class PlayerControls : MonoBehaviour
                         topmostResource = resourceScript;
                     }
                 }
-                if (hit.collider.CompareTag("Enemy"))
+
+                if (hit.collider.TryGetComponent<IClickable>(out var clickable))
                 {
-                    Debug.Log("Detected enemy");
-                    Enemy enemy = hit.collider.GetComponent<Enemy>();
-                    if (enemy != null)
-                    {
-                        EnemyHealthBar.instance.ShowHealthBar(enemy);
-                    }
+                    IClickable clickableObject = clickable;
+                    clickableObject.OnClick();
                 }
-                else
+
+                if (!hit.collider.CompareTag("Enemy"))
                 {
                     EnemyHealthBar.instance.healthBarIsActive = false;
                     EnemyHealthBar.instance.gameObject.SetActive(false);
                 }
             }
-
 
             // If a resource was found, perform the action on the topmost resource
             if (topmostResource != null)
@@ -60,6 +57,7 @@ public class PlayerControls : MonoBehaviour
                 topmostResource.ResourceClicked();
             }
         }
+
     }
 
     public void OnUseItem(CallbackContext callbackContext)

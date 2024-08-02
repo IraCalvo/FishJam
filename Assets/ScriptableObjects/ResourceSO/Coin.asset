@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f64872b14164d4f82b12938ede2c54, type: 3}
   m_Name: Coin
   m_EditorClassIdentifier: 
-  resourceName: 'Coin '
-  resourceValue: 25
+  resourceName: Coin
+  resourceValue: 5
   resourcePool: 1
   disappearTime: 4

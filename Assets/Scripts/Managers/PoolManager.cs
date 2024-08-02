@@ -10,7 +10,8 @@ public enum PoolObjectType
     DamagePopUp,
     BloodFX,
     Fish,
-    Enemy
+    Enemy,
+    Projectile
 }
 
 [Serializable]

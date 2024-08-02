@@ -7,7 +7,7 @@ using UnityEngine;
 public abstract class Resource : MonoBehaviour 
 {
     public ResourceSO resourceSO;
-    private bool didClick = false;
+    public bool didClick = false;
     private float timer;
     private float moveSpeed = 50;
 

@@ -9,7 +9,7 @@ public class ShopItem : MonoBehaviour
 
     [SerializeField] public GameObject shopGameObject;
 
-    [SerializeField] Image image;
+    public Image image;
     [SerializeField] TextMeshProUGUI price;
 
     private void Start()

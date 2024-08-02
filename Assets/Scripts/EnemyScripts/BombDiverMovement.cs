@@ -4,28 +4,27 @@ using UnityEngine;
 
 public class BombDiverMovement : MonoBehaviour
 {
-
-    public float movementSpeed;
-    public float nextAttackTimer;
-    public List<BombDiverBomb> bombDiverBombList;
+    Enemy chickenEnemy;
+    [SerializeField] BombDiverBomb bombPrefab;
 
     private Rigidbody2D rb;
-    private Collider2D collider;
+    private SpriteRenderer sr;
 
     private bool walkingRight;
     private float nextAttackTimerInternal;
 
     private void Awake()
     {
+        chickenEnemy = GetComponent<Enemy>();   
         rb = GetComponent<Rigidbody2D>();
-        collider = GetComponent<Collider2D>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         walkingRight = true;
-        nextAttackTimerInternal = nextAttackTimer;
+        nextAttackTimerInternal = chickenEnemy.enemySO.attackCD;
     }
 
     // Update is called once per frame
@@ -37,15 +36,17 @@ public class BombDiverMovement : MonoBehaviour
 
     void Move()
     {
-        rb.velocity = new Vector2(walkingRight ? movementSpeed : -movementSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(walkingRight ? chickenEnemy.enemySO.speed : -chickenEnemy.enemySO.speed, rb.velocity.y);
 
         if (walkingRight && transform.position.x >= 15.0)
         {
             walkingRight = false;
+            sr.flipX = true;
         }
         else if (!walkingRight && transform.position.x <= -15.0)
         {
             walkingRight = true;
+            sr.flipX = false;
         }
     }
 
@@ -54,7 +55,7 @@ public class BombDiverMovement : MonoBehaviour
         if (nextAttackTimerInternal <= 0.0f)
         {
             SpawnBomb();
-            nextAttackTimerInternal = nextAttackTimer;
+            nextAttackTimerInternal = chickenEnemy.enemySO.attackCD;
         }
         else
         {
@@ -64,9 +65,7 @@ public class BombDiverMovement : MonoBehaviour
 
     void SpawnBomb()
     {
-        int randomBombIndex = Random.Range(0, bombDiverBombList.Count);
-        BombDiverBomb randomBomb = bombDiverBombList[randomBombIndex];
-        randomBomb.Spawn();
+        PoolManager.instance.GetPoolObject(bombPrefab.poolType);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -77,6 +76,4 @@ public class BombDiverMovement : MonoBehaviour
             rb.velocity = Vector3.zero;
         }
     }
-
-
 }

@@ -88,26 +88,9 @@ public class CrabMovement : MonoBehaviour
         }
     }
 
-    void MoveCrabToSpawn()
-    {
-        if (Vector2.Distance(transform.position, targetPosition) > 0.1f)
-        {
-            //float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
-            //float t = 1f - Mathf.Clamp01(distanceToTarget / 10); // Clamping to ensure t is between 0 and 1
-            //float easedT = Mathf.SmoothStep(0f, 1f, t); // Apply easing function
-            //float spawnMoveSpeed = Mathf.Lerp(crabSO.moveSpeed * 6, 0f, easedT); // Interpolate movement speed based on eased t
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, crabSO.moveSpeed * Time.fixedDeltaTime);
-        }
-        else 
-        {
-            crabState.SetStateTo(FishState.State.Normal);
-            PickRandomLocation();
-        }
-    }
-
     void MoveCrabToFood()
     {
-        Fish[] fish = FindObjectsOfType<Fish>();
+        Fish[] fish = FindObjectsOfType<Fish>(false);
         List<Fish> preferredFood = new List<Fish>();
         foreach (Fish f in fish)
         {
@@ -142,7 +125,7 @@ public class CrabMovement : MonoBehaviour
         float t = 1f - Mathf.Clamp01(distanceToTarget / foodMoveSpeedEase);
         float easedT = Mathf.SmoothStep(0f, 1f, t);
         float easedCrabHungerMoveSpeed = Mathf.Lerp(crabSO.moveSpeed, 0f, easedT);
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, easedCrabHungerMoveSpeed);
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, easedCrabHungerMoveSpeed * Time.deltaTime);
 
         if (Mathf.Abs(transform.position.x - targetPosition.x) < 1f)
         {

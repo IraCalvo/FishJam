@@ -21,6 +21,7 @@ public class SnailMovement : MonoBehaviour
     GameObject tank;
     Bounds tankBounds;
     Material material;
+    List<GameObject> preferredFood = new List<GameObject>();
 
     private void Awake()
     {
@@ -41,7 +42,7 @@ public class SnailMovement : MonoBehaviour
         switch (snailState.GetCurrentState())
         {
             case FishState.State.Normal:
-                MoveSnail();
+                MoveSnailToFood();
                 break;
             case FishState.State.Spawning:
                 break;
@@ -67,7 +68,6 @@ public class SnailMovement : MonoBehaviour
         {
             if (Vector2.Distance(transform.position, targetPosition) > 0.1f)
             {
-                float distanceToTarget = Vector2.Distance(targetPosition, targetPosition);
                 transform.position = Vector2.MoveTowards(transform.position, targetPosition, snailSO.moveSpeed * Time.fixedDeltaTime);
             }
             else
@@ -78,27 +78,25 @@ public class SnailMovement : MonoBehaviour
         }
         else
         {
-            snailState.SetStateTo(FishState.State.Normal);
-            PickRandomLocation();
+            nextLocationTimer -= Time.fixedDeltaTime;
         }
     }
 
     void MoveSnailToFood()
     {
-        List<GameObject> preferredFood = new List<GameObject>();
-
         PoolManager poolManager = PoolManager.instance;
+        preferredFood.Clear();
         foreach (FoodType preferredFoodType in snailSO.preferredFoods)
         {
             string foodToResourceName = preferredFoodType.ToString();
             PoolInfo pool = poolManager.GetPoolByResourceName(foodToResourceName);
-            //foreach (GameObject go in pool.pool)
-            //{
-            //    if (go.activeInHierarchy)
-            //    {
-            //        preferredFood.Add(go);
-            //    }
-            //}
+            foreach (GameObject go in pool.pool)
+            {
+                if (go.activeInHierarchy)
+                {
+                    preferredFood.Add(go);
+                }
+            }
         }
 
         if (preferredFood.Count == 0)
@@ -136,7 +134,7 @@ public class SnailMovement : MonoBehaviour
         float t = 1f - Mathf.Clamp01(distanceToTarget / snailSO.moveSpeed);
         float easedT = Mathf.SmoothStep(0f, 1f, t);
         float easedSnailMS = Mathf.Lerp(snailSO.moveSpeed, 0f, easedT);
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, easedSnailMS);
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, easedSnailMS * Time.deltaTime);
     }
 
     void MoveFishToDeath()
@@ -149,9 +147,9 @@ public class SnailMovement : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        float t = 1f - Mathf.Clamp01(distanceToTarget / 1); // Clamping to ensure t is between 0 and 1
-        float easedT = Mathf.SmoothStep(0.5f, 1f, t); // Apply easing function
-        float easedFishHungerMoveSpeed = Mathf.Lerp(snailSO.moveSpeed, 1f, easedT); // Interpolate movement speed based on eased t
+        float t = 1f - Mathf.Clamp01(distanceToTarget / 1);
+        float easedT = Mathf.SmoothStep(0.5f, 1f, t);
+        float easedFishHungerMoveSpeed = Mathf.Lerp(snailSO.moveSpeed, 1f, easedT);
         transform.position = Vector2.MoveTowards(transform.position, deathPosition, easedFishHungerMoveSpeed * Time.fixedDeltaTime);
 
         sr.material.SetFloat("_DeadTimer", Mathf.Clamp(distanceToTarget, 0, 1));
@@ -193,13 +191,14 @@ public class SnailMovement : MonoBehaviour
             rb.gravityScale = 0;
             rb.velocity = Vector3.zero;
             PickRandomLocation();
-            snailState.SetStateTo(FishState.State.Hungry);
+            snailState.SetStateTo(FishState.State.Normal);
         }
         if (collision.gameObject.TryGetComponent<Resource>(out Resource resource))
         {
             if (resource.resourceSO.resourceName != "Pearl" && resource.resourceSO.resourceName != "Sand Dollar")
             {
-                PickRandomLocation();
+                preferredFood.Remove(collision.gameObject);
+                MoveSnailToFood();
             }
         }
     }
