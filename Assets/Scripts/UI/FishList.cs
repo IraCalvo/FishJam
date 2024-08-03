@@ -60,7 +60,19 @@ public class FishList : MonoBehaviour
                     //$"{fish.fishSO.fishName}: {fishTotal}";
 
                     fishRenders[s].sprite = shopItem.image.sprite;
-
+                    if (fish.fishSpecies == FishSpecies.Angler)
+                    {
+                        RectTransform rt = fishRenders[s].GetComponent<RectTransform>();
+                        rt.localScale = new Vector3(2.75f, 1.75f, 1);
+                        rt.localPosition = new Vector3(-120, rt.localPosition.y, rt.localPosition.z);
+                    }
+                    if (fish.fishSpecies == FishSpecies.Crab 
+                        || fish.fishSpecies == FishSpecies.Shark 
+                        || fish.fishSpecies == FishSpecies.Pirahna)
+                    {
+                        RectTransform rt = fishRenders[s].GetComponent<RectTransform>();
+                        rt.localScale = new Vector3(1.5f, 1.5f, 1);
+                    }
                 }
                 else
                 {
@@ -73,6 +85,7 @@ public class FishList : MonoBehaviour
     public int FindFishInTank(string fishToFind)
     {
         int fishCount = 0;
+
         for (int i = 0; i < GameManager.instance.activeFish.Count; i++)
         {
             if (GameManager.instance.activeFish[i].fishSO.fishName == fishToFind)
@@ -84,3 +97,15 @@ public class FishList : MonoBehaviour
         return fishCount;
     }
 }
+
+//PoolInfo fishpoolInfo = PoolManager.instance.GetPoolByFishName(fishToFind);
+//if (fishpoolInfo != null)
+//{
+//    foreach (GameObject fish in fishpoolInfo.pool)
+//    {
+//        if (fish.activeInHierarchy)
+//        {
+//            fishCount++;
+//        }
+//    }
+//}

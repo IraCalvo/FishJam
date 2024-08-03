@@ -14,6 +14,17 @@ public class Enemy : MonoBehaviour, IClickable
     public EnemySO enemySO;
     public float currentHP;
 
+    [Header("Defeat Anim Numbers ")]
+    SpriteRenderer sr;
+    [SerializeField] private float sinkLimit = 4.5f;
+    [SerializeField] private float sinkSpeed = 1f;
+    [SerializeField] private float fadeSpeed = 0.5f;
+
+    private void Awake()
+    {
+        sr = GetComponent<SpriteRenderer>();
+    }
+
     private void OnEnable()
     {
         currentHP = enemySO.MaxHP;
@@ -27,27 +38,23 @@ public class Enemy : MonoBehaviour, IClickable
         {
             EnemySpawnerManager.EnemyDefeated();
         }
+
+        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
     }
 
     public void TakeDamage(int damageToTake)
     {
-        currentHP -= damageToTake;
-        GameObject damagePopUp = PoolManager.instance.GetPoolObject(PoolObjectType.DamagePopUp);
-        damagePopUp.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
-        Debug.Log("Enemy Took damage here is Y pos of damage pop up:"  + damagePopUp.transform.position.y);
-        damagePopUp.GetComponent<DamagePopup>().Setup(damageToTake);
+        if (currentHP > 0)
+        { 
+            currentHP -= damageToTake;
+            GameObject damagePopUp = PoolManager.instance.GetPoolObject(PoolObjectType.DamagePopUp);
+            damagePopUp.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
+            damagePopUp.GetComponent<DamagePopup>().Setup(damageToTake);
+        }
 
         if (currentHP <= 0)
         {
-            GameObject sandDollar = PoolManager.instance.GetPoolObject(enemySO.sandDollarToDrop);
-            sandDollar.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
-
-            if (enemySO.moneyToDrop != null)
-            {
-                GameObject money = PoolManager.instance.GetPoolObject(enemySO.moneyToDrop);
-                money.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
-            }
-            PoolManager.instance.DeactivateObjectInPool(gameObject);
+            StartCoroutine(EnemyDefeatedAnimCoroutine());
 
             if (EnemyHealthBar.instance.healthBarIsActive)
             { 
@@ -62,5 +69,31 @@ public class Enemy : MonoBehaviour, IClickable
         { 
             EnemyHealthBar.instance.UpdateHealthBar();
         }
+    }
+
+    IEnumerator EnemyDefeatedAnimCoroutine()
+    {
+        GameObject sandDollar = PoolManager.instance.GetPoolObject(enemySO.sandDollarToDrop);
+        sandDollar.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
+
+        if (enemySO.moneyToDrop != null)
+        {
+            GameObject money = PoolManager.instance.GetPoolObject(enemySO.moneyToDrop);
+            money.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
+        }
+
+        float elapsedTime = 0f;
+        Color color = sr.color;
+        float startYPos = transform.position.y;
+
+        while (transform.position.y > startYPos - sinkLimit)
+        {
+            transform.Translate(Vector2.down * sinkSpeed * Time.deltaTime, Space.World);
+            sr.color = new Color(color.r, color.g, color.b, Mathf.Lerp(1f, 0f, elapsedTime / fadeSpeed));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        PoolManager.instance.DeactivateObjectInPool(gameObject);
     }
 }

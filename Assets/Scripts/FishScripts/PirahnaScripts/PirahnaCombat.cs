@@ -48,7 +48,7 @@ public class PirahnaCombat : MonoBehaviour
             foreach (Enemy enemy in enemiesInTank)
             {
                 float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
-                if (distanceToEnemy < shortestDistance)
+                if (distanceToEnemy < shortestDistance && enemy.currentHP > 0)
                 {
                     shortestDistance = distanceToEnemy;
                     closestEnemy = enemy;

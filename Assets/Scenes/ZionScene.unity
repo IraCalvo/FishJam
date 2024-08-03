@@ -1642,14 +1642,14 @@ RectTransform:
   m_GameObject: {fileID: 139943979}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
+  m_LocalScale: {x: 2, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1328292961}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: -47.5, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &139943981
@@ -5371,14 +5371,14 @@ RectTransform:
   m_GameObject: {fileID: 549706430}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
+  m_LocalScale: {x: 2, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1328292961}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: -47.5, y: -310}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &549706432
@@ -10073,14 +10073,14 @@ RectTransform:
   m_GameObject: {fileID: 1257351592}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
+  m_LocalScale: {x: 2, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1328292961}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: -47.5, y: -440}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1257351594
@@ -11060,7 +11060,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328292960}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
   m_Name: 
@@ -11478,14 +11478,14 @@ RectTransform:
   m_GameObject: {fileID: 1385186513}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
+  m_LocalScale: {x: 2, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1328292961}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: -47.5, y: -570}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1385186515
@@ -12678,14 +12678,14 @@ RectTransform:
   m_GameObject: {fileID: 1479610672}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
+  m_LocalScale: {x: 2, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1328292961}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: -47.5, y: -180}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1479610674
@@ -22329,7 +22329,7 @@ MonoBehaviour:
   - name: GoldFish
     type: 4
     foodType: 2
-    amountToPool: 5
+    amountToPool: 200
     prefabToPool: {fileID: 5415256789493638983, guid: a6c593db0bcf3d84fa372533b14be184, type: 3}
     container: {fileID: 1982218738}
     willGrow: 1
@@ -22337,7 +22337,7 @@ MonoBehaviour:
   - name: Piranha
     type: 4
     foodType: 4
-    amountToPool: 100
+    amountToPool: 200
     prefabToPool: {fileID: 5415256789493638983, guid: 534c8f0d8c09541aeb06cd8ac2564f7f, type: 3}
     container: {fileID: 1831685640}
     willGrow: 1
@@ -22345,7 +22345,7 @@ MonoBehaviour:
   - name: Crab
     type: 4
     foodType: 3
-    amountToPool: 100
+    amountToPool: 200
     prefabToPool: {fileID: 6518210591975832111, guid: 7d215a26e1320424f9668d50db202c49, type: 3}
     container: {fileID: 873789508}
     willGrow: 1
@@ -22353,7 +22353,7 @@ MonoBehaviour:
   - name: Shark
     type: 4
     foodType: 5
-    amountToPool: 30
+    amountToPool: 200
     prefabToPool: {fileID: 7366362955333346453, guid: dc3bfc3aac8c91748ae28c175f9671bf, type: 3}
     container: {fileID: 1578508661}
     willGrow: 1
@@ -22361,7 +22361,7 @@ MonoBehaviour:
   - name: Angler
     type: 4
     foodType: 6
-    amountToPool: 20
+    amountToPool: 200
     prefabToPool: {fileID: 1161076997416108302, guid: 050ef6f278eb85a4ea52e7e2852d3113, type: 3}
     container: {fileID: 1017890774}
     willGrow: 1
@@ -22369,7 +22369,7 @@ MonoBehaviour:
   - name: Snail
     type: 4
     foodType: 7
-    amountToPool: 20
+    amountToPool: 200
     prefabToPool: {fileID: 4305269419967585295, guid: f34076ccccb0d6c4c88bccdd77829f5c, type: 3}
     container: {fileID: 2140417257}
     willGrow: 1

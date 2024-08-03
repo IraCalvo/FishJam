@@ -51,6 +51,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySO: {fileID: 11400000, guid: b70bfd73bf7bbba4286932d76255ae40, type: 2}
   currentHP: 0
+  sinkLimit: 8
+  sinkSpeed: 0.5
+  fadeSpeed: 0.5
 --- !u!114 &4509416109203791703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,6 +74,7 @@ MonoBehaviour:
   maxChargeDistance: 15
   didAim: 0
   targetSprite: {fileID: 8830859093895283578, guid: 2046e6119ae3f6a48b3845aab9ef7f02, type: 3}
+  targets: []
 --- !u!212 &7939992843742124470
 SpriteRenderer:
   m_ObjectHideFlags: 0

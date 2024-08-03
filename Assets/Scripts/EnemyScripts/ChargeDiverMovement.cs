@@ -16,6 +16,7 @@ public class ChargeDiverMovement : MonoBehaviour
         Charging,
         Attacking,
         Resetting,
+        Dead
     }
 
     [SerializeField] State state;
@@ -78,7 +79,12 @@ public class ChargeDiverMovement : MonoBehaviour
             case State.Resetting:
                 Reset();
                 break;
+            case State.Dead:
+                Reset();
+                break;
         }
+
+        CheckDeath();
     }
 
     void Move()
@@ -325,7 +331,7 @@ public class ChargeDiverMovement : MonoBehaviour
             targetPosition = (Vector2)currentClosestFishObject.transform.position;
         }
 
-        if (target == null)
+        if (target == null && enemy.currentHP > 0)
         {
             target = Instantiate(targetSprite, targetPosition, Quaternion.identity);
         }
@@ -346,5 +352,13 @@ public class ChargeDiverMovement : MonoBehaviour
 
         // Draw the circle using Gizmos.DrawWireSphere
         Gizmos.DrawWireSphere(center, enemySO.attackRange);
+    }
+
+    void CheckDeath()
+    {
+        if (enemy.currentHP <= 0)
+        {
+            state = State.Dead;
+        }
     }
 }
