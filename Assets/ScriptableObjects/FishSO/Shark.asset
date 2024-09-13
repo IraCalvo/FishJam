@@ -18,15 +18,15 @@ MonoBehaviour:
   sellAmount: 99999
   moveSpeed: 12
   classes: 0300000000000000
-  foodType: 5
+  foodType: 6
   minLocationPickTimer: 2
   maxLocationPickTimer: 5
   damage: 15
   hp: 20
-  attackRange: 9
+  attackRange: 10
   combatMoveSpeed: 15
   attackCooldown: 1.5
-  preferredFoods: 0400000002000000
+  preferredFoods: 0100000003000000040000000500000007000000
   foodDetectionRange: 12
   hungerTimerMax: 1
   dieFromHungerTimerMax: 10

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class CloseButton : MonoBehaviour
 {
-    [SerializeField] GameObject thingToClose;
+    [SerializeField] List<GameObject> thingsToClose;
 
     public void ButtonPressed()
     {
         SFXManager.instance.PlaySFX(SoundType.ButtonPressed);
-        thingToClose.SetActive(false);
+        for (int i = 0; i < thingsToClose.Count; i++)
+        {
+            thingsToClose[i].SetActive(false);
+        }
     }
 }

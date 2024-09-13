@@ -58,7 +58,6 @@ public abstract class FishMovement : MonoBehaviour
                 MoveFishToFood();
                 break;
             case FishState.State.Combat:
-                MoveFish();
                 break;
             case FishState.State.Dead:
                 if (!didDie)
@@ -66,6 +65,8 @@ public abstract class FishMovement : MonoBehaviour
                     SetDeathPosition();
                 }
                 MoveFishToDeath();
+                break;
+            case FishState.State.Hooked:
                 break;
         }
         SpriteDirection();
@@ -224,7 +225,7 @@ public abstract class FishMovement : MonoBehaviour
     private void SpriteDirection()
     {
         //TODO: implement this later as 'healthier'
-        if (fishSO.fishName == "Piranha" && fishState.GetCurrentState() == FishState.State.Combat)
+        if (fishSO.fishName == "Piranha"|| fishSO.fishName == "Shark" && fishState.GetCurrentState() == FishState.State.Combat)
         {
             return;
         }

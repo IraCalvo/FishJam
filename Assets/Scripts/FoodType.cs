@@ -5,6 +5,7 @@ using UnityEngine;
 public enum FoodType
 {
     None,
+    FishHook,
     FishFood,
     GoldFish,
     Crab,

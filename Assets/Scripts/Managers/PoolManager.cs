@@ -11,7 +11,8 @@ public enum PoolObjectType
     BloodFX,
     Fish,
     Enemy,
-    Projectile
+    Projectile,
+    FishHook
 }
 
 [Serializable]

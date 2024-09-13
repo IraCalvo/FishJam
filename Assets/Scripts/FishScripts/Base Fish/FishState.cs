@@ -10,7 +10,8 @@ public class FishState : MonoBehaviour
         Spawning,
         Hungry,
         Combat,
-        Dead
+        Dead,
+        Hooked
     }
 
     [SerializeField] private State currentState;

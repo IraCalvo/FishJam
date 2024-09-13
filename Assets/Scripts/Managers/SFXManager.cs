@@ -81,6 +81,9 @@ public class SFXManager : MonoBehaviour
             if (sounds.soundType == soundToPlay)
             {
                 int randomizedSound = UnityEngine.Random.Range(0, sounds.clip.Length);
+                //float randomPitch = UnityEngine.Random.Range(0.95f, 1f);
+
+                //sfxSource.pitch = randomPitch;
                 sfxSource.PlayOneShot(sounds.clip[randomizedSound], sounds.volume * PlayerPrefs.GetFloat("SFX Volume", 1f));
             }
         }

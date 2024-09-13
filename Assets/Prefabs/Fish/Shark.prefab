@@ -14,12 +14,12 @@ GameObject:
   - component: {fileID: 2449403003858839395}
   - component: {fileID: -7855665249500747260}
   - component: {fileID: 9138529416738297863}
+  - component: {fileID: 3822102058438819261}
+  - component: {fileID: 5179771941013761909}
   - component: {fileID: 6240926310361212765}
   - component: {fileID: 4218287692860308468}
   - component: {fileID: 1312528014891980434}
   - component: {fileID: 7886595003683102367}
-  - component: {fileID: 3822102058438819261}
-  - component: {fileID: 5179771941013761909}
   m_Layer: 0
   m_Name: Shark
   m_TagString: Untagged
@@ -112,6 +112,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b05439a0fdd2af4eb4e000c5fc82427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3822102058438819261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7366362955333346453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd4546cb706f8cb4ba4d77208030b85e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fish: {fileID: 0}
+  fishSO: {fileID: 0}
+  fishState: {fileID: 0}
+  targetPosition: {x: 0, y: 0}
+  nextLocationTimer: 0
+--- !u!114 &5179771941013761909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7366362955333346453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1bb31ae9b81f374e83fa906306c0bb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fish: {fileID: 0}
+  fishSO: {fileID: 0}
+  fishState: {fileID: 0}
+  targetPosition: {x: 0, y: 0}
+  nextLocationTimer: 0
+  positionAroundEnemy: {x: 0, y: 0}
+  oppositePoint: {x: 0, y: 0}
 --- !u!212 &6240926310361212765
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -247,34 +283,3 @@ CapsuleCollider2D:
   m_Offset: {x: 0.041912198, y: -0.049202394}
   m_Size: {x: 1.3366762, y: 0.6040969}
   m_Direction: 1
---- !u!114 &3822102058438819261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7366362955333346453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd4546cb706f8cb4ba4d77208030b85e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fish: {fileID: 0}
-  fishSO: {fileID: 0}
-  fishState: {fileID: 0}
-  targetPosition: {x: 0, y: 0}
-  nextLocationTimer: 0
---- !u!114 &5179771941013761909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7366362955333346453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1bb31ae9b81f374e83fa906306c0bb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  positionAroundEnemy: {x: 0, y: 0}
-  oppositePoint: {x: 0, y: 0}

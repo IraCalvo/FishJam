@@ -4,7 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PirahnaCombat : MonoBehaviour
+public class PirahnaCombat : FishMovement
 {
     Fish pirahna;
     FishSO pirahnaSO;
@@ -19,6 +19,16 @@ public class PirahnaCombat : MonoBehaviour
     [SerializeField] Vector2 positionAroundEnemy;
     [SerializeField] Vector2 oppositePoint;
     SpriteRenderer sr;
+
+    public override void AbstractAwake()
+    {
+
+    }
+
+    public override void AbstractFixedUpdate()
+    {
+
+    }
 
     private void Awake()
     {
@@ -70,6 +80,7 @@ public class PirahnaCombat : MonoBehaviour
             if (pickedPos == false)
             {
                 float randomAngle = Random.Range(0f, Mathf.PI * 2);
+                //TODO: add away to shorten attack range/check when its out of bounds and just make the attack in bounds
                 float posX = targetEnemy.transform.position.x + Mathf.Cos(randomAngle) * pirahnaSO.attackRange;
                 float posY = targetEnemy.transform.position.y + Mathf.Sin(randomAngle) * pirahnaSO.attackRange;
                 positionAroundEnemy = new Vector2(posX, posY);
@@ -110,6 +121,7 @@ public class PirahnaCombat : MonoBehaviour
 
         if (Vector2.Distance(transform.position,oppositePoint) >= 0.1f && canAttack)
         {
+            Debug.Log(Vector2.Distance(transform.position, oppositePoint));
             transform.position = Vector2.MoveTowards(transform.position, oppositePoint, pirahnaSO.combatMoveSpeed * Time.fixedDeltaTime);
             isAttacking = true;
             SpriteDirection(oppositePoint);
@@ -120,7 +132,7 @@ public class PirahnaCombat : MonoBehaviour
             attackRangeReached = false;
             isAttacking = false;
             oppositePointPicked = false;
-            CooldownTimerCoroutine();
+            StartCoroutine(CooldownTimerCoroutine());
         }
 
     }
