@@ -127,6 +127,7 @@ MonoBehaviour:
   defaultMaterial: {fileID: 2100000, guid: 5097b1ae8c82b4a47a825cb1bdd09783, type: 2}
   selectedMaterial: {fileID: -876546973899608171, guid: 2cd5d15b925ad9744bc54170c183464e, type: 3}
   hungerMaterial: {fileID: -876546973899608171, guid: 120d4cde031667b4b9c5fb2f598fd89e, type: 3}
+  hungryAndSelectedMaterial: {fileID: -876546973899608171, guid: a181fb3fcd430fb42a5048992009eb7f, type: 3}
   deadMaterial: {fileID: -876546973899608171, guid: e8205a68e13a0b14daf174269c883e0e, type: 3}
 --- !u!114 &6068340904432021836
 MonoBehaviour:
