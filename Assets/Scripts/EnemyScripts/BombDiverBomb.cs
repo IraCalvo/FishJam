@@ -32,6 +32,7 @@ public class BombDiverBomb : MonoBehaviour, IClickable
     bool canBeClicked = true;
 
     Bounds tankBounds;
+    public HashSet<GameObject> alreadyHitTargets = new HashSet<GameObject>();
 
     private void Awake()
     {
@@ -62,6 +63,11 @@ public class BombDiverBomb : MonoBehaviour, IClickable
         if (collision.gameObject.TryGetComponent<Fish>(out Fish fish))
         {
             StartCoroutine(EggExplosionAnim());
+            if (alreadyHitTargets.Contains(collision.gameObject))
+            {
+                return;
+            }
+            alreadyHitTargets.Add(collision.gameObject);
             fish.TakeDamage(damage);
         }
 

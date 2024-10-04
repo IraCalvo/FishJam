@@ -162,6 +162,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountWorth: 10
-  foodType: 1
+  foodType: 2
   poolType: 0
   fadeDuration: 2

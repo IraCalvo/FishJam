@@ -134,6 +134,10 @@ public abstract class FishMovement : MonoBehaviour
             {
                 if (go.activeInHierarchy)
                 {
+                    if (!go.GetComponentInChildren<FishHook>().canHookFish)
+                    {
+                        continue;
+                    }
                     preferredFood.Add(go);
                 }
             }
@@ -169,16 +173,43 @@ public abstract class FishMovement : MonoBehaviour
             return;
         }
 
-        //Vector2 closestFoodPosition = closestFood.transform.position;
-        targetPosition = closestFood.transform.position;
+        if (closestFood.GetComponentInChildren<FishHook>() != null)
+        {
+            targetPosition = closestFood.GetComponentInChildren<FishHook>().transform.position;
+            targetPosition.y -= 3f;
+        }
+        else
+        {
+            targetPosition = closestFood.transform.position;
+        }
+
         SpriteDirection();
 
         float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
-        float t = 1f - Mathf.Clamp01(distanceToTarget / 5); // Clamping to ensure t is between 0 and 1
-        float easedT = Mathf.SmoothStep(0.5f, 0.5f, t); // Apply easing function
-        float easedFishHungerMoveSpeed = Mathf.Lerp(fishSO.moveSpeed, 0f, easedT); // Interpolate movement speed based on eased t
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, easedFishHungerMoveSpeed * Time.fixedDeltaTime);
+        if (distanceToTarget >= 0.1f)
+        {
+            if (closestFood.GetComponentInChildren<FishHook>() != null)
+            {
+                if ((closestFood.GetComponentInChildren<FishHook>().canHookFish == false))
+                {
+                    //edge case for if the closest food is a hook and moving upwards
+                    closestFood = null;
+                    MoveFish();
+                    return;
+                }
+            }
+
+            float t = 1f - Mathf.Clamp01(distanceToTarget / 5); 
+            float easedT = Mathf.SmoothStep(0.5f, 0.5f, t); 
+            float easedFishHungerMoveSpeed = Mathf.Lerp(fishSO.moveSpeed, 0f, easedT);
+            Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
+            transform.position += (Vector3)(direction * easedFishHungerMoveSpeed * Time.deltaTime);
+        }
     }
+
+
+
+    //transform.position = Vector2.MoveTowards(transform.position, targetPosition, easedFishHungerMoveSpeed * Time.fixedDeltaTime);
 
     public virtual void MoveFishToDeath()
     {
@@ -190,9 +221,9 @@ public abstract class FishMovement : MonoBehaviour
         {
             PoolManager.instance.DeactivateObjectInPool(gameObject);
         }
-        float t = 1f - Mathf.Clamp01(distanceToTarget / 3); // Clamping to ensure t is between 0 and 1
-        float easedT = Mathf.SmoothStep(0.5f, 0.5f, t); // Apply easing function
-        float easedFishHungerMoveSpeed = Mathf.Lerp(fishSO.moveSpeed, 0.2f, easedT); // Interpolate movement speed based on eased t
+        float t = 1f - Mathf.Clamp01(distanceToTarget / 3);
+        float easedT = Mathf.SmoothStep(0.5f, 0.5f, t);
+        float easedFishHungerMoveSpeed = Mathf.Lerp(fishSO.moveSpeed, 0.2f, easedT);
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, easedFishHungerMoveSpeed * Time.fixedDeltaTime);
 
         float deadTimerFloat = Mathf.Clamp01(distanceToTarget / 5) - 0.1f;

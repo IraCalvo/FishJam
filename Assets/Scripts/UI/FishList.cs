@@ -54,7 +54,6 @@ public class FishList : MonoBehaviour
                 {
                     fishAmountText[s].gameObject.SetActive(true);
                     int fishTotal = FindFishInTank(fish.fishSO.fishName);
-                    Debug.Log(fishTotal);
 
                     fishAmountText[s].text = $":{fishTotal}";
                     //$"{fish.fishSO.fishName}: {fishTotal}";
